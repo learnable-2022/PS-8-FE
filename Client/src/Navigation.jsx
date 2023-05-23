@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export const Navigation = () => {
   return (
     <div>
-      <ul className="flex w-full justify-center gap-10">
+      {/* <ul className="flex w-full justify-center gap-10">
         <Link to="/">
           <li>sign In</li>
         </Link>
@@ -14,7 +14,7 @@ export const Navigation = () => {
         <Link to="/display_employee_payroll">
           <li>Display_Employee_Payroll</li>
         </Link>
-      </ul>
+      </ul> */}
     </div>
   );
 };
