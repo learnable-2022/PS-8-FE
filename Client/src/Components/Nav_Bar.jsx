@@ -1,6 +1,6 @@
 import React from 'react'
 import { AiOutlineDollar } from "react-icons/ai";
-import { VscServerProcess } from "react-icons/vsc";
+import { VscServerProcess } from "react-icons/vs";
 import '../index.css';
 
 export const Nav_Bar = () => {
