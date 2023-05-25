@@ -5,6 +5,7 @@ import { Nav_Bar } from './Nav_Bar';
 import { Upload } from './Upload';
 import Header from './Header';
 //import { Navigation } from '../Navigation';
+import '../index.css';
 
 export const Payroll_Dashboard = () => {
 
