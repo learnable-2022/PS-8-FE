@@ -1,6 +1,6 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
-
+import * as XLSX from "xlsx";
 const myContext = createContext();
 
 const ContextAPI = ({ children }) => {
@@ -10,7 +10,6 @@ const ContextAPI = ({ children }) => {
   });
 
   const { email, password } = signIn;
-
 
   // -------------------------------------[]--------------------------------------------
 
@@ -53,6 +52,8 @@ const ContextAPI = ({ children }) => {
   }, [HRtoken]);
 
   const [errorMessage, setErrorMessage] = useState("");
+
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(import.meta.env.VITE_API_ENDPOINT);
@@ -86,8 +87,48 @@ const ContextAPI = ({ children }) => {
       console.log("I am logged In");
     }
   };
+  const [isFile, setIsFile] = useState([]);
 
-  // const isLoggedIn = () => {};
+  const handleButtonClick = () => {
+    document.getElementById("SelectedFile").click();
+  };
+
+  const uploadFile = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = (event) => {
+      const data = event.target.result;
+      const workBook = XLSX.read(data, { type: "binary" });
+      const sheetName = workBook.SheetNames[0];
+      const sheet = workBook.Sheets[sheetName];
+      const parsedData = XLSX.utils.sheet_to_json(sheet);
+
+      setIsFile(parsedData);
+      sendToBackend(parsedData);
+    };
+
+    reader.readAsBinaryString(file);
+  };
+
+  const sendToBackend = (data) => {
+    fetch("", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((responseData) => {
+        // Handle response from the backend
+        console.log(responseData);
+      })
+      .catch((error) => {
+        // Handle error
+        console.error(error);
+      });
+  };
 
   // -------------------------------------[]--------------------------------------------
   return (
@@ -103,6 +144,9 @@ const ContextAPI = ({ children }) => {
           errorMessage,
           HRtoken,
           loggedIn,
+          uploadFile,
+          isFile,
+          handleButtonClick,
         }}
       >
         {children}
