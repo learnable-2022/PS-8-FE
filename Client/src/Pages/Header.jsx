@@ -4,7 +4,7 @@ import { TbLogout } from "react-icons/tb";
 import "../index.css";
 const Header = () => {
   return (
-    <header className=" bg-[#ffffff] border-b overflow-hidden  fixed px-10 flex items-center w-full">
+    <header className=" bg-[#ffffff] border-b shadow-black/10 shadow-lg overflow-hidden  fixed px-10 flex items-center w-full">
       <figure className="w-[5%]">
         <img
           src="/public/Images/Logo (1).jpg"
@@ -33,7 +33,7 @@ const Header = () => {
             />
           </div>
 
-          <div className="flex flex-col p-2">
+          <div className="flex flex-col px-3">
             <span className="text-sm">Richard Stark</span>
             <span className="text-sm text-gray-200">Hr Admin</span>
           </div>

@@ -13,62 +13,54 @@ body {
 }
 
 aside {
-  width: 25%;
-  padding-top: 10px;
-
+  width: 20%;
 }
 
 .div {
   border-right: transparent;
   border-top: transparent;
   border-bottom: transparent;
- 
 }
 
 .img {
-  padding:20px;
+  padding: 20px;
 }
 
 header {
   height: 100px;
-  border: 1px solid #C2C2C2;
-}
-
-.linav {
-  height: 64px;
 }
 
 @media only screen and (max-width: 768px) {
-      .img {
-        padding: 0px;
-      }
-
-      .linav {
-        height: 50px;
-      } 
-
-      header {
-        height: 80px;
-      }
-     
+  .img {
+    padding: 0px;
   }
 
-   table {
-    width: 100%;
-    border-collapse: collapse;
+  .linav {
+    height: 50px;
   }
 
-  th, td {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+  header {
+    height: 80px;
   }
+}
 
-  th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-  }
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
 
-  tr:hover {
-    background-color: #f5f5f5;
-  }
+th,
+td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+tr:hover {
+  background-color: #f5f5f5;
+}
