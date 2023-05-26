@@ -13,16 +13,9 @@
     "axios": "^1.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-<<<<<<< HEAD
-<<<<<<< HEAD
-    "react-scripts": "^5.0.1"
-=======
-    "react-router-dom": "^6.11.2"
->>>>>>> 3a178c91e7c7fbc0b5e39daf86e961ff262f491c
-=======
-    "react-icons": "^4.8.0",
-    "react-router-dom": "^6.11.2"
->>>>>>> 10c729df8fe46536fafaeee1c7c7e840ab69bdab
+    "react-scripts": "^5.0.1",
+    "react-router-dom": "^6.11.2",
+    "react-icons": "^4.8.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",

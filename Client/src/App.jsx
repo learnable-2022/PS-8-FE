@@ -14,10 +14,7 @@ function App() {
         </Route>
         <Route path="/" element={<HR_SignIn />} />
       </Routes>
-<<<<<<< HEAD
-=======
      
->>>>>>> 10c729df8fe46536fafaeee1c7c7e840ab69bdab
     </div>
   );
 }
