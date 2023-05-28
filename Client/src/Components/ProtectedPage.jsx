@@ -1,12 +1,27 @@
-import React, { useContext } from "react";
-import { myContext } from "../ContextAPI";
-import { Navigate, Outlet } from "react-router-dom";
+import React from "react";
+import {  Outlet } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export const ProtectedPage = () => {
-  const { loggedIn } = useContext(myContext);
+  const userAuth = () => {
+    const user = window.localStorage.getItem("payMe_signIn");
+    const token = window.localStorage.getItem("HR_access_token");
 
-  if (!loggedIn) {
-    return <Navigate to="/" />;
-  }
-  return <Outlet />;
+
+    return user && token;
+  };
+
+  const navigate = () => {
+    toast.warning("Please Sign In");
+    setTimeout(() => {
+      window.location = "/";
+    }, 2000);
+  };
+
+  const isAuth = userAuth();
+  return (
+    isAuth ? <Outlet /> : navigate()
+  );
 };
+
+
