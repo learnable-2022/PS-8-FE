@@ -4,7 +4,9 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+body,html {
+  height: 100vh;
+  width: 100%;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -12,9 +14,6 @@ body {
   color: rgb(63, 62, 62);
 }
 
-aside {
-  width: 20%;
-}
 
 .div {
   border-right: transparent;
@@ -27,7 +26,16 @@ aside {
 }
 
 header {
-  height: 100px;
+  height: 14vh;
+}
+
+.active{
+  background: #ece7e7;
+  padding:  15px 0 15px 0 ;
+}
+
+.active:hover{
+  height: 100%;
 }
 
 @media only screen and (max-width: 768px) {

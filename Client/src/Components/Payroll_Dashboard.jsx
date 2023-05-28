@@ -12,9 +12,13 @@ export const Payroll_Dashboard = () => {
         <Header />{" "}
       </header>
       <main className="flex flex-row flex-grow ">
-        <Nav_Bar />
-
-        <Upload />
+        <div className="w-1/5">
+          <Nav_Bar />
+        </div>
+        
+        <div className="w-4/5">
+          <Upload />
+        </div>
       </main>
     </>
   );

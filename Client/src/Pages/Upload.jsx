@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 
 export const Upload = () => {
   return (
-    <div className="w-[100%] bg-[#e5e5e5]">
+    <div className="w-[100%] h-full bg-[#e5e5e5]">
     
       <Outlet />
     </div>

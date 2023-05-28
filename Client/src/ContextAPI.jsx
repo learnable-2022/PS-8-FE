@@ -40,7 +40,6 @@ const ContextAPI = ({ children }) => {
   };
   // -------------------------------------[]--------------------------------------------
   const [HRtoken, setHRToken] = useState(null);
-  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
     const accessToken = window.localStorage.getItem("HR_access_token");
@@ -53,7 +52,6 @@ const ContextAPI = ({ children }) => {
 
   const [errorMessage, setErrorMessage] = useState("");
 
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(import.meta.env.VITE_API_ENDPOINT);
@@ -80,10 +78,8 @@ const ContextAPI = ({ children }) => {
       }
     };
     getToken();
-    if (HRtoken !== null) {
-      setLoggedIn(true);
-    }
-    if (loggedIn) {
+
+    if (HRtoken) {
       console.log("I am logged In");
     }
   };
@@ -143,7 +139,6 @@ const ContextAPI = ({ children }) => {
           revealPassword,
           errorMessage,
           HRtoken,
-          loggedIn,
           uploadFile,
           isFile,
           handleButtonClick,

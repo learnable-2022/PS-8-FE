@@ -8,7 +8,7 @@ export const Payroll = () => {
   return (
     <div>
       <div className="w-full ">
-        <div className="w-full justify-center flex mt-[6%]">
+        <div className="w-full justify-center flex pt-[6%]">
           <div className="w-[90%] items-center flex justify-between">
             <h2 className="text-2xl font-bold">Payroll</h2>
             <form>

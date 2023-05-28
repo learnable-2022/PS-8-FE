@@ -14,10 +14,10 @@ function App() {
       <Navigation />
       <Routes>
         <Route>
-          <Route path="/dashboard" element={<Payroll_Dashboard />} exact>
+          <Route element={<Payroll_Dashboard />} exact>
             <Route path="/dashboard" element={<Payroll/>}/>
-            <Route path="/dashboard/processor" element={<Processor/>}/>
-            <Route path="/dashboard/database" element={<Database/>}/>
+            <Route path="/processor" element={<Processor/>}/>
+            <Route path="/database" element={<Database/>}/>
           </Route>
         </Route>
         <Route path="/" element={<HR_SignIn />} />
