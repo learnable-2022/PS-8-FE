@@ -13,7 +13,6 @@ export const Payroll_Dashboard = () => {
       </header>
       <main className="flex flex-row flex-grow ">
         <Nav_Bar />
-
         <Upload />
       </main>
     </>

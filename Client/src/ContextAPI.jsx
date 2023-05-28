@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useRef, useState } from "react";
+ import { toast } from 'react-toastify';
 import axios from "axios";
 import * as XLSX from "xlsx";
 const myContext = createContext();
@@ -6,10 +7,11 @@ const myContext = createContext();
 const ContextAPI = ({ children }) => {
   const [signIn, setSignIn] = useState({
     email: "",
-    password: "",
+    password: ""
   });
 
-  const { email, password } = signIn;
+  const { email, password} = signIn;
+  
 
   // -------------------------------------[]--------------------------------------------
 
@@ -40,53 +42,91 @@ const ContextAPI = ({ children }) => {
   };
   // -------------------------------------[]--------------------------------------------
   const [HRtoken, setHRToken] = useState(null);
-  const [loggedIn, setLoggedIn] = useState(false);
+  // const [loggedIn, setLoggedIn] = useState(false);
 
-  useEffect(() => {
-    const accessToken = window.localStorage.getItem("HR_access_token");
-    setHRToken(accessToken);
-  }, []);
+  // useEffect(() => {
+  //   const accessToken = window.localStorage.getItem("HR_access_token");
+  //   setHRToken(accessToken);
+  // }, []);
 
-  useEffect(() => {
-    window.localStorage.setItem("HR_access_token", HRtoken);
-  }, [HRtoken]);
+  // useEffect(() => {
+  //   window.localStorage.setItem("HR_access_token", HRtoken);
+  // }, [HRtoken]);
 
-  const [errorMessage, setErrorMessage] = useState("");
+  // const [errorMessage, setErrorMessage] = useState("");
 
-  
-  const handleSubmit = async (e) => {
+  // ------------------------------[SUBMIT FORM |GET TOKEN]-------------------------------------
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(import.meta.env.VITE_API_ENDPOINT);
-    console.log(signIn);
+   
+   
     const getToken = async () => {
       try {
-        const response = await axios.post(
-          import.meta.env.VITE_API_ENDPOINT + "/auth/login",
-          {
-            ...signIn,
-          }
-        );
-
-        const token = response.data.accessToken;
-
-        setHRToken(token);
-
-        console.log(response.data);
-
-        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        await axios
+          .post("https://team8api.onrender.com/api/auth/login", {
+            ...signIn
+          })
+          .then((response) => {
+            const token = response.data.accessToken;
+            setHRToken(token);
+            window.localStorage.setItem("HR_access_token", token);
+            token && (window.location = "/dashboard");
+          });
       } catch (error) {
-        setErrorMessage(error.message);
-        console.log("ERROR:", error);
+        if (error.response && error.response.status > 400 < 500) {
+          toast.error("Pls you are not authorized");
+        }
       }
     };
-    getToken();
-    if (HRtoken !== null) {
-      setLoggedIn(true);
-    }
-    if (loggedIn) {
-      console.log("I am logged In");
+
+     if (HRtoken) {
+      toast.warning("You are already logged in")
+      window.location = "/dashboard";
+      return;
+    }else{
+
+      getToken();
     }
   };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   // console.log(import.meta.env.VITE_API_ENDPOINT);
+  //   // console.log(signIn);
+  //   const getToken = async () => {
+  //     try {
+  //       const response = await axios.post(
+  //         import.meta.env.VITE_API_ENDPOINT + "/auth/login",
+  //         {
+  //           ...signIn,
+  //         }
+  //         );
+  //         if (response.status === 200) { window.location = "/dashboard"}
+
+  //       const token = response.data.accessToken;
+
+  //       setHRToken(token);
+  //       window.localStorage.setItem("payMe_signIn", JSON.stringify(signIn));
+
+  //       console.log(response.data);
+
+  //       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  //     } catch (error) {
+  //       console.log(error.message);
+  //     }
+  //   };
+  //   getToken();
+  //   if (HRtoken !== null) {
+  //     setLoggedIn(true);
+  //   }
+  //   if (loggedIn) {
+  //     console.log("I am logged In");
+  //   }
+  // };
+
+  // -------------------------------------[FILE UPLOAD]--------------------------------------------
+
   const [isFile, setIsFile] = useState([]);
 
   const handleButtonClick = () => {
@@ -141,9 +181,7 @@ const ContextAPI = ({ children }) => {
           email,
           showPassword,
           revealPassword,
-          errorMessage,
           HRtoken,
-          loggedIn,
           uploadFile,
           isFile,
           handleButtonClick,
