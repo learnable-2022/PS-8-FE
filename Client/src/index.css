@@ -4,7 +4,9 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+body,html {
+  height: 100vh;
+  width: 100%;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -12,43 +14,61 @@ body {
   color: rgb(63, 62, 62);
 }
 
-aside {
-  width: 25%;
-  padding-top: 10px;
-
-}
 
 .div {
   border-right: transparent;
   border-top: transparent;
   border-bottom: transparent;
- 
 }
 
 .img {
-  padding:20px;
+  padding: 20px;
 }
 
 header {
-  height: 100px;
-  border: 1px solid #C2C2C2;
+  height: 14vh;
 }
 
-.linav {
-  height: 64px;
+.active{
+  background: #ece7e7;
+  padding:  15px 0 15px 0 ;
+}
+
+.active:hover{
+  height: 100%;
 }
 
 @media only screen and (max-width: 768px) {
-      .img {
-        padding: 0px;
-      }
-
-      .linav {
-        height: 50px;
-      } 
-
-      header {
-        height: 80px;
-      }
-     
+  .img {
+    padding: 0px;
   }
+
+  .linav {
+    height: 50px;
+  }
+
+  header {
+    height: 80px;
+  }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+tr:hover {
+  background-color: #f5f5f5;
+}
