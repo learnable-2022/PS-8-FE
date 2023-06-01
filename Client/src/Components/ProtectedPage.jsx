@@ -15,7 +15,7 @@ export const ProtectedPage = () => {
     toast.warning("Please Sign In");
     setTimeout(() => {
       window.location = "/";
-    }, 2000);
+    }, 1000);
   };
 
   const isAuth = userAuth();

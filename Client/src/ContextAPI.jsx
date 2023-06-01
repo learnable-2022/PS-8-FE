@@ -2,6 +2,7 @@ import React, { createContext, useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import * as XLSX from "xlsx";
+import { titleCase } from "./UTILS/Title";
 const myContext = createContext();
 
 const ContextAPI = ({ children }) => {
@@ -41,17 +42,16 @@ const ContextAPI = ({ children }) => {
   };
   // -------------------------------------[]--------------------------------------------
   const [HRtoken, setHRToken] = useState(null);
+  const [userInfo, setUserInfo] = useState("");
 
-  // useEffect(() => {
-  //   const accessToken = window.localStorage.getItem("HR_access_token");
-  //   setHRToken(accessToken);
-  // }, []);
+  useEffect(() => {
+    const data = window.localStorage.getItem("userInfo");
+    setUserInfo(data);
+  }, []);
 
-  // useEffect(() => {
-  //   window.localStorage.setItem("HR_access_token", HRtoken);
-  // }, [HRtoken]);
-
-  // const [errorMessage, setErrorMessage] = useState("");
+  useEffect(() => {
+    window.localStorage.setItem("userInfo", userInfo);
+  }, [userInfo]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -64,21 +64,20 @@ const ContextAPI = ({ children }) => {
           })
           .then((response) => {
             const token = response.data.accessToken;
+            const user = response.data.user.username;
             setHRToken(token);
+            setUserInfo(user);
             window.localStorage.setItem("HR_access_token", token);
             token && (window.location = "/dashboard");
           });
       } catch (error) {
+        console.log(error);
         if (error.response && error.response.status > 400 < 500) {
           toast.error("Pls you are not authorized");
         }
       }
     };
     getToken();
-
-    if (HRtoken) {
-      console.log("I am logged In");
-    }
   };
 
   // const handleSubmit = async (e) => {
@@ -119,49 +118,114 @@ const ContextAPI = ({ children }) => {
   // -------------------------------------[FILE UPLOAD]--------------------------------------------
 
   const [isFile, setIsFile] = useState([]);
+  const [fileName, setFileName] = useState("");
+  const [typeError, setTypeError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const data = window.localStorage.getItem("employee_data_name");
+    setFileName(data);
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem("employee_data_name", fileName);
+  }, [fileName]);
 
   const handleButtonClick = () => {
     document.getElementById("SelectedFile").click();
   };
 
   const uploadFile = (e) => {
+    setIsLoading(false);
+    const dataType = [
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    ];
     const file = e.target.files[0];
-    const reader = new FileReader();
+    setFileName(titleCase(file.name.split(".")[0]));
+    if (file) {
+      if (file && dataType.includes(file.type)) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const data = event.target.result;
+          const workBook = XLSX.read(data, { type: "binary" });
+          const sheetName = workBook.SheetNames[0];
+          const sheet = workBook.Sheets[sheetName];
+          const parsedData = XLSX.utils.sheet_to_json(sheet);
 
-    reader.onload = (event) => {
-      const data = event.target.result;
-      const workBook = XLSX.read(data, { type: "binary" });
-      const sheetName = workBook.SheetNames[0];
-      const sheet = workBook.Sheets[sheetName];
-      const parsedData = XLSX.utils.sheet_to_json(sheet);
-
-      setIsFile(parsedData);
-      sendToBackend(parsedData);
-    };
-
-    reader.readAsBinaryString(file);
+          setIsFile(parsedData);
+        };
+        reader.readAsBinaryString(file);
+      } else {
+        setTypeError("Only excel file is allowed...");
+        return;
+      }
+    }
   };
 
-  const sendToBackend = (data) => {
-    fetch("", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then((responseData) => {
-        // Handle response from the backend
-        console.log(responseData);
-      })
-      .catch((error) => {
-        // Handle error
-        console.error(error);
-      });
+  setTimeout(() => {
+    setTypeError("");
+  }, 5000);
+
+  useEffect(() => {
+    const data = window.localStorage.getItem("employee_data");
+    setIsFile(JSON.parse(data));
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem("employee_data", JSON.stringify(isFile));
+  }, [isFile]);
+
+  const removeData = () => {
+    setIsFile([]);
   };
 
   // -------------------------------------[]--------------------------------------------
+
+  // -------------------------------------[Process Data]--------------------------------------------
+
+  const [notification, setNotification] = useState(true);
+  const handleNotification = () => {
+    setNotification(false);
+    setMoveIsSuccessful("");
+  };
+  const [processData, setProcessData] = useState([]);
+  const [moveIsSuccessful, setMoveIsSuccessful] = useState("");
+
+  const loading = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setMoveIsSuccessful("Data is moved successfully");
+    }, 5000);
+  };
+  const moveData = () => {
+    setTimeout(() => {
+      setProcessData([...processData, isFile]);
+      setIsFile([]);
+      setNotification(true);
+    }, 5000);
+  };
+
+  setTimeout(() => {
+    setMoveIsSuccessful("");
+  }, 7000);
+
+  useEffect(() => {
+    const data = window.localStorage.getItem("process_employee_data");
+    setProcessData(JSON.parse(data));
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem(
+      "process_employee_data",
+      JSON.stringify(processData)
+    );
+  }, [processData]);
+
+  const removeProcessor = () => {
+    setProcessData([]);
+  };
+
+  // -------------------------------------[Process Data]--------------------------------------------
   return (
     <div>
       <myContext.Provider
@@ -176,6 +240,18 @@ const ContextAPI = ({ children }) => {
           uploadFile,
           isFile,
           handleButtonClick,
+          userInfo,
+          fileName,
+          moveData,
+          processData,
+          notification,
+          handleNotification,
+          moveIsSuccessful,
+          removeData,
+          typeError,
+          isLoading,
+          removeProcessor,
+          loading,
         }}
       >
         {children}
