@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { AiOutlineDollar } from "react-icons/ai";
 import { VscServerProcess } from "react-icons/vsc";
+import { MdPolicy } from "react-icons/md";
 import { BsDot } from "react-icons/bs";
 import "../index.css";
 import { NavLink } from "react-router-dom";
@@ -27,7 +28,11 @@ export const Nav_Bar = () => {
                 className="flex items-center justify-start hover:py-5 pl-5 h-[10vh] gap-2 hover:text-[#430359]  hover:bg-[#E5E5E5] w-[100%]"
               >
                 <VscServerProcess className="text-xl" /> processor
-                {notification ? <BsDot className="ml-[-15%] mt-[-2%] text-[red] text-6xl"/> : ""}
+                {notification ? (
+                  <BsDot className="ml-[-15%] mt-[-2%] text-[red] text-6xl" />
+                ) : (
+                  ""
+                )}
               </li>
             ) : (
               <li className="flex items-center justify-start hover:py-5 pl-5 h-[10vh] gap-2 hover:text-[#430359]  hover:bg-[#E5E5E5] w-[100%]">
@@ -36,9 +41,9 @@ export const Nav_Bar = () => {
             )}
           </NavLink>
 
-          <NavLink activeClassName="active" to="/database">
-            <li className="flex gap-2 justify-start pl-5 h-[10vh] items-center  hover:text-[#430359] hover:bg-[#E5E5E5] w-[100%]">
-              <VscServerProcess className="text-xl" /> Database
+          <NavLink activeClassName="active" to="/pay_policy">
+            <li className="flex gap-2 justify-start pl-4 h-[10vh] items-center  hover:text-[#430359] hover:bg-[#E5E5E5] w-[100%]">
+              <MdPolicy className="text-2xl" /> Pay Policy
             </li>
           </NavLink>
         </ul>
