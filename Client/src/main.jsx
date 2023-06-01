@@ -4,6 +4,8 @@ import App from "./App.jsx";
 import "./index.css";
 import { ContextAPI } from "./ContextAPI.jsx";
 import { BrowserRouter } from "react-router-dom";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 

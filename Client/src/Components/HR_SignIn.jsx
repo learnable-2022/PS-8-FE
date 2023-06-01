@@ -1,6 +1,8 @@
 import { useState, useContext, useEffect } from "react";
 import { myContext } from "../ContextAPI";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+ import { ToastContainer } from 'react-toastify';
+
 
 export const HR_SignIn = () => {
   const {
@@ -10,14 +12,13 @@ export const HR_SignIn = () => {
     email,
     showPassword,
     revealPassword,
-    errorMessage,
   } = useContext(myContext);
 
   return (
     <div className="w-full">
+      <ToastContainer/>
       <div className="flex justify-center w-full mt-20">
         <div className="w-full">
-          <p>{errorMessage}</p>
           <div className="flex justify-center">
             <figure className="w-[5%] ">
               <img
@@ -54,7 +55,7 @@ export const HR_SignIn = () => {
                   className="bg-black/10 py-2 outline-none  rounded-lg px-3 mb-5 text-black/60"
                 />
                 <label
-                  htmlFor="email"
+                  htmlFor="password"
                   className="mb-1 text-[#1A1A1A] font-semibold"
                 >
                   Password
@@ -81,7 +82,8 @@ export const HR_SignIn = () => {
                   )}
                 </div>
                 <button
-                  className="bg-[#430359] py-2 rounded-lg mb-10 text-white font-bold"
+                  className="bg-[#430359] py-2 rounded-lg mb-10 text-white font-bold disabled:opacity-40"
+                  disabled={!email || !password}
                 >
                   Sign In
                 </button>

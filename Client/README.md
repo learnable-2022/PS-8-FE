@@ -13,3 +13,6 @@ Updated the dashboard (Ifechukwu)
 
 <!-- ----------------------------------------- fifth PUSH --------------------------------------------- -->
 Updated the dashboard (Ifechukwu)
+
+<!-- ----------------------------------------- sixth PUSH --------------------------------------------- -->
+updated the payroll and processor features (Ifechukwu)
