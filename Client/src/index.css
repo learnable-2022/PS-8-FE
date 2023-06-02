@@ -76,7 +76,7 @@ padding-right: 54px;
 }
 
 .in2 {
-  width: 30px;
+  width: 60px;
   
 }
 .in3 {
@@ -107,7 +107,7 @@ padding-right: 54px;
 }
 
 .cancel-button {
-  border: 1px solid #430359;
+  border: 1px solid #7f04a8;
 }
 
 @media only screen and (max-width: 768px) {
@@ -134,7 +134,7 @@ padding-right: 54px;
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background-color: #000;
+  background-color: #b9b6b6;
   margin: 0 4px;
   animation: loading 1s infinite;
 }

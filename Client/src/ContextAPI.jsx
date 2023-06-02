@@ -145,6 +145,7 @@ const ContextAPI = ({ children }) => {
     if (file) {
       if (file && dataType.includes(file.type)) {
         const reader = new FileReader();
+
         reader.onload = (event) => {
           const data = event.target.result;
           const workBook = XLSX.read(data, { type: "binary" });
@@ -199,7 +200,7 @@ const ContextAPI = ({ children }) => {
   };
   const moveData = () => {
     setTimeout(() => {
-      setProcessData([...processData, isFile]);
+      setProcessData([...isFile]);
       setIsFile([]);
       setNotification(true);
     }, 5000);

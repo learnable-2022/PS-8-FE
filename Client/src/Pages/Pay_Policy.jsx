@@ -90,34 +90,34 @@ const Pay_Policy = () => {
             <p className="p1 p">If</p>
             <input
               type="text"
-              className="in1 input"
+              className="in1 input outline-none"
               placeholder="Appraisal"
               value={performance}
-              onChange={e => setPerformance(e.target.value)}
+              onChange={(e) => setPerformance(e.target.value)}
             />
             <p className="p2">is</p>
             <input
               type="number"
-              className="in2 input"
+              className="in2 input outline-none w-4/5"
               placeholder="5"
               value={perfvalue}
-              onChange={e => setPerfvalue(e.target.value)}
+              onChange={(e) => setPerfvalue(e.target.value)}
             />
             <p className="p3">=</p>
             <input
               type="text"
-              className="in3 input"
+              className="in3 input outline-none"
               placeholder="+10%"
               value={percentage}
-              onChange={e => setPercentage(e.target.value)}
+              onChange={(e) => setPercentage(e.target.value)}
             />
             <p className="p4">of</p>
             <input
               type="text"
-              className="in4 input"
+              className="in4 input outline-none"
               placeholder="Base salary"
               value={salary}
-              onChange={e => setSalary(e.target.value)}
+              onChange={(e) => setSalary(e.target.value)}
             />
             <div className="addcommand">
               {editingIndex === -1 ? (
@@ -128,15 +128,15 @@ const Pay_Policy = () => {
                   Add command +
                 </button>
               ) : (
-                <div>
+                <div className="flex gap-3">
                   <button
-                    className="bg-[#430359] text-white py-2 px-4 rounded-xl update-button"
+                    className="bg-[#430359] hover:bg-[#660e83] transition duration-300 text-white py-1 px-4 rounded-lg update-button"
                     onClick={handleUpdateCommand}
                   >
                     Update
                   </button>
                   <button
-                    className=" text-[#430359] py-2 px-4 rounded-xl cancel-button"
+                    className=" text-[#430359] hover:bg-[#e9e6e6] transition duration-300  py-1 px-4 rounded-lg cancel-button  hover:border-none"
                     onClick={handleCancelEdit}
                   >
                     Cancel
@@ -170,13 +170,13 @@ const Pay_Policy = () => {
                   className="edit-button p-2"
                   onClick={() => handleEditCommand(index)}
                 >
-                  <BiEditAlt/>
+                  <BiEditAlt />
                 </button>
                 <button
                   className="delete-button p-2"
                   onClick={() => handleDeleteCommand(index)}
                 >
-                  <RiDeleteBinLine/>
+                  <RiDeleteBinLine />
                 </button>
               </div>
             )}

@@ -24,6 +24,7 @@ export const Payroll = () => {
     }
   }, [fileName]);
 
+  const columnHeader = isFile.length > 0 ? Object.keys(isFile[0]) : [];
   return (
     <div>
       <div className="w-full">
@@ -94,33 +95,28 @@ export const Payroll = () => {
               </div>
             </div>
             <div className="w-full flex justify-center mb-10">
-              <table className="w-[90%] rounded-2xl h-full bg-white mt-2">
-                <thead className="text-left h-[70px] text-black/50 font-medium ">
-                  <tr className="">
-                    <th className=" border-b pb-2 px-[1%]">Name</th>
-                    <th className="border-b pb-2 px-[1%]">Employee ID</th>
-                    <th className="border-b pb-2 px-[1%]">Employee Role</th>
-                    <th className="border-b pb-2 px-[1%]">Appraisal</th>
-                    <th className="border-b pb-2 px-[1%]">Attendance</th>
-                    <th className="border-b pb-2 px-[1%]">Overtime</th>
-                    <th className="border-b pb-2 px-[1%]">Leave</th>
-                    <th className="border-b pb-2 px-[1%]">
-                      Base Salary (per month)
-                    </th>
+              <table className="w-[90%] rounded-2xl h-full bg-white mt-2 overflow-x-scroll">
+                <thead className="text-left h-[70px] text-black/70 font-medium ">
+                  <tr className="border-b ">
+                    {columnHeader.map((header, index) => (
+                      <th
+                        key={index}
+                        className="pl-[1.5%] flex overflow-x-scroll overflow-auto"
+                      >
+                        {header}
+                      </th>
+                    ))}
                   </tr>
                 </thead>
 
-                <tbody className="text-left font-semibold text-black/60">
-                  {isFile.map((file) => (
-                    <tr key={file.EmployeeID} className="h-[60px]">
-                      <td className="border-b py-2 px-[1%]">{file.Name}</td>
-                      <td className="border-b px-[1%]">{file.EmployeeID}</td>
-                      <td className="border-b px-[1%]">{file.Role}</td>
-                      <td className="border-b px-[1%] ">{file.Appraisal}</td>
-                      <td className="border-b pl-[3%]">{file.Attendance}</td>
-                      <td className="border-b px-[1%]">{file.Overtime}</td>
-                      <td className="border-b pl-[2%]">{file.Leave}</td>
-                      <td className="border-b pl-[5%]">${file.BaseSalary}</td>
+                <tbody>
+                  {isFile.map((row, index) => (
+                    <tr key={index} className="border-b">
+                      {columnHeader.map((header, index) => (
+                        <td key={index} className="py-2 text-sm pl-[1.5%]">
+                          {row[header]}
+                        </td>
+                      ))}
                     </tr>
                   ))}
                 </tbody>
