@@ -48,9 +48,7 @@ export const Processor_Payroll = () => {
           </div>
           <div className="full flex justify-center mb-20">
             <button
-              className="bg-white px-5 py-2 rounded-lg"
-              onClick={removeProcessor}
-            >
+              className="bg-white px-5 py-2 rounded-lg"onClick={removeProcessor}>
               Remove Data
             </button>
           </div>
