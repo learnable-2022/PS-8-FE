@@ -81,11 +81,11 @@ const Pay_Policy = () => {
   };
 
   return (
-    <div className="flex w-[83%]">
-      <div className="w-3/4 p-4">
-        <h1 className="text-3xl font-bold mb-4">Pay policy</h1>
+    <div className="flex w-[83%] payroll-bg">
+      <div className="w-3/4 p-12 items-center justify-between">
+      <h1 className=" font-bold payp p-3">Pay policy</h1>
         <div className="mb-4">
-          <h2 className="text-xl font-bold">Input command</h2>
+          <h2 className="text-x p-3">Input command</h2>
           <div className="flex items-center mt-2 paypolicy">
             <p className="p1 p">If</p>
             <input
@@ -146,7 +146,7 @@ const Pay_Policy = () => {
             </div>
           </div>
         </div>
-        <h2 className="text-xl font-bold">Command lines</h2>
+        <h2 className="text-x p-3">Command lines</h2>
         {commands.map((command, index) => (
           <div
             key={index}
@@ -165,15 +165,15 @@ const Pay_Policy = () => {
               <p className="comm co1">{command.salary}</p>
             </span>
             {newCommand === index && editingIndex !== index && (
-              <div className="buttons-group">
+              <div className="">
                 <button
-                  className="edit-button p-2"
+                  className=" p-2"
                   onClick={() => handleEditCommand(index)}
                 >
                   <BiEditAlt/>
                 </button>
                 <button
-                  className="delete-button p-2"
+                  className=" p-2"
                   onClick={() => handleDeleteCommand(index)}
                 >
                   <RiDeleteBinLine/>

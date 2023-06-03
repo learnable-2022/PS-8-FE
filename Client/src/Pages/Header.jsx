@@ -2,12 +2,15 @@ import React, { useContext, useState, useEffect } from "react";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { TbLogout } from "react-icons/tb";
 import { HiUserCircle } from "react-icons/hi";
+import { NavLink } from "react-router-dom"; // Added NavLink import
 import "../index.css";
 import { myContext } from "../ContextAPI";
 import { toast } from "react-toastify";
 import { titleCase } from "../UTILS/Title";
 
 const Header = () => {
+  const [showDropdown, setShowDropdown] = useState(false);
+
   const { userInfo, processData, isFile } = useContext(myContext);
   const [profileImage, setProfileImage] = useState(null);
 
@@ -47,9 +50,20 @@ const Header = () => {
             <IoNotificationsOutline className="text-2xl text-black/60" />
           </button>
 
-          <button className="bg-white text-black px-4 py-2">
+          <button
+            className="bg-white text-black px-4 py-2"  onClick={() => setShowDropdown(!showDropdown)}>
             <TbLogout className="text-2xl text-black/60" />
           </button>
+          
+          {showDropdown && (
+            <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg">
+              <NavLink to="">
+                <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-[#430359] hover:text-[#ffffff]">
+                  Logout
+                </button>
+              </NavLink>
+            </div>
+          )}
 
           <div className="div border-l-[gray-200] border p-3"></div>
 

@@ -16,7 +16,7 @@ export const Payroll_Dashboard = () => {
           <Nav_Bar />
         </div>
 
-        <div className="w-[83%]">
+        <div className="w-[83%] ">
           <Upload />
         </div>
       </main>
