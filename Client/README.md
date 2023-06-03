@@ -10,3 +10,12 @@ Testing the ground (smiles)
 
 <!-- ----------------------------------------- Fourth PUSH --------------------------------------------- -->
 Updated the dashboard (Ifechukwu)
+<<<<<<< Updated upstream
+=======
+
+<!-- ----------------------------------------- fifth PUSH --------------------------------------------- -->
+Updated the dashboard (Ifechukwu)
+
+<!-- ----------------------------------------- sixth PUSH --------------------------------------------- -->
+updated the payroll and processor features (Ifechukwu)
+>>>>>>> Stashed changes
