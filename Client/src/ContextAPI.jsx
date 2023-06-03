@@ -221,6 +221,14 @@ const ContextAPI = ({ children }) => {
       JSON.stringify(processData)
     );
   }, [processData]);
+  useEffect(() => {
+    const data = window.localStorage.getItem("process_notification");
+    setNotification(data);
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem("process_notification", notification);
+  }, [notification]);
 
   const removeProcessor = () => {
     setProcessData([]);

@@ -30,7 +30,7 @@ const Header = () => {
   const userName = titleCase(userInfo);
 
   return (
-    <header className="bg-[#ffffff] border-b shadow-black/10 shadow-lg overflow-hidden  fixed px-10 flex items-center w-full">
+    <header className="bg-[#ffffff] border-b border-[#dbdada] overflow-hidden  fixed px-10 flex items-center w-full">
       <div className="flex justify-between w-full items-center">
         <div className="w-2/5 h-full">
           <figure className="w-[16%] ">
