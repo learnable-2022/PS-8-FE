@@ -150,7 +150,7 @@ const Pay_Policy = () => {
             </div>
           )}
         </div>
-        <h2 className="text-xl font-bold">Command lines</h2>
+        <h2 className="text-x p-3">Command lines</h2>
         {commands.map((command, index) => (
           <div
             key={index}
@@ -169,15 +169,15 @@ const Pay_Policy = () => {
               <p className="comm co1">{command.salary}</p>
             </span>
             {newCommand === index && editingIndex !== index && (
-              <div className="buttons-group">
+              <div className="">
                 <button
-                  className="edit-button p-2"
+                  className=" p-2"
                   onClick={() => handleEditCommand(index)}
                 >
                   <BiEditAlt />
                 </button>
                 <button
-                  className="delete-button p-2"
+                  className=" p-2"
                   onClick={() => handleDeleteCommand(index)}
                 >
                   <RiDeleteBinLine />
@@ -191,5 +191,4 @@ const Pay_Policy = () => {
   );
 };
 
-export { Pay_Policy };
 export default Pay_Policy;

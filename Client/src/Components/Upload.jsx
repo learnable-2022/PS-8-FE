@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
+import '../index.css';
+
 
 
 export const Upload = () => {
 
    
     return (
-        <div className="w-[100%] bg-[#e5e5e5]">
+        <div className="w-[100%] payroll-bg">
         <div className="flex items-center justify-between p-4">
           <h2 className="text-xl font-bold">Payroll</h2>
          
@@ -17,7 +19,7 @@ export const Upload = () => {
         </div>
 
             <div className="viewer p-4">
-               <div className="bg-[#ededed] px-2 py-20"><p className="flex items-center justify-center text-gray-500 text-sm">No data found</p></div></div> 
+               <div className="bg-[#ffffff] px-2 py-20"><p className="flex items-center justify-center text-gray-500 text-sm">No data found</p></div></div> 
             
       </div>
     );
