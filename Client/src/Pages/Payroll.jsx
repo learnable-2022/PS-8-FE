@@ -17,6 +17,11 @@ export const Payroll = () => {
     loading,
   } = useContext(myContext);
   const [files, setFiles] = useState([]);
+  console.log(
+    isFile
+      .filter((item) => item["Monthly base pay ($)"] <= 3000)
+      .map((item) => item["Monthly base pay ($)"])
+  );
 
   useEffect(() => {
     if (fileName) {
@@ -73,7 +78,7 @@ export const Payroll = () => {
             ) : (
               <button
                 onClick={handleButtonClick}
-                className="bg-[#430359] transition duration-300 hover:bg-purple-900 text-white font-bold py-2 px-7 rounded-lg"
+                className="bg-[#430359] transition duration-300 hover:bg-purple-900 text-white font-bold py-2 px-7 rounded-lg cursor-pointer"
               >
                 Import File{" "}
               </button>
@@ -94,7 +99,7 @@ export const Payroll = () => {
                 </p>
               </div>
             </div>
-            <div className="w-full flex justify-center mb-10 overflow-x-scroll">
+            <div className="w-full flex justify-center mb-10">
               <table className="w-[90%] rounded-2xl h-full bg-white mt-2 ">
                 <thead className="text-left h-[70px] text-black/70 font-medium">
                   <tr className="border-b ">
@@ -121,7 +126,7 @@ export const Payroll = () => {
             </div>
             <div className="full flex justify-center mb-20">
               <button
-                className="bg-white px-5 py-2 rounded-lg"
+                className="bg-white px-5 py-2 rounded-lg cursor-pointer"
                 onClick={removeData}
               >
                 Remove Data

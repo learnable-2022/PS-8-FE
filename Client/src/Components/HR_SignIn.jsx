@@ -82,7 +82,7 @@ export const HR_SignIn = () => {
                   )}
                 </div>
                 <button
-                  className="bg-[#430359] hover:bg-[#6c148a] transition duration-300 py-2 rounded-lg mb-5 text-white font-bold disabled:opacity-40"
+                  className="bg-[#430359] hover:bg-[#6c148a] transition duration-300 py-2 rounded-lg mb-5 text-white font-bold disabled:opacity-40 cursor-pointer"
                   disabled={!email || !password}
                 >
                   Sign In

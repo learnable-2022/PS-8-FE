@@ -6,6 +6,7 @@ import "../index.css";
 import { myContext } from "../ContextAPI";
 import { toast } from "react-toastify";
 import { titleCase } from "../UTILS/Title";
+import { Navigate } from "react-router-dom";
 
 const Header = () => {
   const { userInfo, processData, isFile } = useContext(myContext);
@@ -63,7 +64,10 @@ const Header = () => {
             />
           </form>
           {profileImage ? (
-            <figure className="w-[50px] h-[50px]" onClick={uploadProfile}>
+            <figure
+              className="w-[50px] h-[50px] cursor-pointer"
+              onClick={uploadProfile}
+            >
               <img
                 src={profileImage}
                 alt="Profile"

@@ -1,26 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import '../index.css';
+import React, { useState, useEffect, useContext } from "react";
+import "../index.css";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { BiEditAlt } from "react-icons/bi";
+import { myContext } from "../ContextAPI";
 
 const Pay_Policy = () => {
+  const { isFile } = useContext(myContext);
   const [commands, setCommands] = useState([]);
-  const [newCommand, setNewCommand] = useState('');
+  const [newCommand, setNewCommand] = useState("");
   const [editingIndex, setEditingIndex] = useState(-1);
-  const [performance, setPerformance] = useState('');
-  const [perfvalue, setPerfvalue] = useState('');
-  const [percentage, setPercentage] = useState('');
-  const [salary, setSalary] = useState('');
+  const [performance, setPerformance] = useState("");
+  const [perfvalue, setPerfvalue] = useState("");
+  const [percentage, setPercentage] = useState("");
+  const [salary, setSalary] = useState("");
 
+  const handleSalaryChange = () => {
+    setSalary(isFile.map((item) => item["Monthly base pay ($)"]));
+  };
   useEffect(() => {
-    const storedCommands = localStorage.getItem('commands');
+    const storedCommands = localStorage.getItem("commands");
     if (storedCommands) {
       setCommands(JSON.parse(storedCommands));
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('commands', JSON.stringify(commands));
+    localStorage.setItem("commands", JSON.stringify(commands));
   }, [commands]);
 
   const handleAddCommand = () => {
@@ -28,21 +33,21 @@ const Pay_Policy = () => {
       performance,
       perfvalue,
       percentage,
-      salary
+      salary,
     };
 
-    setCommands(prevCommands => [...prevCommands, command]);
-    setPerformance('');
-    setPerfvalue('');
-    setPercentage('');
-    setSalary('');
+    setCommands((prevCommands) => [...prevCommands, command]);
+    setPerformance("");
+    setPerfvalue("");
+    setPercentage("");
+    setSalary();
   };
 
-  const handleDeleteCommand = index => {
-    setCommands(prevCommands => prevCommands.filter((_, i) => i !== index));
+  const handleDeleteCommand = (index) => {
+    setCommands((prevCommands) => prevCommands.filter((_, i) => i !== index));
   };
 
-  const handleEditCommand = index => {
+  const handleEditCommand = (index) => {
     setEditingIndex(index);
     const command = commands[index];
     setPerformance(command.performance);
@@ -56,29 +61,31 @@ const Pay_Policy = () => {
       performance,
       perfvalue,
       percentage,
-      salary
+      salary,
     };
 
-    setCommands(prevCommands => {
+    setCommands((prevCommands) => {
       const updatedCommands = [...prevCommands];
       updatedCommands[editingIndex] = updatedCommand;
       return updatedCommands;
     });
 
     setEditingIndex(-1);
-    setPerformance('');
-    setPerfvalue('');
-    setPercentage('');
-    setSalary('');
+    setPerformance("");
+    setPerfvalue("");
+    setPercentage("");
+    setSalary("");
   };
 
   const handleCancelEdit = () => {
     setEditingIndex(-1);
-    setPerformance('');
-    setPerfvalue('');
-    setPercentage('');
-    setSalary('');
+    setPerformance("");
+    setPerfvalue("");
+    setPercentage("");
+    setSalary("");
   };
+
+  console.log(commands);
 
   return (
     <div className="flex w-full justify-center">
@@ -116,7 +123,7 @@ const Pay_Policy = () => {
             className="outline-none w-[15%] py-1 text-center rounded-lg bg-black/10"
             placeholder="Base salary"
             value={salary}
-            onChange={(e) => setSalary(e.target.value)}
+            onChange={handleSalaryChange}
           />
 
           {editingIndex === -1 ? (

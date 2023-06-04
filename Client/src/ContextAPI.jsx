@@ -80,41 +80,6 @@ const ContextAPI = ({ children }) => {
     getToken();
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   // console.log(import.meta.env.VITE_API_ENDPOINT);
-  //   // console.log(signIn);
-  //   const getToken = async () => {
-  //     try {
-  //       const response = await axios.post(
-  //         import.meta.env.VITE_API_ENDPOINT + "/auth/login",
-  //         {
-  //           ...signIn,
-  //         }
-  //         );
-  //         if (response.status === 200) { window.location = "/dashboard"}
-
-  //       const token = response.data.accessToken;
-
-  //       setHRToken(token);
-  //       window.localStorage.setItem("payMe_signIn", JSON.stringify(signIn));
-
-  //       console.log(response.data);
-
-  //       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  //     } catch (error) {
-  //       console.log(error.message);
-  //     }
-  //   };
-  //   getToken();
-  //   if (HRtoken !== null) {
-  //     setLoggedIn(true);
-  //   }
-  //   if (loggedIn) {
-  //     console.log("I am logged In");
-  //   }
-  // };
-
   // -------------------------------------[FILE UPLOAD]--------------------------------------------
 
   const [isFile, setIsFile] = useState([]);
