@@ -81,6 +81,7 @@ const Pay_Policy = () => {
   };
 
   return (
+<<<<<<< HEAD
     <div className="flex w-[83%] payroll-bg">
       <div className="w-3/4 p-12 items-center justify-between">
       <h1 className=" font-bold payp p-3">Pay policy</h1>
@@ -143,8 +144,69 @@ const Pay_Policy = () => {
                   </button>
                 </div>
               )}
+=======
+    <div className="flex w-full justify-center">
+      <div className="mt-20 w-[90%] ">
+        <h1 className="text-2xl font-bold mb-5">Pay policy</h1>
+        <h2 className="text-lg font-bold mb-3">Input command</h2>
+        <div className="flex items-center justify-center gap-6 border-black/20 bg-white py-4 rounded-lg border">
+          <p className="font-bold text-black/40 ">If</p>
+          <input
+            type="text"
+            className="outline-none w-[15%] py-1 text-center rounded-lg bg-black/10"
+            placeholder="Appraisal"
+            value={performance}
+            onChange={(e) => setPerformance(e.target.value)}
+          />
+          <p className="">is</p>
+          <input
+            type="number"
+            className=" outline-none w-[7%] py-1 text-center rounded-lg bg-black/10"
+            placeholder="5"
+            value={perfvalue}
+            onChange={(e) => setPerfvalue(e.target.value)}
+          />
+          <p className="">=</p>
+          <input
+            type="text"
+            className=" outline-none w-[7%] py-1 text-center rounded-lg bg-black/10"
+            placeholder="+10%"
+            value={percentage}
+            onChange={(e) => setPercentage(e.target.value)}
+          />
+          <p className="">of</p>
+          <input
+            type="text"
+            className="outline-none w-[15%] py-1 text-center rounded-lg bg-black/10"
+            placeholder="Base salary"
+            value={salary}
+            onChange={(e) => setSalary(e.target.value)}
+          />
+
+          {editingIndex === -1 ? (
+            <button
+              className="bg-[#430359] text-white w-1/5 py-1 text-center rounded-lg"
+              onClick={handleAddCommand}
+            >
+              Add command +
+            </button>
+          ) : (
+            <div className="flex gap-3">
+              <button
+                className="bg-[#430359] hover:bg-[#660e83] transition duration-300 text-white py-1 px-4 rounded-lg update-button"
+                onClick={handleUpdateCommand}
+              >
+                Update
+              </button>
+              <button
+                className=" text-[#430359] hover:bg-[#e9e6e6] transition duration-300  py-1 px-4 rounded-lg cancel-button  hover:border-none"
+                onClick={handleCancelEdit}
+              >
+                Cancel
+              </button>
+>>>>>>> 5e6f8362b20c938d4b3307866681bf92f608240a
             </div>
-          </div>
+          )}
         </div>
         <h2 className="text-x p-3">Command lines</h2>
         {commands.map((command, index) => (
@@ -170,13 +232,13 @@ const Pay_Policy = () => {
                   className=" p-2"
                   onClick={() => handleEditCommand(index)}
                 >
-                  <BiEditAlt/>
+                  <BiEditAlt />
                 </button>
                 <button
                   className=" p-2"
                   onClick={() => handleDeleteCommand(index)}
                 >
-                  <RiDeleteBinLine/>
+                  <RiDeleteBinLine />
                 </button>
               </div>
             )}

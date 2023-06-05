@@ -4,7 +4,8 @@
 @tailwind components;
 @tailwind utilities;
 
-body,html {
+body,
+html {
   height: 100vh;
   width: 100%;
   padding: 0;
@@ -13,7 +14,6 @@ body,html {
   font-family: lato;
   color: rgb(63, 62, 62);
 }
-
 
 .div {
   border-right: transparent;
@@ -29,16 +29,17 @@ header {
   height: 14vh;
 }
 
-.active{
-  background: #F5E4FB;
+.active {
+  background: #f5e4fb;
   height: 10vh;
   width: 100%;
   display: flex;
   justify-items: center;
   color: #430359;
+  font-weight: bold;
 }
 
-.active.hover{
+.active.hover {
   width: 100%;
 }
 
@@ -48,16 +49,6 @@ header {
   width: 1064px;
   background-color: #ffffff;
  border-radius: 12px;
-}
-
-.payp {
-  font-size: x-large;
-}
-
-.payroll-bg {
-  background-color: #F5E4FB;
-  width: 100%;
-  height: 100%;
 }
 
 .p1 {
@@ -134,7 +125,6 @@ padding-right: 54px;
   }
 }
 
-
 .loading-dots {
   display: inline-block;
 }
@@ -144,7 +134,7 @@ padding-right: 54px;
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background-color: #000;
+  background-color: #a8a8a8;
   margin: 0 4px;
   animation: loading 1s infinite;
 }
@@ -160,6 +150,3 @@ padding-right: 54px;
     transform: scale(1);
   }
 }
-
-
-
