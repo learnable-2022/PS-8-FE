@@ -58,7 +58,7 @@ const ContextAPI = ({ children }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    console.log(import.meta.env.VITE_API_ENDPOINT + "/auth/login");
     const getToken = async () => {
       try {
         await axios

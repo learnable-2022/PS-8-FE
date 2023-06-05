@@ -4,37 +4,16 @@ import { Payroll_Dashboard } from "./Components/Payroll_Dashboard";
 // import { Display_Employee_Payroll } from "./Components/Display_Employee_Payroll";
 import { Payroll } from "./Pages/Payroll";
 import { Processor } from "./Pages/Processor";
-<<<<<<< Updated upstream
-import { Database } from "./Pages/Database";
-import { ProtectedPage } from "./Components/ProtectedPage";
- import { ToastContainer } from 'react-toastify';
-
-
-=======
 import { Pay_Policy } from "./Pages/Pay_Policy";
 import { ProtectedPage } from "./Components/ProtectedPage";
 import { ToastContainer } from "react-toastify";
 import { Processor_Payroll } from "./Pages/Processor_Mini_Pages/Processor_Payroll";
 import { Processor_History } from "./Pages/Processor_Mini_Pages/Processor_History";
 import { Processor_Disbursement } from "./Pages/Processor_Mini_Pages/Processor_Disbursement";
->>>>>>> Stashed changes
 
 function App() {
   return (
     <div>
-<<<<<<< Updated upstream
-      <ToastContainer/>
-      <Navigation />
-      <Routes>
-        <Route element={<ProtectedPage />}> 
-          <Route path="/dashboard" element={<Payroll_Dashboard />}>
-            <Route path="/dashboard" element={<Payroll/>}/>
-            <Route path="/dashboard/processor" element={<Processor/>}/>
-            <Route path="/dashboard/database" element={<Database/>}/>
-          </Route>
-        </Route>
-        <Route path="/" element={<HR_SignIn />} exact/>
-=======
       <ToastContainer />
       <Routes>
         <Route element={<ProtectedPage />}>
@@ -55,7 +34,6 @@ function App() {
           </Route>
         </Route>
         <Route path="/" element={<HR_SignIn />} exact />
->>>>>>> Stashed changes
       </Routes>
     </div>
   );
