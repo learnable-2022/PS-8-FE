@@ -39,9 +39,9 @@ export const Payroll = () => {
             {moveIsSuccessful}
           </p>
         </div>
-        <div className="w-full justify-center flex pt-[3%]">
+        <div className="w-full justify-center flex">
           <div className="w-[90%] items-center flex justify-between">
-            <h2 className="text-2xl font-bold">Payroll</h2>
+            <h2 className="text-[34px] font-bold">Payroll</h2>
             <form>
               <input
                 className="hidden"
@@ -67,7 +67,7 @@ export const Payroll = () => {
                   onClick={handleButtonClick}
                   className="bg-[#430359] transition duration-300 hover:bg-purple-900 text-white font-bold py-2 px-7 rounded-lg"
                 >
-                  Upload
+                  Import File
                 </button>
               </div>
             ) : (
@@ -75,7 +75,7 @@ export const Payroll = () => {
                 onClick={handleButtonClick}
                 className="bg-[#430359] transition duration-300 hover:bg-purple-900 text-white font-bold py-2 px-7 rounded-lg"
               >
-                Upload
+                Import File{" "}
               </button>
             )}
           </div>
@@ -94,15 +94,12 @@ export const Payroll = () => {
                 </p>
               </div>
             </div>
-            <div className="w-full flex justify-center mb-10">
-              <table className="w-[90%] rounded-2xl h-full bg-white mt-2 overflow-x-scroll">
-                <thead className="text-left h-[70px] text-black/70 font-medium ">
+            <div className="w-full flex justify-center mb-10 overflow-x-scroll">
+              <table className="w-[90%] rounded-2xl h-full bg-white mt-2 ">
+                <thead className="text-left h-[70px] text-black/70 font-medium">
                   <tr className="border-b ">
                     {columnHeader.map((header, index) => (
-                      <th
-                        key={index}
-                        className="pl-[1.5%] flex overflow-x-scroll overflow-auto"
-                      >
+                      <th key={index} className="pl-[1.5%]">
                         {header}
                       </th>
                     ))}

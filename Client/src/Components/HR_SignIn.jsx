@@ -16,7 +16,7 @@ export const HR_SignIn = () => {
 
   return (
     <div className="w-full">
-      <ToastContainer/>
+      <ToastContainer />
       <div className="flex justify-center w-full mt-20">
         <div className="w-full">
           <div className="flex justify-center">
@@ -32,18 +32,18 @@ export const HR_SignIn = () => {
             Welcome back
           </h2>
           <div className="flex justify-center w-full">
-            <div className="w-2/5 border-black/10 mt-10 rounded-lg border flex justify-center">
+            <div className="w-[30%] border-[#C2C2C2] mt-10 rounded-lg border flex justify-center">
               <form
                 onSubmit={handleSubmit}
-                className="flex flex-col w-[90%] mt-10"
+                className="flex flex-col w-[90%] mt-5"
               >
-                <h2 className="font-semibold text-[#1A1A1A] text-xl mb-5">
+                <h2 className="font-bold text-[#1A1A1A] text-[28px] mb-5">
                   Sign in
                 </h2>
 
                 <label
                   htmlFor="email"
-                  className="mb-1 text-[#1A1A1A] font-semibold"
+                  className="mb-1 text-[#1A1A1A] font-medium"
                 >
                   Email Address
                 </label>
@@ -52,11 +52,11 @@ export const HR_SignIn = () => {
                   name="email"
                   value={email}
                   onChange={handleSignIn}
-                  className="bg-black/5 py-2  rounded-lg px-3 mb-5 text-black/60"
+                  className="bg-[#F5F5F5] py-2 outline-none  rounded-lg px-3 mb-5 text-black/60"
                 />
                 <label
                   htmlFor="password"
-                  className="mb-1 text-[#1A1A1A] font-semibold"
+                  className="mb-1 text-[#1A1A1A] font-medium"
                 >
                   Password
                 </label>
@@ -65,7 +65,7 @@ export const HR_SignIn = () => {
                     type={revealPassword ? "text" : "password"}
                     name="password"
                     value={password}
-                    className="bg-black/5 w-full py-2  rounded-lg px-3 text-black/60"
+                    className="bg-[#F5F5F5] w-full py-2 outline-none  rounded-lg px-3 text-black/60"
                     onChange={handleSignIn}
                   />
 
@@ -82,7 +82,7 @@ export const HR_SignIn = () => {
                   )}
                 </div>
                 <button
-                  className="bg-[#430359] py-2 rounded-lg mb-10 text-white font-bold disabled:opacity-40"
+                  className="bg-[#430359] hover:bg-[#6c148a] transition duration-300 py-2 rounded-lg mb-5 text-white font-bold disabled:opacity-40"
                   disabled={!email || !password}
                 >
                   Sign In

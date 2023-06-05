@@ -4,7 +4,7 @@ import { VscServerProcess } from "react-icons/vsc";
 import { MdPolicy } from "react-icons/md";
 import { BsDot } from "react-icons/bs";
 import "../index.css";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { myContext } from "../ContextAPI";
 
 export const Nav_Bar = () => {
@@ -13,28 +13,21 @@ export const Nav_Bar = () => {
   return (
     <aside className="">
       <nav className="flex overflow-hidden  flex-col h-screen bg-[#ffffff]  py-6 ">
-        <ul className="flex flex-col mt-10 gap-5 fixed w-[17%]">
+        <ul className="flex flex-col fixed w-[17%]">
           <NavLink activeClassName="active" to="/dashboard">
             <li className="flex items-center text-start justify-start pl-5 h-[10vh]  gap-2 hover:text-[#430359] hover:bg-[#E5E5E5] w-[100%]">
               <AiOutlineDollar className="text-xl" />
-              <Link to="/dashboard">Payroll</Link>
-            </li>
-            <li className="flex items-center gap-2 hover:text-[#430359] hover:bg-[#F5E4FB]">
-              <VscServerProcess className="text-xl" />{" "}
-              <Link to="/dashboard/processor">Processor</Link>
-            </li>
-            <li className="flex items-center gap-2 hover:text-[#430359] hover:bg-[#F5E4FB]">
-              <VscServerProcess className="text-xl" />{" "}
-              <Link to="/dashboard/database">Database</Link>
+              Payroll
             </li>
           </NavLink>
+
           <NavLink activeClassName="active" to="/processor">
             {processData.length > 0 ? (
               <li
                 onClick={handleNotification}
                 className="flex items-center justify-start hover:py-5 pl-5 h-[10vh] gap-2 hover:text-[#430359]  hover:bg-[#E5E5E5] w-[100%]"
               >
-                <VscServerProcess className="text-xl" /> processor
+                <VscServerProcess className="text-xl" /> Processor
                 {notification ? (
                   <BsDot className="ml-[-15%] mt-[-2%] text-[red] text-6xl" />
                 ) : (

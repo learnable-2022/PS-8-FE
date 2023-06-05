@@ -8,11 +8,10 @@ const myContext = createContext();
 const ContextAPI = ({ children }) => {
   const [signIn, setSignIn] = useState({
     email: "",
-    password: ""
+    password: "",
   });
 
-  const { email, password} = signIn;
-  
+  const { email, password } = signIn;
 
   // -------------------------------------[]--------------------------------------------
 
@@ -54,11 +53,9 @@ const ContextAPI = ({ children }) => {
     window.localStorage.setItem("userInfo", userInfo);
   }, [userInfo]);
 
-  // ------------------------------[SUBMIT FORM |GET TOKEN]-------------------------------------
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(import.meta.env.VITE_API_ENDPOINT + "/auth/login");
+
     const getToken = async () => {
       try {
         await axios
@@ -224,6 +221,14 @@ const ContextAPI = ({ children }) => {
       JSON.stringify(processData)
     );
   }, [processData]);
+  useEffect(() => {
+    const data = window.localStorage.getItem("process_notification");
+    setNotification(data);
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem("process_notification", notification);
+  }, [notification]);
 
   const removeProcessor = () => {
     setProcessData([]);

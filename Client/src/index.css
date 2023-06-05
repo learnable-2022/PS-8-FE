@@ -4,7 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+body,
+html {
+  height: 100vh;
+  width: 100%;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -12,135 +15,47 @@ body {
   color: rgb(63, 62, 62);
 }
 
-aside {
-  width: 25%;
-  padding-top: 10px;
-
-}
-
 .div {
   border-right: transparent;
   border-top: transparent;
   border-bottom: transparent;
- 
 }
 
 .img {
-  padding:20px;
+  padding: 20px;
 }
 
 header {
-  height: 100px;
-  border: 1px solid #C2C2C2;
+  height: 14vh;
 }
 
-.active{
-  background: #F5E4FB;
+.active {
+  background: #f5e4fb;
   height: 10vh;
   width: 100%;
   display: flex;
   justify-items: center;
   color: #430359;
+  font-weight: bold;
 }
 
-.active.hover{
+.active.hover {
   width: 100%;
 }
 
-.paypolicy {
-  border: 1px solid #C2C2C2;
-  height: 80px;
-  width: 1064px;
-  background-color: #ffffff;
- border-radius: 12px;
-}
-
-.p1 {
-padding-left: 24px;
-padding-top: 30px;
-padding-bottom: 30px;
-padding-right: 54px;
-}
-
-.p2, .p3, .p4 {
-  padding-left: 64.43px;
-  padding-right: 64.43px;
-}
-
-.input {
-  height: 39px;
-  border: 1px solid transparent;
-  border-radius: 5px;
-  text-align: center;
-  background-color: #F5F5F5;
-}
-
-
-.in1 {
-  width: 90px;
-}
-
-.in2 {
-  width: 60px;
-  
-}
-.in3 {
-  width: 55px;
-}
-
-.in4 {
-  width: 100px;
-}
-
-.addcommand {
-  padding-left: 80px;
-}
- 
-.comm {
-  padding-left: 45px;
-  padding-right: 45px;
-}
-.span {
- width: 1064px;
- background-color: #ffffff;
-}
-
-.co1 {
-  border: 1px solid #ece8e8;
-  border-radius: 5px;
- 
-}
-
-.cancel-button {
-  border: 1px solid #7f04a8;
-}
-
 @media only screen and (max-width: 768px) {
-      .img {
-        padding: 0px;
-      }
-
-      .linav {
-        height: 50px;
-      } 
-
-      header {
-        height: 80px;
-      }
-     
+  .img {
+    padding: 0px;
   }
 
-   table {
-    width: 100%;
-    border-collapse: collapse;
+  .linav {
+    height: 50px;
   }
 
-  th, td {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+  header {
+    height: 80px;
   }
-
+}
 
 .loading-dots {
   display: inline-block;
@@ -151,7 +66,7 @@ padding-right: 54px;
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background-color: #b9b6b6;
+  background-color: #a8a8a8;
   margin: 0 4px;
   animation: loading 1s infinite;
 }
@@ -167,6 +82,3 @@ padding-right: 54px;
     transform: scale(1);
   }
 }
-
-
-

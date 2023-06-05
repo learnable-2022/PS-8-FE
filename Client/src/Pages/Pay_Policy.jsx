@@ -81,70 +81,67 @@ const Pay_Policy = () => {
   };
 
   return (
-    <div className="flex w-[83%]">
-      <div className="w-3/4 p-4">
-        <h1 className="text-3xl font-bold mb-4">Pay policy</h1>
-        <div className="mb-4">
-          <h2 className="text-xl font-bold">Input command</h2>
-          <div className="flex items-center mt-2 paypolicy">
-            <p className="p1 p">If</p>
-            <input
-              type="text"
-              className="in1 input outline-none"
-              placeholder="Appraisal"
-              value={performance}
-              onChange={(e) => setPerformance(e.target.value)}
-            />
-            <p className="p2">is</p>
-            <input
-              type="number"
-              className="in2 input outline-none w-4/5"
-              placeholder="5"
-              value={perfvalue}
-              onChange={(e) => setPerfvalue(e.target.value)}
-            />
-            <p className="p3">=</p>
-            <input
-              type="text"
-              className="in3 input outline-none"
-              placeholder="+10%"
-              value={percentage}
-              onChange={(e) => setPercentage(e.target.value)}
-            />
-            <p className="p4">of</p>
-            <input
-              type="text"
-              className="in4 input outline-none"
-              placeholder="Base salary"
-              value={salary}
-              onChange={(e) => setSalary(e.target.value)}
-            />
-            <div className="addcommand">
-              {editingIndex === -1 ? (
-                <button
-                  className="bg-[#430359] text-white py-2 px-4 rounded-xl"
-                  onClick={handleAddCommand}
-                >
-                  Add command +
-                </button>
-              ) : (
-                <div className="flex gap-3">
-                  <button
-                    className="bg-[#430359] hover:bg-[#660e83] transition duration-300 text-white py-1 px-4 rounded-lg update-button"
-                    onClick={handleUpdateCommand}
-                  >
-                    Update
-                  </button>
-                  <button
-                    className=" text-[#430359] hover:bg-[#e9e6e6] transition duration-300  py-1 px-4 rounded-lg cancel-button  hover:border-none"
-                    onClick={handleCancelEdit}
-                  >
-                    Cancel
-                  </button>
-                </div>
-              )}
+    <div className="flex w-full justify-center">
+      <div className="mt-20 w-[90%] ">
+        <h1 className="text-2xl font-bold mb-5">Pay policy</h1>
+        <h2 className="text-lg font-bold mb-3">Input command</h2>
+        <div className="flex items-center justify-center gap-6 border-black/20 bg-white py-4 rounded-lg border">
+          <p className="font-bold text-black/40 ">If</p>
+          <input
+            type="text"
+            className="outline-none w-[15%] py-1 text-center rounded-lg bg-black/10"
+            placeholder="Appraisal"
+            value={performance}
+            onChange={(e) => setPerformance(e.target.value)}
+          />
+          <p className="">is</p>
+          <input
+            type="number"
+            className=" outline-none w-[7%] py-1 text-center rounded-lg bg-black/10"
+            placeholder="5"
+            value={perfvalue}
+            onChange={(e) => setPerfvalue(e.target.value)}
+          />
+          <p className="">=</p>
+          <input
+            type="text"
+            className=" outline-none w-[7%] py-1 text-center rounded-lg bg-black/10"
+            placeholder="+10%"
+            value={percentage}
+            onChange={(e) => setPercentage(e.target.value)}
+          />
+          <p className="">of</p>
+          <input
+            type="text"
+            className="outline-none w-[15%] py-1 text-center rounded-lg bg-black/10"
+            placeholder="Base salary"
+            value={salary}
+            onChange={(e) => setSalary(e.target.value)}
+          />
+
+          {editingIndex === -1 ? (
+            <button
+              className="bg-[#430359] text-white w-1/5 py-1 text-center rounded-lg"
+              onClick={handleAddCommand}
+            >
+              Add command +
+            </button>
+          ) : (
+            <div className="flex gap-3">
+              <button
+                className="bg-[#430359] hover:bg-[#660e83] transition duration-300 text-white py-1 px-4 rounded-lg update-button"
+                onClick={handleUpdateCommand}
+              >
+                Update
+              </button>
+              <button
+                className=" text-[#430359] hover:bg-[#e9e6e6] transition duration-300  py-1 px-4 rounded-lg cancel-button  hover:border-none"
+                onClick={handleCancelEdit}
+              >
+                Cancel
+              </button>
             </div>
-          </div>
+          )}
         </div>
         <h2 className="text-xl font-bold">Command lines</h2>
         {commands.map((command, index) => (
