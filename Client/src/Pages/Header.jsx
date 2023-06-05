@@ -7,6 +7,7 @@ import "../index.css";
 import { myContext } from "../ContextAPI";
 import { toast } from "react-toastify";
 import { titleCase } from "../UTILS/Title";
+import "./connectWallet"
 
 const Header = () => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -96,10 +97,16 @@ const Header = () => {
             <span className="text-sm">{userName}</span>
             <span className="text-sm text-gray-200">Hr Admin</span>
           </div>
+          <div>
+          <button className="cursor-pointer  bg-[#430359] hover:bg-purple-900 text-white font-bold py-3 px-5 rounded-xl">
+            connect
+        </button>
+            <connectWallet/>
+          </div>
         </div>
       </div>
     </header>
   );
-};
+}
 
 export default Header;

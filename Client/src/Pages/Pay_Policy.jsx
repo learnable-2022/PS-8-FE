@@ -81,70 +81,6 @@ const Pay_Policy = () => {
   };
 
   return (
-<<<<<<< HEAD
-    <div className="flex w-[83%] payroll-bg">
-      <div className="w-3/4 p-12 items-center justify-between">
-      <h1 className=" font-bold payp p-3">Pay policy</h1>
-        <div className="mb-4">
-          <h2 className="text-x p-3">Input command</h2>
-          <div className="flex items-center mt-2 paypolicy">
-            <p className="p1 p">If</p>
-            <input
-              type="text"
-              className="in1 input"
-              placeholder="Appraisal"
-              value={performance}
-              onChange={e => setPerformance(e.target.value)}
-            />
-            <p className="p2">is</p>
-            <input
-              type="number"
-              className="in2 input"
-              placeholder="5"
-              value={perfvalue}
-              onChange={e => setPerfvalue(e.target.value)}
-            />
-            <p className="p3">=</p>
-            <input
-              type="text"
-              className="in3 input"
-              placeholder="+10%"
-              value={percentage}
-              onChange={e => setPercentage(e.target.value)}
-            />
-            <p className="p4">of</p>
-            <input
-              type="text"
-              className="in4 input"
-              placeholder="Base salary"
-              value={salary}
-              onChange={e => setSalary(e.target.value)}
-            />
-            <div className="addcommand">
-              {editingIndex === -1 ? (
-                <button
-                  className="bg-[#430359] text-white py-2 px-4 rounded-xl"
-                  onClick={handleAddCommand}
-                >
-                  Add command +
-                </button>
-              ) : (
-                <div>
-                  <button
-                    className="bg-[#430359] text-white py-2 px-4 rounded-xl update-button"
-                    onClick={handleUpdateCommand}
-                  >
-                    Update
-                  </button>
-                  <button
-                    className=" text-[#430359] py-2 px-4 rounded-xl cancel-button"
-                    onClick={handleCancelEdit}
-                  >
-                    Cancel
-                  </button>
-                </div>
-              )}
-=======
     <div className="flex w-full justify-center">
       <div className="mt-20 w-[90%] ">
         <h1 className="text-2xl font-bold mb-5">Pay policy</h1>
@@ -204,7 +140,6 @@ const Pay_Policy = () => {
               >
                 Cancel
               </button>
->>>>>>> 5e6f8362b20c938d4b3307866681bf92f608240a
             </div>
           )}
         </div>

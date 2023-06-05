@@ -51,6 +51,16 @@ header {
  border-radius: 12px;
 }
 
+.payp {
+  font-size: x-large;
+}
+
+.payroll-bg {
+  background-color: #F5E4FB;
+  width: 100%;
+  height: 100%;
+}
+
 .p1 {
 padding-left: 24px;
 padding-top: 30px;
