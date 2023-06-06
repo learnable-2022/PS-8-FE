@@ -1,30 +1,29 @@
-import React, { useState } from 'react';
-import '../index.css';
-import { ethers } from 'ethers';
+import React, { useState } from "react";
+import "../index.css";
+import { ethers } from "ethers";
 
 
 const contractAddress = '0x0B2ae7d89cCB3CF33eC7c1C4191593d71B15999E';
 const contractAbi = payme.json
-
 const ConnectWallet = () => {
-  const [currentAccount, setCurrentAccount] = useState('');
+  const [currentAccount, setCurrentAccount] = useState("");
 
   const connectWallet = async () => {
     try {
-      if (typeof window.ethereum !== 'undefined') {
+      if (typeof window.ethereum !== "undefined") {
         await window.ethereum.enable();
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
         const accounts = await signer.getAddress();
 
-        setCurrentAccount(accounts[0]);
-        alert('Hey ' + accounts[0]);
+        setCurrentAccount(accounts);
+        alert("Hey" + accounts);
       } else {
-        alert('Metamask not installed');
+        alert("Metamask not installed");
       }
     } catch (error) {
       console.error(error);
-      alert('Error connecting to Metamask');
+      alert("Error connecting to Metamask");
     }
   };
 
