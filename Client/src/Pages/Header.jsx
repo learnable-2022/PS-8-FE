@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import { titleCase } from "../UTILS/Title";
 
 const Header = () => {
-  const { userInfo, processData, isFile } = useContext(myContext);
+  const { userInfo, processData, isFile, handleLogout } = useContext(myContext);
   const [profileImage, setProfileImage] = useState(null);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const Header = () => {
         <div className="w-2/5 h-full">
           <figure className="w-[16%] ">
             <img
-              src="/public/Images/Logo (1).jpg"
+              src="/Images/Logo (1).jpg"
               alt="PayMe"
               className="w-full h-full"
             />
@@ -48,7 +48,7 @@ const Header = () => {
           </button>
 
           <button className="bg-white text-black px-4 py-2">
-            <TbLogout className="text-2xl text-black/60" />
+            <TbLogout className="text-2xl text-black/60" onClick={handleLogout}/>
           </button>
 
           <div className="div border-l-[gray-200] border p-3"></div>
@@ -60,6 +60,7 @@ const Header = () => {
               id="profile"
               className="hidden"
               onChange={uploadImage}
+              
             />
           </form>
           {profileImage ? (
