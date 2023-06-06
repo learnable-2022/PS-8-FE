@@ -38,16 +38,16 @@ export const Processor_Payroll = () => {
           </div>
           <div className="flex justify-center mt-4">
             <button
-              onClick={removeProcessor}
               className="bg-white px-5 py-2 rounded-lg"
+              onClick={removeProcessor}
             >
-              Remove Data{" "}
+              Remove Data
             </button>
           </div>
         </div>
       ) : (
         <div className="w-full flex justify-center">
-          <div className="bg-[#ededed] w-[90%] py-[10%] mt-10 rounded-xl shadow-black/20 shadow-md">
+          <div className="bg-[#ffffff] w-[90%] py-[10%] mt-10 rounded-xl shadow-black/20 shadow-md">
             <p className="flex items-center justify-center text-gray-500 text-sm">
               No data found
             </p>

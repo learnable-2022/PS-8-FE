@@ -43,6 +43,84 @@ header {
   width: 100%;
 }
 
+.paypolicy {
+  border: 1px solid #C2C2C2;
+  height: 80px;
+  width: 1064px;
+  background-color: #ffffff;
+ border-radius: 12px;
+}
+
+.payp {
+  font-size: x-large;
+}
+
+.payroll-bg {
+  background-color: #F5E4FB;
+  width: 100%;
+  height: 100%;
+}
+
+.p1 {
+padding-left: 24px;
+padding-top: 30px;
+padding-bottom: 30px;
+padding-right: 54px;
+}
+
+.p2, .p3, .p4 {
+  padding-left: 64.43px;
+  padding-right: 64.43px;
+}
+
+.input {
+  height: 39px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  text-align: center;
+  background-color: #F5F5F5;
+}
+
+
+.in1 {
+  width: 90px;
+}
+
+.in2 {
+  width: 30px;
+  
+}
+.in3 {
+  width: 55px;
+}
+
+.in4 {
+  width: 100px;
+}
+
+.addcommand {
+  padding-left: 80px;
+}
+ 
+.comm {
+  padding-left: 45px;
+  padding-right: 45px;
+}
+.span {
+ width: 1064px;
+ background-color: #ffffff;
+}
+
+.co1 {
+  border: 1px solid #ece8e8;
+  border-radius: 5px;
+ 
+}
+
+.cancel-button {
+  border: 1px solid #430359;
+}
+
 @media only screen and (max-width: 768px) {
   .img {
     padding: 0px;

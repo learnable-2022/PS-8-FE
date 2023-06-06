@@ -4,8 +4,8 @@ import { TbLogout } from "react-icons/tb";
 import { HiUserCircle } from "react-icons/hi";
 import "../index.css";
 import { myContext } from "../ContextAPI";
-import { toast } from "react-toastify";
 import { titleCase } from "../UTILS/Title";
+import ConnectWallet from "./ConnectWallet";
 
 const Header = () => {
   const { userInfo, processData, isFile, handleLogout } = useContext(myContext);
@@ -47,9 +47,11 @@ const Header = () => {
             <IoNotificationsOutline className="text-2xl text-black/60" />
           </button>
 
-          <button className="bg-white text-black px-4 py-2">
+          <button
+            className="bg-white text-black px-4 py-2"  onClick={() => setShowDropdown(!showDropdown)}>
             <TbLogout className="text-2xl text-black/60" onClick={handleLogout}/>
           </button>
+          
 
           <div className="div border-l-[gray-200] border p-3"></div>
 
@@ -83,10 +85,14 @@ const Header = () => {
             <span className="text-sm">{userName}</span>
             <span className="text-sm text-gray-200">Hr Admin</span>
           </div>
+          <div>
+          
+            <ConnectWallet/>
+          </div>
         </div>
       </div>
     </header>
   );
-};
+}
 
 export default Header;

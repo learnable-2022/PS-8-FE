@@ -8,10 +8,12 @@ export const HR_SignIn = () => {
   const {
     handleSignIn,
     handleSubmit,
+    handleClick,
     password,
     email,
     showPassword,
     revealPassword,
+    isPending,
   } = useContext(myContext);
 
   return (
@@ -82,10 +84,11 @@ export const HR_SignIn = () => {
                   )}
                 </div>
                 <button
-                  className="bg-[#430359] hover:bg-[#6c148a] transition duration-300 py-2 rounded-lg mb-5 text-white font-bold disabled:opacity-40"
+                  className={`bg-[#430359] hover:bg-[#6c148a] transition duration-300 py-2 rounded-lg mb-5 text-white font-bold disabled:opacity-40 ${isPending && "cursor-not-allowed"}`}
                   disabled={!email || !password}
+                  onClick={handleClick}
                 >
-                  Sign In
+                  {isPending ? "Loading..." : "Sign In"}
                 </button>
               </form>
             </div>
