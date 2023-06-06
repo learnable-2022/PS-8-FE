@@ -100,29 +100,31 @@ export const Payroll = () => {
               </div>
             </div>
             <div className="w-full flex justify-center mb-10">
-              <table className="w-[90%] rounded-2xl h-full bg-white mt-2 ">
-                <thead className="text-left h-[70px] text-black/70 font-medium">
-                  <tr className="border-b ">
-                    {columnHeader.map((header, index) => (
-                      <th key={index} className="pl-[1.5%]">
-                        {header}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-
-                <tbody>
-                  {isFile.map((row, index) => (
-                    <tr key={index} className="border-b">
+              <div className="w-[90%] rounded-2xl h-full bg-white mt-2 overflow-x-scroll">
+                <table className="min-w-full ">
+                  <thead className="text-left h-[70px] text-black/70 font-medium">
+                    <tr className="border-b ">
                       {columnHeader.map((header, index) => (
-                        <td key={index} className="py-2 text-sm pl-[1.5%]">
-                          {row[header]}
-                        </td>
+                        <th key={index} className="pl-[1.5%] pr-10 whitespace-nowrap">
+                          {header}
+                        </th>
                       ))}
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+
+                  <tbody>
+                    {isFile.map((row, index) => (
+                      <tr key={index} className="border-b">
+                        {columnHeader.map((header, index) => (
+                          <td key={index} className="py-2 text-sm pl-[1.5%]">
+                            {row[header]}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
             <div className="full flex justify-center mb-20">
               <button

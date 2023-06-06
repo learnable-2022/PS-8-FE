@@ -200,6 +200,69 @@ const ContextAPI = ({ children }) => {
   };
 
   // -------------------------------------[Process Data]--------------------------------------------
+
+  // -------------------------------------[Process Uploaded Data]-----------------------------------
+  const [processPayroll, setProcessPayroll] = useState([]);
+  const processUploadedData = () => {
+    const calculate = processData.map((item) => {
+      const appraisalScore = item["Appraisal score"];
+      const workingHours = item["Total working hours"];
+      const yearsOfService = item["Years of service"];
+      const taxPolicy = item["Tax policy (%)"];
+      const monthlyBasePay = item["Monthly base pay (₦)"];
+
+      let totalSalary = monthlyBasePay;
+
+      let bonusPercentage = 0;
+
+      if (appraisalScore === 5) {
+        bonusPercentage += 20;
+      } else if (appraisalScore === 4) {
+        bonusPercentage += 10;
+      } else if (appraisalScore === 3) {
+        bonusPercentage += 5;
+      }
+
+      if (workingHours > 180) {
+        bonusPercentage += 20;
+      } else if (workingHours >= 161 && workingHours <= 180) {
+        bonusPercentage += 10;
+      } else if (workingHours === 160) {
+        bonusPercentage += 2;
+      }
+
+      if (yearsOfService >= 2 && yearsOfService <= 10) {
+        const serviceBonus = [0.05, 0.08, 0.1, 0.14, 0.17, 0.2, 0.24, 0.26];
+        bonusPercentage += serviceBonus[yearsOfService - 2] * 100;
+      } else if (yearsOfService >= 10) {
+        bonusPercentage += 35;
+      }
+
+      const bonusAmount = monthlyBasePay * (bonusPercentage / 100);
+      totalSalary += bonusAmount;
+
+      const taxDeductionPercentage = taxPolicy;
+      const taxDeductionAmount = totalSalary * (taxDeductionPercentage / 100);
+      totalSalary -= taxDeductionAmount;
+
+      return {
+        Name: item.Name,
+        ID: item.ID,
+        "Net Change": `${(totalSalary - monthlyBasePay).toFixed(0)}`,
+        Bonus: `${bonusAmount.toFixed(0)}`,
+        Deduction: ` -${taxDeductionAmount.toFixed(0)}`,
+        "Monthly base pay (₦)": monthlyBasePay,
+        "Total salary": `${totalSalary.toFixed(0)}`,
+      };
+    });
+    setProcessPayroll(calculate);
+  };
+
+  // const calculatedData = processUploadedData()
+
+  console.log(processPayroll);
+  // -------------------------------------[Process Uploaded Data]-----------------------------------
+
   return (
     <div>
       <myContext.Provider
@@ -226,6 +289,8 @@ const ContextAPI = ({ children }) => {
           isLoading,
           removeProcessor,
           loading,
+          processUploadedData,
+          processPayroll,
         }}
       >
         {children}

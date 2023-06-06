@@ -4,7 +4,7 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import { BiEditAlt } from "react-icons/bi";
 import { myContext } from "../ContextAPI";
 
-const Pay_Policy = () => {
+export const Pay_Policy = () => {
   const { isFile } = useContext(myContext);
   const [commands, setCommands] = useState([]);
   const [newCommand, setNewCommand] = useState("");
@@ -27,9 +27,19 @@ const Pay_Policy = () => {
   useEffect(() => {
     localStorage.setItem("commands", JSON.stringify(commands));
   }, [commands]);
-
+  const [message, setMessage] = useState("");
   const handleAddCommand = () => {
-    const command = {
+    if (
+      performance.trim() === "" ||
+      perfvalue.trim() === "" ||
+      percentage.trim() === ""
+    ) {
+      setMessage("Add command!");
+      return;
+    }else{
+      setMessage("")
+    }
+   const command = {
       performance,
       perfvalue,
       percentage,
@@ -40,8 +50,12 @@ const Pay_Policy = () => {
     setPerformance("");
     setPerfvalue("");
     setPercentage("");
-    setSalary();
-  };
+    setSalary("");
+};
+
+   setTimeout(() => {
+     setMessage("");
+   }, 4000);
 
   const handleDeleteCommand = (index) => {
     setCommands((prevCommands) => prevCommands.filter((_, i) => i !== index));
@@ -89,8 +103,8 @@ const Pay_Policy = () => {
 
   return (
     <div className="flex w-full justify-center">
-      <div className="mt-20 w-[90%] ">
-        <h1 className="text-2xl font-bold mb-5">Pay policy</h1>
+      <div className="mt-5 w-[90%] ">
+        <h1 className="text-[34px] font-bold mb-5">Pay policy</h1>
         <h2 className="text-lg font-bold mb-3">Input command</h2>
         <div className="flex items-center justify-center gap-6 border-black/20 bg-white py-4 rounded-lg border">
           <p className="font-bold text-black/40 ">If</p>
@@ -111,7 +125,7 @@ const Pay_Policy = () => {
           />
           <p className="">=</p>
           <input
-            type="text"
+            type="number"
             className=" outline-none w-[7%] py-1 text-center rounded-lg bg-black/10"
             placeholder="+10%"
             value={percentage}
@@ -119,11 +133,11 @@ const Pay_Policy = () => {
           />
           <p className="">of</p>
           <input
-            type="text"
+            type="number"
             className="outline-none w-[15%] py-1 text-center rounded-lg bg-black/10"
             placeholder="Base salary"
             value={salary}
-            onChange={handleSalaryChange}
+            onChange={(e) => setSalary(e.target.value)}
           />
 
           {editingIndex === -1 ? (
@@ -150,45 +164,52 @@ const Pay_Policy = () => {
             </div>
           )}
         </div>
-        <h2 className="text-x p-3">Command lines</h2>
+        <h2 className="text-lg font-bold py-4">Command lines</h2>
         {commands.map((command, index) => (
           <div
             key={index}
-            className="span border rounded-xl p-1 flex items-center mb-2"
+            className="flex items-center mb-2"
             onMouseEnter={() => setNewCommand(index)}
             onMouseLeave={() => setNewCommand(-1)}
           >
-            <span className="mr-2 flex">
+            <span className="w-[90%]  flex gap-10 items-center">
               <p className="comm">{index + 1}. If</p>
-              <p className="comm co1">{command.performance}</p>
+              <p className="bg-white w-[15%] flex justify-center py-1 rounded-lg">
+                {command.performance}
+              </p>
               <p className="comm">is</p>
-              <p className="comm co1">{command.perfvalue}</p>
+              <p className="bg-white w-[5%] flex justify-center py-1 rounded-lg">
+                {command.perfvalue}
+              </p>
               <p className="comm">=</p>
-              <p className="comm co1">{command.percentage}</p>
+              <p className="bg-white w-[5%] flex justify-center py-1 rounded-lg">
+                {command.percentage}
+              </p>
               <p className="comm">of</p>
-              <p className="comm co1">{command.salary}</p>
+              <p className="bg-white w-[15%] flex justify-center items-center h-9 rounded-lg">
+                {command.salary}
+              </p>
             </span>
             {newCommand === index && editingIndex !== index && (
-              <div className="">
+              <div className="flex">
                 <button
                   className=" p-2"
                   onClick={() => handleEditCommand(index)}
                 >
-                  <BiEditAlt />
+                  <BiEditAlt className="text-2xl text-black/50 hover:text-[#430359]" />
                 </button>
                 <button
                   className=" p-2"
                   onClick={() => handleDeleteCommand(index)}
                 >
-                  <RiDeleteBinLine />
+                  <RiDeleteBinLine className="text-2xl text-black/50 hover:text-[red]" />
                 </button>
               </div>
             )}
           </div>
         ))}
+        <p>{message}</p>
       </div>
     </div>
   );
 };
-
-export default Pay_Policy;
