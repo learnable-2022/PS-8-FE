@@ -81,6 +81,10 @@ padding-right: 54px;
   background-color: #F5F5F5;
 }
 
+.connect-btn {
+  border: 1px solid #430359;
+}
+
 
 .in1 {
   width: 90px;
