@@ -43,6 +43,8 @@ const ContextAPI = ({ children }) => {
   // -------------------------------------[]--------------------------------------------
   const [HRtoken, setHRToken] = useState(null);
   const [userInfo, setUserInfo] = useState("");
+  const [isPending, setIsPending] = useState(false);
+
 
   useEffect(() => {
     const data = window.localStorage.getItem("userInfo");
@@ -53,8 +55,14 @@ const ContextAPI = ({ children }) => {
     window.localStorage.setItem("userInfo", userInfo);
   }, [userInfo]);
 
+  const handleClick = () => {
+    console.log("clicked");
+    setIsPending(true);
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
 
     const getToken = async () => {
       try {
@@ -63,17 +71,27 @@ const ContextAPI = ({ children }) => {
             ...signIn,
           })
           .then((response) => {
+            setIsPending(false);
             const token = response.data.accessToken;
             const user = response.data.user.username;
+            toast.loading("Logging in...");
             setHRToken(token);
             setUserInfo(user);
             window.localStorage.setItem("HR_access_token", token);
-            token && (window.location = "/dashboard");
+            setTimeout(() => {
+              token && (window.location = "/dashboard");
+            }, 3000);
           });
       } catch (error) {
         console.log(error);
-        if (error.response && error.response.status > 400 < 500) {
-          toast.error("Pls you are not authorized");
+        if (error.response && error.response.status > 400) {
+          setTimeout(() => {
+            toast.error("Pls you are not authorized");
+            setIsPending(false)
+          }, 2000);
+        }
+        if (error.message === "Network Error") {
+          toast.error(error.message);
         }
       }
     };
@@ -99,6 +117,15 @@ const ContextAPI = ({ children }) => {
   const handleButtonClick = () => {
     document.getElementById("SelectedFile").click();
   };
+
+  const handleLogout = () => {
+    toast.loading("Logging out...");
+    setTimeout(() => {
+      setHRToken(null);
+      window.localStorage.removeItem("HR_access_token");
+      window.location = "/";
+    }, 3000);
+  }
 
   const uploadFile = (e) => {
     setIsLoading(false);
@@ -291,6 +318,9 @@ const ContextAPI = ({ children }) => {
           loading,
           processUploadedData,
           processPayroll,
+          handleLogout,
+          handleClick,
+          isPending,
         }}
       >
         {children}

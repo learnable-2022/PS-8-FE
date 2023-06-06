@@ -2,17 +2,14 @@ import React, { useContext, useState, useEffect } from "react";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { TbLogout } from "react-icons/tb";
 import { HiUserCircle } from "react-icons/hi";
-import { NavLink } from "react-router-dom"; // Added NavLink import
 import "../index.css";
 import { myContext } from "../ContextAPI";
-import { toast } from "react-toastify";
 import { titleCase } from "../UTILS/Title";
 import { Navigate } from "react-router-dom";
+import ConnectWallet from "./ConnectWallet";
 
 const Header = () => {
-  const [showDropdown, setShowDropdown] = useState(false);
-
-  const { userInfo, processData, isFile } = useContext(myContext);
+  const { userInfo, processData, isFile, handleLogout } = useContext(myContext);
   const [profileImage, setProfileImage] = useState(null);
 
   useEffect(() => {
@@ -39,7 +36,7 @@ const Header = () => {
         <div className="w-2/5 h-full">
           <figure className="w-[16%] ">
             <img
-              src="/public/Images/Logo (1).jpg"
+              src="/Images/Logo (1).jpg"
               alt="PayMe"
               className="w-full h-full"
             />
@@ -53,18 +50,9 @@ const Header = () => {
 
           <button
             className="bg-white text-black px-4 py-2"  onClick={() => setShowDropdown(!showDropdown)}>
-            <TbLogout className="text-2xl text-black/60" />
+            <TbLogout className="text-2xl text-black/60" onClick={handleLogout}/>
           </button>
           
-          {showDropdown && (
-            <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg">
-              <NavLink to="">
-                <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-[#430359] hover:text-[#ffffff]">
-                  Logout
-                </button>
-              </NavLink>
-            </div>
-          )}
 
           <div className="div border-l-[gray-200] border p-3"></div>
 
@@ -75,6 +63,7 @@ const Header = () => {
               id="profile"
               className="hidden"
               onChange={uploadImage}
+              
             />
           </form>
           {profileImage ? (
@@ -100,10 +89,14 @@ const Header = () => {
             <span className="text-sm">{userName}</span>
             <span className="text-sm text-gray-200">Hr Admin</span>
           </div>
+          <div>
+          
+            <ConnectWallet/>
+          </div>
         </div>
       </div>
     </header>
   );
-};
+}
 
 export default Header;

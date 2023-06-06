@@ -7,7 +7,6 @@ export const ProtectedPage = () => {
     const user = window.localStorage.getItem("payMe_signIn");
     const token = window.localStorage.getItem("HR_access_token");
 
-
     return user && token;
   };
 

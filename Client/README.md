@@ -9,10 +9,10 @@ Just finished working on the sign in form of the HR (Ifechukwu)
 Testing the ground (smiles)
 
 <!-- ----------------------------------------- Fourth PUSH --------------------------------------------- -->
-Updated the dashboard (Ifechukwu)
 
 <!-- ----------------------------------------- fifth PUSH --------------------------------------------- -->
 Updated the dashboard (Ifechukwu)
 
 <!-- ----------------------------------------- sixth PUSH --------------------------------------------- -->
 updated the payroll and processor features (Ifechukwu)
+
