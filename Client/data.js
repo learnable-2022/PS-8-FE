@@ -1,5 +1,5 @@
 
-[
+const data = [
   {
     "id": 1,
     "performance": "Appraisal score",
@@ -134,3 +134,5 @@
     "salary": "Monthly Base Pay"
   }
 ]
+
+export default data;
