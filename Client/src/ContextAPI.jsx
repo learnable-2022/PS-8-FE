@@ -88,10 +88,13 @@ const ContextAPI = ({ children }) => {
           setTimeout(() => {
             toast.error("Pls you are not authorized");
             setIsPending(false)
-          }, 2000);
+          }, 1000);
         }
         if (error.message === "Network Error") {
-          toast.error(error.message);
+          setTimeout(() => {
+            toast.error(error.message);
+            setIsPending(false)
+          }, 1000);
         }
       }
     };

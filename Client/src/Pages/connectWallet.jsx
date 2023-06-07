@@ -5,7 +5,7 @@ import "../index.css"
 const ConnectWallet = () => {
     return (
          <div >
-            <button className="cursor-pointer  bg-[#430359] hover:bg-purple-900 text-white font-bold py-3 px-5 rounded-xl">
+            <button className="cursor-pointer text-[#430359] border-solid border-2 border-[#430359] font-bold py-2 px-6 rounded-xl mr-4">
                 connect
             </button>
         </div>

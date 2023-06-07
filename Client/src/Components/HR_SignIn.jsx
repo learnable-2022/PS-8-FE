@@ -24,7 +24,7 @@ export const HR_SignIn = () => {
           <div className="flex justify-center">
             <figure className="w-[5%] ">
               <img
-                src="/Images/Logo (1).jpg"
+                src="/Images/Logo.png"
                 alt="PayMe"
                 className="w-full h-full"
               />
