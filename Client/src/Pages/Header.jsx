@@ -1,9 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
-import { IoNotificationsOutline } from "react-icons/io5";
+import { TbLogout } from "react-icons/tb";
 import { HiUserCircle } from "react-icons/hi";
 import "../index.css";
 import { myContext } from "../ContextAPI";
 import { titleCase } from "../UTILS/Title";
+import { Navigate } from "react-router-dom";
 import ConnectWallet from "./ConnectWallet";
 
 const Header = () => {
@@ -42,12 +43,10 @@ const Header = () => {
         </div>
 
         <div className="ml-auto flex items-center justify-end w-3/5">
-          <div>
-            <ConnectWallet />
-          </div>
-          <button className="bg-white text-black px-2 py-2 flex justify-end">
-            <IoNotificationsOutline className="text-2xl text-black/60" />
-          </button>
+        <div className="pr-10">
+          <ConnectWallet/>
+        </div>
+         
 
 
           
@@ -65,7 +64,10 @@ const Header = () => {
             />
           </form>
           {profileImage ? (
-            <figure className="w-[50px] h-[50px]" onClick={uploadProfile}>
+            <figure
+              className="w-[50px] h-[50px] cursor-pointer"
+              onClick={uploadProfile}
+            >
               <img
                 src={profileImage}
                 alt="Profile"

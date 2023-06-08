@@ -45,7 +45,6 @@ const ContextAPI = ({ children }) => {
   const [userInfo, setUserInfo] = useState("");
   const [isPending, setIsPending] = useState(false);
 
-
   useEffect(() => {
     const data = window.localStorage.getItem("userInfo");
     setUserInfo(data);
@@ -58,11 +57,10 @@ const ContextAPI = ({ children }) => {
   const handleClick = () => {
     console.log("clicked");
     setIsPending(true);
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
 
     const getToken = async () => {
       try {
@@ -87,8 +85,8 @@ const ContextAPI = ({ children }) => {
         if (error.response && error.response.status > 400) {
           setTimeout(() => {
             toast.error("Pls you are not authorized");
-            setIsPending(false)
-          }, 1000);
+            setIsPending(false);
+          }, 2000);
         }
         if (error.message === "Network Error") {
           setTimeout(() => {
@@ -128,7 +126,7 @@ const ContextAPI = ({ children }) => {
       window.localStorage.removeItem("HR_access_token");
       window.location = "/";
     }, 3000);
-  }
+  };
 
   const uploadFile = (e) => {
     setIsLoading(false);
@@ -230,6 +228,102 @@ const ContextAPI = ({ children }) => {
   };
 
   // -------------------------------------[Process Data]--------------------------------------------
+
+  // -------------------------------------[Process Uploaded Data]----------------------------------
+  const [alert, setAlert] = useState("");
+
+  const [loadingProcessedPayroll, setLoadingProcessedPayroll] = useState(false);
+  const [processPayroll, setProcessPayroll] = useState([]);
+  const [showDataHistory, setShowDataHistory] = useState([]);
+  const processUploadedData = () => {
+    setLoadingProcessedPayroll(true);
+    setTimeout(() => {
+      setLoadingProcessedPayroll(false);
+      setAlert("Payroll Processed Successfully");
+      const calculate = processData.map((item) => {
+        const appraisalScore = item["Appraisal score"];
+        const workingHours = item["Total working hours"];
+        const yearsOfService = item["Years of service"];
+        const taxPolicy = item["Tax policy (%)"];
+        const monthlyBasePay = item["Monthly base pay (₦)"];
+
+        let totalSalary = monthlyBasePay;
+
+        let bonusPercentage = 0;
+
+        if (appraisalScore === 5) {
+          bonusPercentage += 20;
+        } else if (appraisalScore === 4) {
+          bonusPercentage += 10;
+        } else if (appraisalScore === 3) {
+          bonusPercentage += 5;
+        }
+
+        if (workingHours > 180) {
+          bonusPercentage += 20;
+        } else if (workingHours >= 161 && workingHours <= 180) {
+          bonusPercentage += 10;
+        } else if (workingHours === 160) {
+          bonusPercentage += 2;
+        }
+
+        if (yearsOfService >= 2 && yearsOfService <= 10) {
+          const serviceBonus = [0.05, 0.08, 0.1, 0.14, 0.17, 0.2, 0.24, 0.26];
+          bonusPercentage += serviceBonus[yearsOfService - 2] * 100;
+        } else if (yearsOfService >= 10) {
+          bonusPercentage += 35;
+        }
+
+        const bonusAmount = monthlyBasePay * (bonusPercentage / 100);
+        totalSalary += bonusAmount;
+
+        const taxDeductionPercentage = taxPolicy;
+        const taxDeductionAmount = totalSalary * (taxDeductionPercentage / 100);
+        totalSalary -= taxDeductionAmount;
+
+        return {
+          Name: item.Name,
+          ID: item.ID,
+          "Email Address": item["Email address"],
+          "Net Change": `₦${(totalSalary - monthlyBasePay).toFixed(0)}`,
+          Bonus: `₦${bonusAmount.toFixed(0)}`,
+          Deduction: ` ₦-${taxDeductionAmount.toFixed(0)}`,
+          "Monthly base pay (₦)": `₦${monthlyBasePay}`,
+          "Total salary": `NGN${totalSalary.toLocaleString()}`,
+        };
+      });
+      setProcessPayroll(calculate);
+
+      const mergedArray = processData.map((item) => {
+        const matchingPayrollItem = calculate.find(
+          (payrollItem) => payrollItem.ID === item.ID
+        );
+        if (matchingPayrollItem) {
+          const mergedItem = {
+            ...item,
+            ...matchingPayrollItem,
+          };
+          delete mergedItem["Email Address"];
+          return mergedItem;
+        }
+        return item;
+      });
+
+      setShowDataHistory(mergedArray);
+
+      console.log(mergedArray);
+    }, 5000);
+  };
+
+  setTimeout(() => {
+    setAlert("");
+  }, 4000);
+
+  const removeProcessedData = () => {
+    setProcessPayroll([]);
+  };
+  // -------------------------------------[Process Uploaded Data]-----------------------------------
+
   return (
     <div>
       <myContext.Provider
@@ -256,9 +350,15 @@ const ContextAPI = ({ children }) => {
           isLoading,
           removeProcessor,
           loading,
+          processUploadedData,
+          processPayroll,
           handleLogout,
           handleClick,
           isPending,
+          removeProcessedData,
+          loadingProcessedPayroll,
+          alert,
+          showDataHistory,
         }}
       >
         {children}

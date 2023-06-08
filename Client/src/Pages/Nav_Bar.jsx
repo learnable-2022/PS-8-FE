@@ -14,7 +14,7 @@ export const Nav_Bar = () => {
   
   return (
     <aside className="">
-      <nav className="flex overflow-hidden  flex-col h-screen bg-[#ffffff]  py-6 ">
+      <nav className="flex overflow-hidden flex-col h-screen bg-[#ffffff]  py-6 ">
         <ul className="flex flex-col fixed w-[17%]">
           <NavLink activeClassName="active" to="/dashboard">
             <li className="flex items-center text-start justify-start pl-5 h-[10vh]  gap-2 hover:text-[#ffffff] hover:bg-[#430359] w-[100%]">
@@ -33,7 +33,7 @@ export const Nav_Bar = () => {
               >
                 <VscServerProcess className="text-xl" /> Processor
                 {notification ? (
-                  <BsDot className="ml-[-15%] mt-[-2%] text-[red] text-6xl" />
+                  <BsDot className="ml-[-15%] mt-[-2%] text-[#DBBB23] text-6xl" />
                 ) : (
                   ""
                 )}

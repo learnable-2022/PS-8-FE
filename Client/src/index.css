@@ -43,6 +43,11 @@ header {
   width: 100%;
 }
 
+.active-route{
+  border-bottom: 1px red solid;
+  background-color: red;
+  width: 100%;
+}
 .paypolicy {
   border: 1px solid #C2C2C2;
   height: 80px;
@@ -79,6 +84,10 @@ padding-right: 54px;
   border-radius: 5px;
   text-align: center;
   background-color: #F5F5F5;
+}
+
+.connect-btn {
+  border: 1px solid #4e0268;
 }
 
 
