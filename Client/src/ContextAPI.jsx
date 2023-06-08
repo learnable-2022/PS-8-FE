@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import * as XLSX from "xlsx";
 import { titleCase } from "./UTILS/Title";
+import { getMonthName } from "./UTILS/getMonthName";
 const myContext = createContext();
 
 const ContextAPI = ({ children }) => {
@@ -12,6 +13,7 @@ const ContextAPI = ({ children }) => {
   });
 
   const { email, password } = signIn;
+  const [isPayrollProcessed, setIsPayrollProcessed] = useState(false);
 
   // -------------------------------------[]--------------------------------------------
 
@@ -91,7 +93,7 @@ const ContextAPI = ({ children }) => {
         if (error.message === "Network Error") {
           setTimeout(() => {
             toast.error(error.message);
-            setIsPending(false)
+            setIsPending(false);
           }, 1000);
         }
       }
@@ -132,9 +134,7 @@ const ContextAPI = ({ children }) => {
     setIsLoading(false);
     setProcessPayroll([]);
 
-    const dataType = [
-      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-    ];
+    const dataType = ["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"];
     const file = e.target.files[0];
     setFileName(titleCase(file.name.split(".")[0]));
     if (file) {
@@ -211,10 +211,7 @@ const ContextAPI = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    window.localStorage.setItem(
-      "process_employee_data",
-      JSON.stringify(processData)
-    );
+    window.localStorage.setItem("process_employee_data", JSON.stringify(processData));
   }, [processData]);
   useEffect(() => {
     const data = window.localStorage.getItem("process_notification");
@@ -299,6 +296,7 @@ const ContextAPI = ({ children }) => {
         };
       });
       setProcessPayroll(calculate);
+      setIsPayrollProcessed(true);
 
       const getCurrentDateTime = () => {
         const now = new Date();
@@ -306,9 +304,7 @@ const ContextAPI = ({ children }) => {
       };
 
       const mergedArray = processData.map((item) => {
-        const matchingPayrollItem = calculate.find(
-          (payrollItem) => payrollItem.ID === item.ID
-        );
+        const matchingPayrollItem = calculate.find((payrollItem) => payrollItem.ID === item.ID);
         if (matchingPayrollItem) {
           const mergedItem = {
             ...item,
@@ -335,6 +331,37 @@ const ContextAPI = ({ children }) => {
     setProcessPayroll([]);
   };
   // -------------------------------------[Process Uploaded Data]-----------------------------------
+
+  // -------------------------------------[Process Disburse Salaries]-----------------------------------//
+
+  const disburseSalary = () => {
+    console.log("hello world", isPayrollProcessed);
+    const date = new Date();
+
+    const formData = processPayroll.map((elem) => {
+      const allowance = elem["Allowance"] ?? 0;
+      return {
+        name: elem["Name"],
+        employeeId: elem["ID"],
+        loan: elem["Loan"],
+        tax: elem["Tax"],
+        bonus: elem["Bonus"],
+        totalDeduction: elem["Deduction"],
+        monthlyBasePay: elem["Monthly base pay (₦)"],
+        totaltotalDeduction: elem["Deduction"],
+        totalSalary: elem["Monthly base pay (₦)"] + elem["Bonus"] + allowance,
+        netSalary: elem["Total salary"],
+        email: elem["Email Address"],
+        allowance,
+        year: date.getFullYear(),
+        month: getMonthName(date.getMonth()),
+      };
+    });
+    // console.log(processPayroll);
+    console.log(formData);
+  };
+
+  // -------------------------------------[Process Disburse Salaries end]-----------------------------------//
 
   return (
     <div>
@@ -372,6 +399,9 @@ const ContextAPI = ({ children }) => {
           alert,
           showDataHistory,
           date,
+          isPayrollProcessed,
+          setIsPayrollProcessed,
+          disburseSalary,
         }}
       >
         {children}
