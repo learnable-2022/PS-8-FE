@@ -16,14 +16,14 @@ export const HR_SignIn = () => {
   } = useContext(myContext);
 
   return (
-    <div className="w-full">
+    <div className="w-full flex justify-center relative">
       <ToastContainer />
-      <div className="flex justify-center w-full mt-20">
+      <div className=" w-full mt-10 relative">
         <div className="w-full">
-          <div className="flex justify-center">
+          <div className="flex justify-center ">
             <figure className="w-[5%] ">
               <img
-                src="/Images/Logo (1).jpg"
+                src="/Images/Logo.png"
                 alt="PayMe"
                 className="w-full h-full"
               />
@@ -96,6 +96,9 @@ export const HR_SignIn = () => {
           </div>
         </div>
       </div>
+              <div className="absolute bottom-0 right-0 top-[160px]">
+                <img src="./Images/signImg.png" alt="man on suit" className="max-w-[70%]"/>
+              </div>
     </div>
   );
 };

@@ -35,7 +35,7 @@ const Header = () => {
         <div className="w-2/5 h-full">
           <figure className="w-[16%] ">
             <img
-              src="/Images/Logo (1).jpg"
+              src="/Images/Logo.png"
               alt="PayMe"
               className="w-full h-full"
             />
@@ -48,10 +48,7 @@ const Header = () => {
         </div>
          
 
-          <button
-            className="bg-white text-black px-4 py-2"  onClick={() => setShowDropdown(!showDropdown)}>
-            <TbLogout className="text-2xl text-black/60" onClick={handleLogout}/>
-          </button>
+
           
 
           <div className="div border-l-[gray-200] border p-3"></div>

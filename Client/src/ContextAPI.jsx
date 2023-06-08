@@ -89,7 +89,10 @@ const ContextAPI = ({ children }) => {
           }, 2000);
         }
         if (error.message === "Network Error") {
-          toast.error(error.message);
+          setTimeout(() => {
+            toast.error(error.message);
+            setIsPending(false)
+          }, 1000);
         }
       }
     };
