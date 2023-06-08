@@ -12,8 +12,8 @@ export const Nav_Bar = () => {
     useContext(myContext);
 
   return (
-    <aside className="w-full ">
-      <nav className="flex overflow-hidden flex-col h-screen bg-[#ffffff] w-full py-6 z-100">
+    <aside className="w-full">
+      <nav className="flex overflow-hidden flex-col h-screen bg-[#ffffff] w-full py-6 ">
         <ul className="flex flex-col fixed w-[17%] gap-3 ">
           <NavLink activeClassName="active" to="/dashboard">
             <li className="flex items-center h-[10vh] pl-[3%] gap-2 hover:text-[#ffffff] hover:bg-[#430359] w-[100%]">

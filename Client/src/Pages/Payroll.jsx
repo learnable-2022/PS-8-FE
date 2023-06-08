@@ -32,7 +32,7 @@ export const Payroll = () => {
   const columnHeader = isFile.length > 0 ? Object.keys(isFile[0]) : [];
   return (
     <div>
-      <div className="w-full">
+      <div className="md:w-full">
         <div className="flex justify-end pr-10 w-full overflow-hidden ">
           <p
             className={`${

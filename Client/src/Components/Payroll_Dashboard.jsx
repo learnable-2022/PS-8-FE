@@ -16,13 +16,13 @@ export const Payroll_Dashboard = () => {
       <header>
         <Header />{" "}
       </header>
-      <main className="flex flex-row flex-grow ">
-        <div className="md:w-[17%] flex justify-center">
+      <main className="flex flex-row flex-grow">
+        <div className="md:w-[17%] w-4/5 flex justify-center">
           <Nav_Bar />
         </div>
 
-        <div className="w-[83%] ">
-          <Upload/>
+        <div className="md:w-[83%] ">
+          <Upload />
         </div>
       </main>
     </>

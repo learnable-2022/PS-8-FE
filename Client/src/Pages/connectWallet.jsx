@@ -29,7 +29,7 @@ const ConnectWallet = () => {
   return (
     <div>
       <button
-        className="connect-btn cursor-pointer text-[#430359] 
+        className="connect-btn hidden cursor-pointer text-[#430359] 
         font-bold py-1 px-4 rounded-xl hover:bg-[#F5E4FB] hover:border-none hover:transition-all hover:duration-500"
         onClick={connectWallet}
       >
