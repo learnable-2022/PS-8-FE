@@ -29,7 +29,7 @@ export const Nav_Bar = () => {
               >
                 <VscServerProcess className="text-xl" /> Processor
                 {notification ? (
-                  <BsDot className="ml-[-15%] mt-[-2%] text-[red] text-6xl" />
+                  <BsDot className="ml-[-15%] mt-[-2%] text-[#DBBB23] text-6xl" />
                 ) : (
                   ""
                 )}

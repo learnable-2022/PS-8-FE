@@ -116,7 +116,7 @@ export const Payroll = () => {
                     {isFile.map((row, index) => (
                       <tr key={index} className="border-b">
                         {columnHeader.map((header, index) => (
-                          <td key={index} className="py-2 text-sm pl-[1.5%]">
+                          <td key={index} className="py-3 text-sm pl-[1.5%] pr-10 whitespace-nowrap">
                             {row[header]}
                           </td>
                         ))}
