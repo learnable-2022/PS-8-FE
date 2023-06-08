@@ -2,7 +2,8 @@ import React, { useContext } from "react";
 import { myContext } from "../../ContextAPI";
 
 export const Processor_Processed_Payroll = () => {
-  const { processPayroll, removeProcessedData } = useContext(myContext);
+  const {processPayroll, removeProcessedData } = useContext(myContext);
+  console.log(processPayroll);
   return (
     <div className="w-full">
       <div className="w-full flex justify-center">
@@ -11,7 +12,10 @@ export const Processor_Processed_Payroll = () => {
             <thead className="text-left h-[70px] text-black/70 font-medium ">
               <tr className="border-b">
                 {Object.keys(processPayroll[0]).map((header) => (
-                  <th key={header} className="pl-[1.5%] pr-10 whitespace-nowrap">
+                  <th
+                    key={header}
+                    className="pl-[1.5%] pr-10 whitespace-nowrap"
+                  >
                     {header}
                   </th>
                 ))}
@@ -21,7 +25,10 @@ export const Processor_Processed_Payroll = () => {
               {processPayroll.map((item, index) => (
                 <tr key={index} className="border-b">
                   {Object.values(item).map((value, index) => (
-                    <td key={index} className="py-3 text-sm pl-[1.5%] pr-10 whitespace-nowrap">
+                    <td
+                      key={index}
+                      className="py-3 text-sm pl-[1.5%] pr-10 whitespace-nowrap"
+                    >
                       {value}
                     </td>
                   ))}

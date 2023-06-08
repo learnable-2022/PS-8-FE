@@ -7,7 +7,6 @@ import { Nav_Bar } from "../Pages/Nav_Bar";
 import { toast } from "react-toastify";
 
 export const Payroll_Dashboard = () => {
-  
   useEffect(() => {
     toast("Welcome to PayMe");
   }, []);
@@ -18,12 +17,12 @@ export const Payroll_Dashboard = () => {
         <Header />{" "}
       </header>
       <main className="flex flex-row flex-grow ">
-        <div className="w-[17%]">
+        <div className="md:w-[17%] flex justify-center">
           <Nav_Bar />
         </div>
 
         <div className="w-[83%] ">
-          <Upload />
+          <Upload/>
         </div>
       </main>
     </>

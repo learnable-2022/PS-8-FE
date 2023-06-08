@@ -127,6 +127,8 @@ const ContextAPI = ({ children }) => {
 
   const uploadFile = (e) => {
     setIsLoading(false);
+    setProcessPayroll([]);
+
     const dataType = [
       "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     ];
@@ -232,6 +234,8 @@ const ContextAPI = ({ children }) => {
   const [loadingProcessedPayroll, setLoadingProcessedPayroll] = useState(false);
   const [processPayroll, setProcessPayroll] = useState([]);
   const [showDataHistory, setShowDataHistory] = useState([]);
+  const [date, setDate] = useState("");
+
   const processUploadedData = () => {
     setLoadingProcessedPayroll(true);
     setTimeout(() => {
@@ -281,6 +285,8 @@ const ContextAPI = ({ children }) => {
         return {
           Name: item.Name,
           ID: item.ID,
+          Loan: "---",
+          Tax: item["Tax policy (%)"],
           "Email Address": item["Email address"],
           "Net Change": `₦${(totalSalary - monthlyBasePay).toFixed(0)}`,
           Bonus: `₦${bonusAmount.toFixed(0)}`,
@@ -291,6 +297,11 @@ const ContextAPI = ({ children }) => {
       });
       setProcessPayroll(calculate);
 
+      const getCurrentDateTime = () => {
+        const now = new Date();
+        return now.toLocaleDateString();
+      };
+
       const mergedArray = processData.map((item) => {
         const matchingPayrollItem = calculate.find(
           (payrollItem) => payrollItem.ID === item.ID
@@ -299,6 +310,7 @@ const ContextAPI = ({ children }) => {
           const mergedItem = {
             ...item,
             ...matchingPayrollItem,
+            Date: getCurrentDateTime(),
           };
           delete mergedItem["Email Address"];
           return mergedItem;
@@ -306,9 +318,9 @@ const ContextAPI = ({ children }) => {
         return item;
       });
 
-      setShowDataHistory(mergedArray);
-
-      console.log(mergedArray);
+      setShowDataHistory((prevData) => [...mergedArray, ...prevData]);
+      // const dateTime = getCurrentDateTime();
+      // setDate(dateTime);
     }, 5000);
   };
 
@@ -356,6 +368,7 @@ const ContextAPI = ({ children }) => {
           loadingProcessedPayroll,
           alert,
           showDataHistory,
+          date,
         }}
       >
         {children}

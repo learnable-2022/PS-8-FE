@@ -46,7 +46,7 @@ export const Processor = () => {
           )}
         </div>
       </div>
-      {processData.length > 0 ? (
+      {processData.length > 0 || processPayroll.length > 0 ? (
         <div className="w-full justify-center flex">
           <div className="w-[90%] flex justify-between items-center ">
             <div className="gap-2 flex">

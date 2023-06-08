@@ -8,14 +8,15 @@ import { NavLink } from "react-router-dom";
 import { myContext } from "../ContextAPI";
 
 export const Nav_Bar = () => {
-  const { processData, handleNotification, notification } = useContext(myContext);
-  
+  const { processData, handleNotification, notification } =
+    useContext(myContext);
+
   return (
-    <aside className="">
-      <nav className="flex overflow-hidden flex-col h-screen bg-[#ffffff]  py-6 ">
-        <ul className="flex flex-col fixed w-[17%]">
+    <aside className="w-full ">
+      <nav className="flex overflow-hidden flex-col h-screen bg-[#ffffff] w-full py-6 z-100">
+        <ul className="flex flex-col fixed w-[17%] gap-3 ">
           <NavLink activeClassName="active" to="/dashboard">
-            <li className="flex items-center text-start justify-start pl-5 h-[10vh]  gap-2 hover:text-[#ffffff] hover:bg-[#430359] w-[100%]">
+            <li className="flex items-center h-[10vh] pl-[3%] gap-2 hover:text-[#ffffff] hover:bg-[#430359] w-[100%]">
               <AiOutlineDollar className="text-xl" />
               Payroll
             </li>
@@ -25,7 +26,7 @@ export const Nav_Bar = () => {
             {processData.length > 0 ? (
               <li
                 onClick={handleNotification}
-                className="flex items-center justify-start hover:py-5 pl-5 h-[10vh] gap-2 hover:text-[#ffffff]  hover:bg-[#430359] w-[100%]"
+                className="flex items-center justify-start hover:py-5  pl-[3%] h-[10vh] gap-2 hover:text-[#ffffff]  hover:bg-[#430359] w-[100%]"
               >
                 <VscServerProcess className="text-xl" /> Processor
                 {notification ? (
@@ -35,14 +36,14 @@ export const Nav_Bar = () => {
                 )}
               </li>
             ) : (
-              <li className="flex items-center justify-start hover:py-5 pl-5 h-[10vh] gap-2 hover:text-[#ffffff]  hover:bg-[#430359] w-[100%]">
+              <li className="flex items-center justify-start hover:py-5 pl-[3%] h-[10vh] gap-2 hover:text-[#ffffff]  hover:bg-[#430359] w-[100%]">
                 <VscServerProcess className="text-xl" /> processor
               </li>
             )}
           </NavLink>
 
           <NavLink activeClassName="active" to="/pay_policy">
-            <li className="flex gap-2 justify-start pl-4 h-[10vh] items-center  hover:text-[#ffffff] hover:bg-[#430359] w-[100%]">
+            <li className="flex gap-2 justify-start  h-[10vh] items-center pl-[3%]  hover:text-[#ffffff] hover:bg-[#430359] w-[100%]">
               <MdPolicy className="text-2xl" /> Pay Policy
             </li>
           </NavLink>
