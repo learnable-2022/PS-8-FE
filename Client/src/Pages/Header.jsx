@@ -5,7 +5,7 @@ import { HiUserCircle } from "react-icons/hi";
 import "../index.css";
 import { myContext } from "../ContextAPI";
 import { titleCase } from "../UTILS/Title";
-import ConnectWallet from "./ConnectWallet";
+import ConnectWallet from "./connectWallet"
 
 const Header = () => {
   const { userInfo, processData, isFile, handleLogout } = useContext(myContext);
