@@ -4,8 +4,7 @@ import { HiUserCircle } from "react-icons/hi";
 import "../index.css";
 import { myContext } from "../ContextAPI";
 import { titleCase } from "../UTILS/Title";
-import { Navigate } from "react-router-dom";
-import ConnectWallet from "./ConnectWallet";
+import ConnectWallet from "./connectWallet";
 
 const Header = () => {
   const { userInfo, processData, isFile, handleLogout } = useContext(myContext);
@@ -34,23 +33,14 @@ const Header = () => {
       <div className="flex justify-between w-full items-center">
         <div className="w-2/5 h-full">
           <figure className="w-[16%] ">
-            <img
-              src="/Images/Logo.png"
-              alt="PayMe"
-              className="w-full h-full"
-            />
+            <img src="/Images/Logo.png" alt="PayMe" className="w-full h-full" />
           </figure>
         </div>
 
         <div className="ml-auto flex items-center justify-end w-3/5">
-        <div className="pr-10">
-          <ConnectWallet/>
-        </div>
-         
-
-
-          
-
+          <div className="pr-10">
+            <ConnectWallet />
+          </div>
           <div className="div border-l-[gray-200] border p-3"></div>
 
           <form>
@@ -60,7 +50,6 @@ const Header = () => {
               id="profile"
               className="hidden"
               onChange={uploadImage}
-              
             />
           </form>
           {profileImage ? (
@@ -86,11 +75,10 @@ const Header = () => {
             <span className="text-sm">{userName}</span>
             <span className="text-sm text-gray-200">Hr Admin</span>
           </div>
-          
         </div>
       </div>
     </header>
   );
-}
+};
 
 export default Header;
