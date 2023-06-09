@@ -3,7 +3,7 @@ import { myContext } from "../../ContextAPI";
 
 export const Processor_Processed_Payroll = () => {
   const { processPayroll, removeProcessedData } = useContext(myContext);
-  console.log(processPayroll);
+  // console.log(processPayroll);
   return (
     <div className="w-full">
       <div className="w-full flex justify-center">

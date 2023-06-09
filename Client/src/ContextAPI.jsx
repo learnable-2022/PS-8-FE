@@ -1,9 +1,11 @@
 import React, { createContext, useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
-import axios from "axios";
 import * as XLSX from "xlsx";
 import { titleCase } from "./UTILS/Title";
 import { getMonthName } from "./UTILS/getMonthName";
+import { extractNumFromString } from "./UTILS/parseNum";
+import request from "./axios";
+
 const myContext = createContext();
 
 const ContextAPI = ({ children }) => {
@@ -66,7 +68,7 @@ const ContextAPI = ({ children }) => {
 
     const getToken = async () => {
       try {
-        await axios
+        await request
           .post(import.meta.env.VITE_API_ENDPOINT + "/auth/login", {
             ...signIn,
           })
@@ -127,7 +129,7 @@ const ContextAPI = ({ children }) => {
       setHRToken(null);
       window.localStorage.removeItem("HR_access_token");
       window.location = "/";
-    }, 3000);
+    }, 2000);
   };
 
   const uploadFile = (e) => {
@@ -285,7 +287,7 @@ const ContextAPI = ({ children }) => {
         return {
           Name: item.Name,
           ID: item.ID,
-          Loan: "---",
+          Loan: 0,
           Tax: item["Tax policy (%)"],
           "Email Address": item["Email address"],
           "Net Change": `₦${(totalSalary - monthlyBasePay).toFixed(0)}`,
@@ -334,33 +336,53 @@ const ContextAPI = ({ children }) => {
 
   // -------------------------------------[Process Disburse Salaries]-----------------------------------//
 
-  const disburseSalary = () => {
-    console.log("hello world", isPayrollProcessed);
+  const disburseSalary = async () => {
+    setLoadingProcessedPayroll(true);
+    try {
+      const formData = await getFormData();
+
+      const response = await request.post("/disbursement", formData);
+
+      toast.success(response.data.message);
+      setLoadingProcessedPayroll(false);
+    } catch (err) {
+      console.error(err);
+      toast.error(err.response.data.error);
+
+      return Promise.reject(err);
+    }
+  };
+
+  const getFormData = async () => {
     const date = new Date();
 
-    const formData = processPayroll.map((elem) => {
+    const data = await processPayroll.map((elem, index) => {
       const allowance = elem["Allowance"] ?? 0;
       return {
         name: elem["Name"],
         employeeId: elem["ID"],
         loan: elem["Loan"],
         tax: elem["Tax"],
-        bonus: elem["Bonus"],
-        totalDeduction: elem["Deduction"],
-        monthlyBasePay: elem["Monthly base pay (₦)"],
-        totaltotalDeduction: elem["Deduction"],
-        totalSalary: elem["Monthly base pay (₦)"] + elem["Bonus"] + allowance,
-        netSalary: elem["Total salary"],
+        bonus: extractNumFromString(elem["Bonus"]),
+        totalDeduction: extractNumFromString(elem["Deduction"]),
+        monthlyBasePay: extractNumFromString(elem["Monthly base pay (₦)"]),
+        totalSalary:
+          extractNumFromString(elem["Monthly base pay (₦)"]) +
+          extractNumFromString(elem["Bonus"]) +
+          allowance,
+        netSalary: extractNumFromString(elem["Total salary"]),
         email: elem["Email Address"],
         allowance,
         year: date.getFullYear(),
         month: getMonthName(date.getMonth()),
+        yearsOfService: processData[index]["Years of service"],
+        totalWorkingHours: processData[index]["Total working hours"],
+        jobRole: processData[index]["Role"],
       };
     });
-    // console.log(processPayroll);
-    console.log(formData);
-  };
 
+    return data;
+  };
   // -------------------------------------[Process Disburse Salaries end]-----------------------------------//
 
   return (
