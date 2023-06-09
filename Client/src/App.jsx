@@ -10,6 +10,7 @@ import { ToastContainer } from "react-toastify";
 import { Processor_Payroll } from "./Pages/Processor_Mini_Pages/Processor_Payroll";
 import { Processor_History } from "./Pages/Processor_Mini_Pages/Processor_History";
 import { Processor_Disbursement } from "./Pages/Processor_Mini_Pages/Processor_Disbursement";
+import NotFound from "./Pages/NotFound";
 
 function App() {
   const token = window.localStorage.getItem("HR_access_token");
@@ -30,6 +31,7 @@ function App() {
         </Route>
 
         <Route path="/" element={token ? <Navigate to="/dashboard" /> : <HR_SignIn />} exact />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );

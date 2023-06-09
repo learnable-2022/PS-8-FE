@@ -1,0 +1,10 @@
+{
+  "rewrites": [
+    { "source": "/dashboard", "destination": "/" },
+    { "source": "/processor", "destination": "/" },
+    { "source": "/processor/history", "destination": "/" },
+    { "source": "/processor/disbursement", "destination": "/" },
+    { "source": "/pay_policy", "destination": "/" },
+    { "source": "/(.*)", "destination": "/" }
+  ]
+}
