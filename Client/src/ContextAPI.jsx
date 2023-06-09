@@ -19,6 +19,20 @@ const ContextAPI = ({ children }) => {
 
   // -------------------------------------[]--------------------------------------------
 
+  useEffect(() => {
+    const data = window.localStorage.getItem("payMe_signIn");
+    setSignIn(JSON.parse(data));
+  }, []);
+
+  // -------------------------------------[]--------------------------------------------
+
+  useEffect(() => {
+    window.localStorage.setItem("payMe_signIn", JSON.stringify(signIn));
+  }, [signIn]);
+
+  // -------------------------------------[]--------------------------------------------
+
+  // -------------------------------------[]--------------------------------------------
 
   const handleSignIn = (e) => {
     const { name, value } = e.target;
