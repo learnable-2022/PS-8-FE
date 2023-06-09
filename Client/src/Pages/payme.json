@@ -1,0 +1,549 @@
+{ 
+	"abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_businessName",
+          "type": "string"
+        }
+      ],
+      "name": "addBusiness",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_data",
+          "type": "string"
+        }
+      ],
+      "name": "addData",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "businessCount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getAllBusiness",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "string",
+              "name": "businessName",
+              "type": "string"
+            },
+            {
+              "internalType": "address",
+              "name": "businessAddress",
+              "type": "address"
+            }
+          ],
+          "internalType": "struct PayMe.Business[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "getBusiness",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "businessName",
+          "type": "string"
+        },
+        {
+          "internalType": "address",
+          "name": "businessAddress",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "getBusinessById",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "businessName",
+          "type": "string"
+        },
+        {
+          "internalType": "address",
+          "name": "businessAddress",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "businessAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "dataId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getData",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "data",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct PayMe.Data",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "businessAddress",
+          "type": "address"
+        }
+      ],
+      "name": "getDataS",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "data",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct PayMe.Data[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_index",
+          "type": "uint256"
+        }
+      ],
+      "name": "getMyData",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "data",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct PayMe.Data",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getMyDataCount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getMyDataS",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "data",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct PayMe.Data[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getMyPayment",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "string",
+                  "name": "businessName",
+                  "type": "string"
+                },
+                {
+                  "internalType": "address",
+                  "name": "businessAddress",
+                  "type": "address"
+                }
+              ],
+              "internalType": "struct PayMe.Business",
+              "name": "business",
+              "type": "tuple"
+            },
+            {
+              "internalType": "uint256",
+              "name": "dataCount",
+              "type": "uint256"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "id",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "string",
+                  "name": "data",
+                  "type": "string"
+                }
+              ],
+              "internalType": "struct PayMe.Data[]",
+              "name": "datas",
+              "type": "tuple[]"
+            }
+          ],
+          "internalType": "struct PayMe.Payment",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "businessAddress",
+          "type": "address"
+        }
+      ],
+      "name": "getPayment",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "string",
+                  "name": "businessName",
+                  "type": "string"
+                },
+                {
+                  "internalType": "address",
+                  "name": "businessAddress",
+                  "type": "address"
+                }
+              ],
+              "internalType": "struct PayMe.Business",
+              "name": "business",
+              "type": "tuple"
+            },
+            {
+              "internalType": "uint256",
+              "name": "dataCount",
+              "type": "uint256"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "id",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "string",
+                  "name": "data",
+                  "type": "string"
+                }
+              ],
+              "internalType": "struct PayMe.Data[]",
+              "name": "datas",
+              "type": "tuple[]"
+            }
+          ],
+          "internalType": "struct PayMe.Payment",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "paymentId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getPaymentById",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "string",
+                  "name": "businessName",
+                  "type": "string"
+                },
+                {
+                  "internalType": "address",
+                  "name": "businessAddress",
+                  "type": "address"
+                }
+              ],
+              "internalType": "struct PayMe.Business",
+              "name": "business",
+              "type": "tuple"
+            },
+            {
+              "internalType": "uint256",
+              "name": "dataCount",
+              "type": "uint256"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "id",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "string",
+                  "name": "data",
+                  "type": "string"
+                }
+              ],
+              "internalType": "struct PayMe.Data[]",
+              "name": "datas",
+              "type": "tuple[]"
+            }
+          ],
+          "internalType": "struct PayMe.Payment",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getPaymentS",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "string",
+                  "name": "businessName",
+                  "type": "string"
+                },
+                {
+                  "internalType": "address",
+                  "name": "businessAddress",
+                  "type": "address"
+                }
+              ],
+              "internalType": "struct PayMe.Business",
+              "name": "business",
+              "type": "tuple"
+            },
+            {
+              "internalType": "uint256",
+              "name": "dataCount",
+              "type": "uint256"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "id",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "string",
+                  "name": "data",
+                  "type": "string"
+                }
+              ],
+              "internalType": "struct PayMe.Data[]",
+              "name": "datas",
+              "type": "tuple[]"
+            }
+          ],
+          "internalType": "struct PayMe.Payment[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_businessAddress",
+          "type": "address"
+        }
+      ],
+      "name": "removeBusiness",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_businessAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferBusinessOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ]
+}

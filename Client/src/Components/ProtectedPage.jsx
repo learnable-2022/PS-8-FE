@@ -7,7 +7,6 @@ export const ProtectedPage = () => {
     const user = window.localStorage.getItem("payMe_signIn");
     const token = window.localStorage.getItem("HR_access_token");
 
-
     return user && token;
   };
 
@@ -15,7 +14,7 @@ export const ProtectedPage = () => {
     toast.warning("Please Sign In");
     setTimeout(() => {
       window.location = "/";
-    }, 2000);
+    }, 1000);
   };
 
   const isAuth = userAuth();
