@@ -32,6 +32,8 @@ const ContextAPI = ({ children }) => {
 
   // -------------------------------------[]--------------------------------------------
 
+  // -------------------------------------[]--------------------------------------------
+
   const handleSignIn = (e) => {
     const { name, value } = e.target;
     setSignIn((state) => ({
@@ -334,6 +336,15 @@ const ContextAPI = ({ children }) => {
   };
   // -------------------------------------[Process Uploaded Data]-----------------------------------
 
+  // -------------------------------------[Connect Wallet]-----------------------------------
+  // -------------------------------------[Connect Wallet]-----------------------------------
+
+  const [nav, setNav] = useState(false);
+
+  const showNavbar = () => {
+    setNav((prev) => !prev);
+  };
+
   // -------------------------------------[Process Disburse Salaries]-----------------------------------//
 
   const disburseSalary = async () => {
@@ -421,6 +432,8 @@ const ContextAPI = ({ children }) => {
           alert,
           showDataHistory,
           date,
+          showNavbar,
+          nav,
           isPayrollProcessed,
           setIsPayrollProcessed,
           disburseSalary,
