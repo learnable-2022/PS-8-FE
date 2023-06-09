@@ -50,16 +50,15 @@ const ConnectWallet = () => {
         />
         Connect
         <button />
-          <div className="dropdown">
-        <button
-          className=" cursor-pointer bg-[#660000] text-white font-bold py-2 px-4 rounded-xl"
-          onClick={toggleDropdown}
-        >
-          Disconnect
-        </button>
-        {showDropdown && (
-          
-          <div>
+        <div className="dropdown">
+          <button
+            className=" cursor-pointer bg-[#660000] text-white font-bold py-2 px-4 rounded-xl"
+            onClick={toggleDropdown}
+          >
+            Disconnect
+          </button>
+          {showDropdown && (
+            <div>
               {checkAcct == 1 && (
                 <button
                   className="disconnect cursor-pointer text-black font-bold py-2 px-4 rounded-xl"
@@ -71,13 +70,15 @@ const ConnectWallet = () => {
               <div>
                 {checkAcct == 1 && (
                   <p className="walletAddress">
-                    {`${currentAccount.slice(0, 4)}...${currentAccount.slice(-4)}`}
+                    {`${currentAccount.slice(0, 4)}...${currentAccount.slice(
+                      -4
+                    )}`}
                   </p>
                 )}
-                </div>
               </div>
-              )}
-            </div> 
+            </div>
+          )}
+        </div>
       </div>
     );
   };
