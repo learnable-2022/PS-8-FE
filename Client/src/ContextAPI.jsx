@@ -339,6 +339,12 @@ const ContextAPI = ({ children }) => {
   // -------------------------------------[Connect Wallet]-----------------------------------
   // -------------------------------------[Connect Wallet]-----------------------------------
 
+  const [nav, setNav] = useState(false);
+
+  const showNavbar = () => {
+    setNav((prev) => !prev);
+  };
+
   return (
     <div>
       <myContext.Provider
@@ -375,6 +381,8 @@ const ContextAPI = ({ children }) => {
           alert,
           showDataHistory,
           date,
+          showNavbar,
+          nav
         }}
       >
         {children}

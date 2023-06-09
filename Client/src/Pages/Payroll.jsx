@@ -15,6 +15,7 @@ export const Payroll = () => {
     typeError,
     isLoading,
     loading,
+    nav,
   } = useContext(myContext);
   const [files, setFiles] = useState([]);
   console.log(
@@ -45,8 +46,10 @@ export const Payroll = () => {
           </p>
         </div>
         <div className="w-full justify-center flex">
-          <div className="w-[90%] items-center flex justify-between">
-            <h2 className="text-[34px] font-bold">Payroll</h2>
+          <div
+            className={`w-[90%] md:items-center md:flex md:flex-row flex flex-col justify-between`}
+          >
+            <h2 className="text-[34px] font-bold mb-5 md:mb-auto">Payroll</h2>
             <form>
               <input
                 className="hidden"
@@ -58,7 +61,11 @@ export const Payroll = () => {
               />
             </form>
             {isFile.length > 0 ? (
-              <div className="flex gap-5">
+              <div
+                className={` ${
+                  nav ? "flex xs:flex xs:flex-col" : "flex xs:flex xs:flex-col"
+                } gap-2 md:gap-5 md:flex md:flex-row`}
+              >
                 <button
                   onClick={() => {
                     loading();
@@ -105,7 +112,10 @@ export const Payroll = () => {
                   <thead className="text-left h-[70px] text-black/70 font-medium">
                     <tr className="border-b ">
                       {columnHeader.map((header, index) => (
-                        <th key={index} className="pl-[1.5%] pr-10 whitespace-nowrap">
+                        <th
+                          key={index}
+                          className="pl-[1.5%] pr-10 whitespace-nowrap"
+                        >
                           {header}
                         </th>
                       ))}
@@ -116,7 +126,10 @@ export const Payroll = () => {
                     {isFile.map((row, index) => (
                       <tr key={index} className="border-b">
                         {columnHeader.map((header, index) => (
-                          <td key={index} className="py-3 text-sm pl-[1.5%] pr-10 whitespace-nowrap">
+                          <td
+                            key={index}
+                            className="py-3 text-sm pl-[1.5%] pr-10 whitespace-nowrap"
+                          >
                             {row[header]}
                           </td>
                         ))}
