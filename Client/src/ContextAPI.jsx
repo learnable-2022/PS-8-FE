@@ -19,18 +19,6 @@ const ContextAPI = ({ children }) => {
 
   // -------------------------------------[]--------------------------------------------
 
-  useEffect(() => {
-    const data = window.localStorage.getItem("payMe_signIn");
-    setSignIn(JSON.parse(data));
-  }, []);
-
-  // -------------------------------------[]--------------------------------------------
-
-  useEffect(() => {
-    window.localStorage.setItem("payMe_signIn", JSON.stringify(signIn));
-  }, [signIn]);
-
-  // -------------------------------------[]--------------------------------------------
 
   const handleSignIn = (e) => {
     const { name, value } = e.target;
@@ -236,6 +224,7 @@ const ContextAPI = ({ children }) => {
   const [loadingProcessedPayroll, setLoadingProcessedPayroll] = useState(false);
   const [processPayroll, setProcessPayroll] = useState([]);
   const [showDataHistory, setShowDataHistory] = useState([]);
+  const [date, setDate] = useState("");
 
   const processUploadedData = () => {
     setLoadingProcessedPayroll(true);
@@ -333,6 +322,15 @@ const ContextAPI = ({ children }) => {
   };
   // -------------------------------------[Process Uploaded Data]-----------------------------------
 
+  // -------------------------------------[Connect Wallet]-----------------------------------
+  // -------------------------------------[Connect Wallet]-----------------------------------
+
+  const [nav, setNav] = useState(false);
+
+  const showNavbar = () => {
+    setNav((prev) => !prev);
+  };
+
   // -------------------------------------[Process Disburse Salaries]-----------------------------------//
 
   const disburseSalary = async () => {
@@ -420,6 +418,8 @@ const ContextAPI = ({ children }) => {
           alert,
           showDataHistory,
           date,
+          showNavbar,
+          nav,
           isPayrollProcessed,
           setIsPayrollProcessed,
           disburseSalary,

@@ -1,13 +1,14 @@
 import React, { useContext, useState, useEffect } from "react";
 import { TbLogout } from "react-icons/tb";
 import { HiUserCircle } from "react-icons/hi";
+import { GrClose } from "react-icons/gr";
 import "../index.css";
 import { myContext } from "../ContextAPI";
 import { titleCase } from "../UTILS/Title";
 import ConnectWallet from "./connectWallet";
 import { RxHamburgerMenu } from "react-icons/rx";
 const Header = () => {
-  const { userInfo, showNavbar } = useContext(myContext);
+  const { userInfo, showNavbar, nav } = useContext(myContext);
   const [profileImage, setProfileImage] = useState(null);
 
   useEffect(() => {
@@ -31,18 +32,25 @@ const Header = () => {
   return (
     <header className="bg-[#ffffff] border-b border-[#dbdada] overflow-hidden px-5  fixed md:px-10 flex items-center w-full">
       <div className="flex justify-between w-full items-center">
-        <div>
-          <RxHamburgerMenu onClick={showNavbar} className="md:hidden text-4xl" />
+        <div onClick={showNavbar}>
+          {nav ? (
+            <GrClose className="md:hidden text-2xl" />
+          ) : (
+            <RxHamburgerMenu className="md:hidden text-2xl" />
+          )}
         </div>
 
         <div className="md:w-2/5 h-full">
           <figure className="md:w-[16%] w-[60px]">
-            <img src="/Images/Logo.png" alt="PayMe" className="w-full h-full" />
+            <img src="/Images/Logo.png" alt="PayMe" className="w-full h-full hidden md:flex" />
+          </figure>
+          <figure className="md:w-[16%] w-[26px] ml-5">
+            <img src="/Images/Logo symbol.png" alt="PayMe" className="w-full h-full  md:hidden" />
           </figure>
         </div>
 
         <div className="flex items-center md:justify-end md:w-3/5">
-          <div className="pr-10">
+          <div className="">
             <ConnectWallet />
           </div>
           <div className="div border-l-[gray-200] border p-3 md:flex hidden"></div>

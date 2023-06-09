@@ -26,7 +26,7 @@ export const Payroll_Dashboard = () => {
         {nav ? (
           <div
             className={`md:w-[17%] ${
-              nav ? "w-[25%]" : "w-0"
+              nav ? "w-[45%]" : "w-0"
             } md:justify-center md:hidden`}
           >
             <Nav_Bar />
@@ -35,7 +35,7 @@ export const Payroll_Dashboard = () => {
           ""
         )}
 
-        <div className={`md:w-[83%] ${nav ? "w-[75%]" : "w-full h-screen"}`}>
+        <div className={`md:w-[83%] ${nav ? "w-[75%] overflow-auto" : "w-full h-screen"}`}>
           <Upload />
         </div>
       </main>

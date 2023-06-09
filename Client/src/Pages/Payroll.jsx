@@ -63,7 +63,9 @@ export const Payroll = () => {
             {isFile.length > 0 ? (
               <div
                 className={` ${
-                  nav ? "flex xs:flex xs:flex-col" : "flex xs:flex xs:flex-col"
+                  nav
+                    ? "sm:flex  flex flex-col-reverse sm:flex-row"
+                    : "sm:flex sm:flex-row flex flex-col-reverse"
                 } gap-2 md:gap-5 md:flex md:flex-row`}
               >
                 <button
@@ -71,13 +73,13 @@ export const Payroll = () => {
                     loading();
                     moveData();
                   }}
-                  className="bg-[#430359] transition duration-300 hover:bg-purple-900 text-white font-bold py-2 px-7 rounded-lg"
+                  className="bg-[#430359] text-start sm:text-center transition duration-300 hover:bg-purple-900 text-white font-bold  py-2 px-7 rounded-lg"
                 >
                   Move file to processor
                 </button>
                 <button
                   onClick={handleButtonClick}
-                  className="bg-[#430359] transition duration-300 hover:bg-purple-900 text-white font-bold py-2 px-7 rounded-lg"
+                  className="bg-[#430359] transition text-start sm:text-center duration-300 hover:bg-purple-900 text-white font-bold py-2 px-7 rounded-lg"
                 >
                   Import File
                 </button>
@@ -85,7 +87,7 @@ export const Payroll = () => {
             ) : (
               <button
                 onClick={handleButtonClick}
-                className="bg-[#430359] transition duration-300 hover:bg-purple-900 text-white font-bold py-2 px-7 rounded-lg cursor-pointer"
+                className="bg-[#430359] transition text-start sm:text-center duration-300 hover:bg-purple-900 text-white font-bold py-2 px-7 rounded-lg cursor-pointer"
               >
                 Import File{" "}
               </button>
@@ -101,7 +103,7 @@ export const Payroll = () => {
                   {fileName}
                 </button>
 
-                <p className="pr-10 mt-[2%]">
+                <p className="md:pr-10 mt-[2%]">
                   {isLoading ? <Loading_Animation /> : ""}
                 </p>
               </div>
