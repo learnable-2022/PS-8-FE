@@ -10,6 +10,7 @@ export const Processor = () => {
     loadingProcessedPayroll,
     processPayroll,
     alert,
+    disburseSalary,
   } = useContext(myContext);
   const [active, setActive] = useState(0);
   const handleActive = (item) => {
@@ -33,7 +34,10 @@ export const Processor = () => {
         <div className="w-[90%] items-center flex justify-between">
           <h2 className="text-[34px] font-bold">Processor</h2>
           {processPayroll.length > 0 ? (
-            <button className="bg-[#430359] transition duration-300 hover:bg-purple-900 text-white font-bold py-2 px-7 rounded-lg">
+            <button
+              className="bg-[#430359] transition duration-300 hover:bg-purple-900 text-white font-bold py-2 px-7 rounded-lg"
+              onClick={disburseSalary}
+            >
               Disburse Salary
             </button>
           ) : (
@@ -70,10 +74,7 @@ export const Processor = () => {
                   History
                 </button>
               </NavLink>
-              <NavLink
-                to="/processor/disbursement"
-                activeClassName="active-route"
-              >
+              <NavLink to="/processor/disbursement" activeClassName="active-route">
                 <button
                   onClick={() => handleActive(2)}
                   className={`${

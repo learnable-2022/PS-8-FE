@@ -1,8 +1,11 @@
 import React, { createContext, useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
-import axios from "axios";
 import * as XLSX from "xlsx";
 import { titleCase } from "./UTILS/Title";
+import { getMonthName } from "./UTILS/getMonthName";
+import { extractNumFromString } from "./UTILS/parseNum";
+import request from "./axios";
+
 const myContext = createContext();
 
 const ContextAPI = ({ children }) => {
@@ -12,6 +15,7 @@ const ContextAPI = ({ children }) => {
   });
 
   const { email, password } = signIn;
+  const [isPayrollProcessed, setIsPayrollProcessed] = useState(false);
 
   // -------------------------------------[]--------------------------------------------
 
@@ -64,7 +68,7 @@ const ContextAPI = ({ children }) => {
 
     const getToken = async () => {
       try {
-        await axios
+        await request
           .post(import.meta.env.VITE_API_ENDPOINT + "/auth/login", {
             ...signIn,
           })
@@ -125,16 +129,14 @@ const ContextAPI = ({ children }) => {
       setHRToken(null);
       window.localStorage.removeItem("HR_access_token");
       window.location = "/";
-    }, 3000);
+    }, 2000);
   };
 
   const uploadFile = (e) => {
     setIsLoading(false);
     setProcessPayroll([]);
 
-    const dataType = [
-      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-    ];
+    const dataType = ["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"];
     const file = e.target.files[0];
     setFileName(titleCase(file.name.split(".")[0]));
     if (file) {
@@ -211,10 +213,7 @@ const ContextAPI = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    window.localStorage.setItem(
-      "process_employee_data",
-      JSON.stringify(processData)
-    );
+    window.localStorage.setItem("process_employee_data", JSON.stringify(processData));
   }, [processData]);
   useEffect(() => {
     const data = window.localStorage.getItem("process_notification");
@@ -237,7 +236,6 @@ const ContextAPI = ({ children }) => {
   const [loadingProcessedPayroll, setLoadingProcessedPayroll] = useState(false);
   const [processPayroll, setProcessPayroll] = useState([]);
   const [showDataHistory, setShowDataHistory] = useState([]);
-  const [date, setDate] = useState("");
 
   const processUploadedData = () => {
     setLoadingProcessedPayroll(true);
@@ -288,7 +286,7 @@ const ContextAPI = ({ children }) => {
         return {
           Name: item.Name,
           ID: item.ID,
-          Loan: "---",
+          Loan: 0,
           Tax: item["Tax policy (%)"],
           "Email Address": item["Email address"],
           "Net Change": `₦${(totalSalary - monthlyBasePay).toFixed(0)}`,
@@ -299,6 +297,7 @@ const ContextAPI = ({ children }) => {
         };
       });
       setProcessPayroll(calculate);
+      setIsPayrollProcessed(true);
 
       const getCurrentDateTime = () => {
         const now = new Date();
@@ -306,9 +305,7 @@ const ContextAPI = ({ children }) => {
       };
 
       const mergedArray = processData.map((item) => {
-        const matchingPayrollItem = calculate.find(
-          (payrollItem) => payrollItem.ID === item.ID
-        );
+        const matchingPayrollItem = calculate.find((payrollItem) => payrollItem.ID === item.ID);
         if (matchingPayrollItem) {
           const mergedItem = {
             ...item,
@@ -336,14 +333,56 @@ const ContextAPI = ({ children }) => {
   };
   // -------------------------------------[Process Uploaded Data]-----------------------------------
 
-  // -------------------------------------[Connect Wallet]-----------------------------------
-  // -------------------------------------[Connect Wallet]-----------------------------------
+  // -------------------------------------[Process Disburse Salaries]-----------------------------------//
 
-  const [nav, setNav] = useState(false);
+  const disburseSalary = async () => {
+    setLoadingProcessedPayroll(true);
+    try {
+      const formData = await getFormData();
 
-  const showNavbar = () => {
-    setNav((prev) => !prev);
+      const response = await request.post("/disbursement", formData);
+
+      toast.success(response.data.message);
+      setLoadingProcessedPayroll(false);
+    } catch (err) {
+      console.error(err);
+      toast.error(err.response.data.error);
+
+      return Promise.reject(err);
+    }
   };
+
+  const getFormData = async () => {
+    const date = new Date();
+
+    const data = await processPayroll.map((elem, index) => {
+      const allowance = elem["Allowance"] ?? 0;
+      return {
+        name: elem["Name"],
+        employeeId: elem["ID"],
+        loan: elem["Loan"],
+        tax: elem["Tax"],
+        bonus: extractNumFromString(elem["Bonus"]),
+        totalDeduction: extractNumFromString(elem["Deduction"]),
+        monthlyBasePay: extractNumFromString(elem["Monthly base pay (₦)"]),
+        totalSalary:
+          extractNumFromString(elem["Monthly base pay (₦)"]) +
+          extractNumFromString(elem["Bonus"]) +
+          allowance,
+        netSalary: extractNumFromString(elem["Total salary"]),
+        email: elem["Email Address"],
+        allowance,
+        year: date.getFullYear(),
+        month: getMonthName(date.getMonth()),
+        yearsOfService: processData[index]["Years of service"],
+        totalWorkingHours: processData[index]["Total working hours"],
+        jobRole: processData[index]["Role"],
+      };
+    });
+
+    return data;
+  };
+  // -------------------------------------[Process Disburse Salaries end]-----------------------------------//
 
   return (
     <div>
@@ -381,8 +420,9 @@ const ContextAPI = ({ children }) => {
           alert,
           showDataHistory,
           date,
-          showNavbar,
-          nav
+          isPayrollProcessed,
+          setIsPayrollProcessed,
+          disburseSalary,
         }}
       >
         {children}
