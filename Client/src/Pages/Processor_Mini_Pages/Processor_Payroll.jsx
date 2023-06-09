@@ -5,7 +5,7 @@ import { Processor_Processed_Payroll } from "./Processor_Processed_Payroll";
 export const Processor_Payroll = () => {
   const { processData, removeProcessor, processPayroll } =
     useContext(myContext);
-  console.log(processData);
+  // console.log(processData);
   const columnHeader =
     processData.length > 0 ? Object.keys(processData[0]) : [];
 

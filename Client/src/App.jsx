@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import { HR_SignIn } from "./Components/HR_SignIn";
 import { Payroll_Dashboard } from "./Components/Payroll_Dashboard";
 // import { Display_Employee_Payroll } from "./Components/Display_Employee_Payroll";
@@ -12,6 +12,7 @@ import { Processor_History } from "./Pages/Processor_Mini_Pages/Processor_Histor
 import { Processor_Disbursement } from "./Pages/Processor_Mini_Pages/Processor_Disbursement";
 
 function App() {
+  const token = window.localStorage.getItem("HR_access_token");
   return (
     <div>
       <ToastContainer />
@@ -21,19 +22,14 @@ function App() {
             <Route path="/dashboard" element={<Payroll />} />
             <Route path="/processor" element={<Processor />}>
               <Route path="/processor" element={<Processor_Payroll />} />
-              <Route
-                path="/processor/history"
-                element={<Processor_History />}
-              />
-              <Route
-                path="/processor/disbursement"
-                element={<Processor_Disbursement />}
-              />
+              <Route path="/processor/history" element={<Processor_History />} />
+              <Route path="/processor/disbursement" element={<Processor_Disbursement />} />
             </Route>
             <Route path="/pay_policy" element={<Pay_Policy />} />
           </Route>
         </Route>
-        <Route path="/" element={<HR_SignIn />} exact />
+
+        <Route path="/" element={token ? <Navigate to="/dashboard" /> : <HR_SignIn />} exact />
       </Routes>
     </div>
   );
