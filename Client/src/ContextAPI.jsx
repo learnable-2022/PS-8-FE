@@ -91,7 +91,7 @@ const ContextAPI = ({ children }) => {
         if (error.message === "Network Error") {
           setTimeout(() => {
             toast.error(error.message);
-            setIsPending(false)
+            setIsPending(false);
           }, 1000);
         }
       }
@@ -335,6 +335,9 @@ const ContextAPI = ({ children }) => {
     setProcessPayroll([]);
   };
   // -------------------------------------[Process Uploaded Data]-----------------------------------
+
+  // -------------------------------------[Connect Wallet]-----------------------------------
+  // -------------------------------------[Connect Wallet]-----------------------------------
 
   return (
     <div>

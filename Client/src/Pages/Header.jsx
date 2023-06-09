@@ -5,9 +5,8 @@ import "../index.css";
 import { myContext } from "../ContextAPI";
 import { titleCase } from "../UTILS/Title";
 import ConnectWallet from "./connectWallet";
-
 const Header = () => {
-  const { userInfo, processData, isFile, handleLogout } = useContext(myContext);
+  const { userInfo } = useContext(myContext);
   const [profileImage, setProfileImage] = useState(null);
 
   useEffect(() => {
@@ -37,10 +36,8 @@ const Header = () => {
           </figure>
         </div>
 
-        <div className="ml-auto flex items-center justify-end w-3/5">
-          <div className="pr-10">
+        <div className="flex items-center justify-end w-3/5">
             <ConnectWallet />
-          </div>
           <div className="div border-l-[gray-200] border p-3"></div>
 
           <form>
