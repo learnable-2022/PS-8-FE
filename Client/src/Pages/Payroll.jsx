@@ -40,7 +40,7 @@ export const Payroll = () => {
               !moveIsSuccessful
                 ? "translate-x-[500px] transition-all duration-1000"
                 : "translate-x-0 transition-all duration-1000 mt-5"
-            } bg-white px-10 py-3 rounded-lg text-[green] `}
+            } bg-white px-10 py-3 rounded-lg text-[green]`}
           >
             {moveIsSuccessful}
           </p>

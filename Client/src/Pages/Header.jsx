@@ -1,11 +1,11 @@
 import React, { useContext, useState, useEffect } from "react";
 import { TbLogout } from "react-icons/tb";
+import ConnectWallet from "./connectWallet";
 import { HiUserCircle } from "react-icons/hi";
 import { GrClose } from "react-icons/gr";
 import "../index.css";
 import { myContext } from "../ContextAPI";
 import { titleCase } from "../UTILS/Title";
-import ConnectWallet from "./connectWallet";
 import { RxHamburgerMenu } from "react-icons/rx";
 const Header = () => {
   const { userInfo, showNavbar, nav } = useContext(myContext);
@@ -42,17 +42,24 @@ const Header = () => {
 
         <div className="md:w-2/5 h-full">
           <figure className="md:w-[16%] w-[60px]">
-            <img src="/Images/Logo.png" alt="PayMe" className="w-full h-full hidden md:flex" />
+            <img
+              src="/Images/Logo.png"
+              alt="PayMe"
+              className="w-full h-full hidden md:flex"
+            />
           </figure>
           <figure className="md:w-[16%] w-[26px] ml-5">
-            <img src="/Images/Logo symbol.png" alt="PayMe" className="w-full h-full  md:hidden" />
+            <img
+              src="/Images/Logo symbol.png"
+              alt="PayMe"
+              className="w-full h-full  md:hidden"
+            />
           </figure>
         </div>
 
         <div className="flex items-center md:justify-end md:w-3/5">
-          <div className="">
             <ConnectWallet />
-          </div>
+
           <div className="div border-l-[gray-200] border p-3 md:flex hidden"></div>
 
           <form>
@@ -82,6 +89,7 @@ const Header = () => {
               onClick={uploadProfile}
             />
           )}
+          {/* <Connect /> */}
 
           <div className="md:flex flex-col px-3 hidden">
             <span className="text-sm">{userName}</span>

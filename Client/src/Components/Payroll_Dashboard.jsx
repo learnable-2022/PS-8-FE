@@ -35,7 +35,9 @@ export const Payroll_Dashboard = () => {
           ""
         )}
 
-        <div className={`md:w-[83%] ${nav ? "w-[75%] overflow-auto" : "w-full h-screen"}`}>
+        <div
+          className={`md:w-[83%] ${nav ? "w-[75%] overflow-auto" : "w-full"}`}
+        >
           <Upload />
         </div>
       </main>
