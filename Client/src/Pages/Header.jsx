@@ -4,7 +4,8 @@ import { HiUserCircle } from "react-icons/hi";
 import "../index.css";
 import { myContext } from "../ContextAPI";
 import { titleCase } from "../UTILS/Title";
-import ConnectWallet from "./connectWallet";
+ import ConnectWallet from "./connectWallet";
+
 
 const Header = () => {
   const { userInfo, processData, isFile, handleLogout } = useContext(myContext);
@@ -38,8 +39,9 @@ const Header = () => {
         </div>
 
         <div className="ml-auto flex items-center justify-end w-3/5">
-          <div className="pr-10">
+        <div className="pr-10">
             <ConnectWallet />
+           
           </div>
           <div className="div border-l-[gray-200] border p-3"></div>
 

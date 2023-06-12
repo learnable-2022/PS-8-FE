@@ -10,6 +10,7 @@ import { ToastContainer } from "react-toastify";
 import { Processor_Payroll } from "./Pages/Processor_Mini_Pages/Processor_Payroll";
 import { Processor_History } from "./Pages/Processor_Mini_Pages/Processor_History";
 import { Processor_Disbursement } from "./Pages/Processor_Mini_Pages/Processor_Disbursement";
+import ConnectWallet from "././Pages/connectWallet";
 
 function App() {
   return (

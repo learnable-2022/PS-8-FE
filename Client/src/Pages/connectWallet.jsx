@@ -17,8 +17,11 @@ const ConnectWallet = () => {
     setCheck(2);
   };
 
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
   const connectWallet = async () => {
-    try {
+   // try {
       if (typeof eth !== "undefined") {
         //const provider = new ethers.providers.Web3Provider(window.ethereum);
         const accounts = await eth.request({ method: "eth_requestAccounts" });
@@ -31,57 +34,50 @@ const ConnectWallet = () => {
       } else {
         alert("MetaMask wallet not installed");
       }
-    } catch (error) {
-      console.error(error);
-      alert("Error connecting to Ethereum wallet");
-    }
-    const disconnectWallet = () => {
-      setCurrentAccount("");
-    };
-
-    const toggleDropdown = () => {
-      setShowDropdown(!showDropdown);
-    };
-    return (
+    // } catch (error) {
+    //   console.error(error);
+    //   alert("Error connecting to Ethereum wallet");
+    // }
+  };
+    // const disconnectWallet = () => {
+    //   setCurrentAccount("");
+    // };
+  return (
       <div>
-        <button
-          className="connect-btn hidden cursor-pointer text-[#430359] font-bold py-1 px-4 rounded-xl hover:bg-[#F5E4FB] hover:border-none hover:transition-all hover:duration-500"
-          onClick={connectWallet}
-        />
-        Connect
-        <button />
-        <div className="dropdown">
+        {checkAcct !== 1 && (
+          <button className="connect-btn hidden cursor-pointer text-[#430359] font-bold py-1 px-4 rounded-xl hover:bg-[#F5E4FB] hover:border-none hover:transition-all hover:duration-500"
+          onClick={connectWallet}>
+          Connect
+        </button>
+         )} 
+        
+         {checkAcct == 1 && ( <div className="dropdown">
           <button
             className=" cursor-pointer bg-[#660000] text-white font-bold py-2 px-4 rounded-xl"
-            onClick={toggleDropdown}
-          >
+            onClick={toggleDropdown}>
             Disconnect
           </button>
           {showDropdown && (
+
             <div>
-              {checkAcct == 1 && (
+              
                 <button
                   className="disconnect cursor-pointer text-black font-bold py-2 px-4 rounded-xl"
-                  onClick={disConnect}
-                >
+                  onClick={disConnect}>
                   Disconnect Wallet
                 </button>
-              )}
+             
               <div>
-                {checkAcct == 1 && (
                   <p className="walletAddress">
-                    {`${currentAccount.slice(0, 4)}...${currentAccount.slice(
-                      -4
-                    )}`}
+                    {`${currentAccount.slice(0, 4)}...${currentAccount.slice(-4)}`}
                   </p>
-                )}
               </div>
             </div>
           )}
         </div>
+        )} 
       </div>
     );
-  };
 };
 
 export default ConnectWallet;

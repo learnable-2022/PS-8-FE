@@ -9,6 +9,7 @@ import { myContext } from "../ContextAPI";
 import { TbLogout } from "react-icons/tb";
 
 
+
 export const Nav_Bar = () => {
   const { processData, handleNotification, notification, handleLogout } = useContext(myContext);
   
@@ -50,6 +51,7 @@ export const Nav_Bar = () => {
               <MdPolicy className="text-2xl" /> Pay Policy
             </li>
           </NavLink>
+
           
             <div
             className="flex items-center text-start text-[#1A1A1A] justify-start pl-5 h-[10vh]  gap-2 mt-[8.6rem] cursor-pointer hover:bg-[#430359] w-[100%]" 
