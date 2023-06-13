@@ -1,17 +1,19 @@
 import React, { useContext, useState, useEffect } from "react";
 import { TbLogout } from "react-icons/tb";
+import ConnectWallet from "./connectWallet";
 import { HiUserCircle } from "react-icons/hi";
 import { GrClose } from "react-icons/gr";
 import "../index.css";
 import { myContext } from "../ContextAPI";
 import { titleCase } from "../UTILS/Title";
-import ConnectWallet from "./connectWallet";
 import { RxHamburgerMenu } from "react-icons/rx";
 const Header = () => {
   const { userInfo, showNavbar, nav } = useContext(myContext);
   const [profileImage, setProfileImage] = useState(null);
+  const { username, avatar } = JSON.parse(userInfo);
 
   useEffect(() => {
+    window.localStorage.setItem("payme_profile", avatar);
     setProfileImage(window.localStorage.getItem("payme_profile"));
   }, []);
 
@@ -26,8 +28,6 @@ const Header = () => {
   const uploadImage = (e) => {
     setProfileImage(URL.createObjectURL(e.target.files[0]));
   };
-
-  const userName = titleCase(userInfo);
 
   return (
     <header className="bg-[#ffffff] border-b border-[#dbdada] overflow-hidden px-5  fixed md:px-10 flex items-center w-full">
@@ -50,9 +50,8 @@ const Header = () => {
         </div>
 
         <div className="flex items-center md:justify-end md:w-3/5">
-          <div className="">
-            <ConnectWallet />
-          </div>
+          <ConnectWallet />
+
           <div className="div border-l-[gray-200] border p-3 md:flex hidden"></div>
 
           <form>
@@ -64,13 +63,10 @@ const Header = () => {
               onChange={uploadImage}
             />
           </form>
-          {profileImage ? (
-            <figure
-              className="w-[50px] h-[50px] cursor-pointer"
-              onClick={uploadProfile}
-            >
+          {avatar ? (
+            <figure className="w-[50px] h-[50px] cursor-pointer" onClick={uploadProfile}>
               <img
-                src={profileImage}
+                src={avatar}
                 alt="Profile"
                 title={userInfo}
                 className="w-full h-full rounded-full"
@@ -82,9 +78,10 @@ const Header = () => {
               onClick={uploadProfile}
             />
           )}
+          {/* <Connect /> */}
 
           <div className="md:flex flex-col px-3 hidden">
-            <span className="text-sm">{userName}</span>
+            <span className="text-sm">{titleCase(username)}</span>
             <span className="text-sm text-gray-200">Hr Admin</span>
           </div>
         </div>

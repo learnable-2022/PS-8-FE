@@ -11,20 +11,24 @@ const eth = getWallet();
 const ConnectWallet = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [currentAccount, setCurrentAccount] = useState("");
-  let [checkAcct, setCheck] = useState("");
+  const [checkAcct, setCheckAcct] = useState(0); // Initialize with 0
 
   const disConnect = function () {
-    setCheck(2);
+    setCurrentAccount("");
+    setCheckAcct(0); // Set checkAcct to 0 to hide the dropdown
   };
 
   const connectWallet = async () => {
     try {
       if (typeof eth !== "undefined") {
-        //const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const accounts = await eth.request({ method: "eth_requestAccounts" });
-        // const signer = provider.getSigner();
-        // const accounts = await signer.getAddress();
-        setCheck(1);
+        await eth.request({
+          method: "eth_requestAccounts",
+        });
+
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const accounts = await signer.getAddress();
+        setCheckAcct(1);
 
         setCurrentAccount(accounts[0]);
         alert("Hey " + accounts[0]);
@@ -35,52 +39,36 @@ const ConnectWallet = () => {
       console.error(error);
       alert("Error connecting to Ethereum wallet");
     }
-    const disconnectWallet = () => {
-      setCurrentAccount("");
-    };
-
-    const toggleDropdown = () => {
-      setShowDropdown(!showDropdown);
-    };
-    return (
-      <div>
-        <button
-          className="connect-btn hidden cursor-pointer text-[#430359] font-bold py-1 px-4 rounded-xl hover:bg-[#F5E4FB] hover:border-none hover:transition-all hover:duration-500"
-          onClick={connectWallet}
-        />
-        Connect
-        <button />
-          <div className="dropdown">
-        <button
-          className=" cursor-pointer bg-[#660000] text-white font-bold py-2 px-4 rounded-xl"
-          onClick={toggleDropdown}
-        >
-          Disconnect
-        </button>
-        {showDropdown && (
-          
-          <div>
-              {checkAcct == 1 && (
-                <button
-                  className="disconnect cursor-pointer text-black font-bold py-2 px-4 rounded-xl"
-                  onClick={disConnect}
-                >
-                  Disconnect Wallet
-                </button>
-              )}
-              <div>
-                {checkAcct == 1 && (
-                  <p className="walletAddress">
-                    {`${currentAccount.slice(0, 4)}...${currentAccount.slice(-4)}`}
-                  </p>
-                )}
-                </div>
-              </div>
-              )}
-            </div> 
-      </div>
-    );
   };
+
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
+
+  return (
+    <div>
+      {currentAccount ? (
+        <div className="dropdown">
+          <button
+            onClick={toggleDropdown}
+            className="cursor-pointer bg-[#660000] text-white font-bold py-2 px-4 rounded-xl"
+          >
+            Disconnect
+          </button>
+          <p className="walletAddress">
+            {`${currentAccount.slice(0, 4)}...${currentAccount.slice(-4)}`}
+          </p>
+        </div>
+      ) : (
+        <button
+          className="mr-10 border border-[#430359]== text-white font-bold px-5 py-1 rounded-full hover:bg-[#7f23a0] transition duration-500 md:flex hidden"
+          onClick={connectWallet}
+        >
+          {currentAccount ? "Connected" : "Connect"}
+        </button>
+      )}
+    </div>
+  );
 };
 
 export default ConnectWallet;

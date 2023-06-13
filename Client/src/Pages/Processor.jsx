@@ -11,6 +11,7 @@ export const Processor = () => {
     processPayroll,
     alert,
     disburseSalary,
+    isPayrollDisbursed,
   } = useContext(myContext);
   const [active, setActive] = useState(0);
   const handleActive = (item) => {
@@ -33,7 +34,14 @@ export const Processor = () => {
       <div className="w-full flex justify-center pt-[3%]">
         <div className="w-[90%] md:items-center flex flex-col md:flex md:flex-row justify-between">
           <h2 className="text-[34px] font-bold">Processor</h2>
-          {processPayroll.length > 0 ? (
+          {!processPayroll?.length > 0 ? (
+            <button
+              onClick={processUploadedData}
+              className="bg-[#430359] transition duration-300 hover:bg-purple-900 text-white font-bold py-2 md:px-7 mt-3 md:mt-auto rounded-lg w-40 md:w-auto"
+            >
+              Process Payroll
+            </button>
+          ) : !isPayrollDisbursed ? (
             <button
               className="bg-[#430359] transition duration-300 hover:bg-purple-900 text-white font-bold py-2 px-7 rounded-lg"
               onClick={disburseSalary}
@@ -41,16 +49,11 @@ export const Processor = () => {
               Disburse Salary
             </button>
           ) : (
-            <button
-              onClick={processUploadedData}
-              className="bg-[#430359] transition duration-300 hover:bg-purple-900 text-white font-bold py-2 md:px-7 mt-3 md:mt-auto rounded-lg w-40 md:w-auto"
-            >
-              Process Payroll
-            </button>
+            ""
           )}
         </div>
       </div>
-      {processData.length > 0 || processPayroll.length > 0 ? (
+      {processData?.length > 0 || processPayroll?.length > 0 ? (
         <div className="w-full justify-center flex">
           <div className="w-[90%]  flex flex-col md:flex md:flex-row justify-between md:items-center ">
             <div className="gap-2 flex ">

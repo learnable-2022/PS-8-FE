@@ -17,25 +17,21 @@ export const Payroll_Dashboard = () => {
   return (
     <>
       <header>
-        <Header />{" "}
+        <Header />
       </header>
       <main className="flex flex-row ">
         <div className={`md:w-[17%] hidden md:flex justify-center`}>
           <Nav_Bar />
         </div>
         {nav ? (
-          <div
-            className={`md:w-[17%] ${
-              nav ? "w-[45%]" : "w-0"
-            } md:justify-center md:hidden`}
-          >
+          <div className={`md:w-[17%] ${nav ? "w-[45%]" : "w-0"} md:justify-center md:hidden`}>
             <Nav_Bar />
           </div>
         ) : (
           ""
         )}
 
-        <div className={`md:w-[83%] ${nav ? "w-[75%] overflow-auto" : "w-full h-screen"}`}>
+        <div className={`md:w-[83%] ${nav ? "w-[75%] overflow-auto" : "w-full"}`}>
           <Upload />
         </div>
       </main>
