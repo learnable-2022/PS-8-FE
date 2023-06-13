@@ -41,7 +41,7 @@ const Header = () => {
         <div className="ml-auto flex items-center justify-end w-3/5">
         <div className="pr-10">
             <ConnectWallet />
-           
+          
           </div>
           <div className="div border-l-[gray-200] border p-3"></div>
 
