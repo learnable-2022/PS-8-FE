@@ -5,6 +5,7 @@ import { titleCase } from "./UTILS/Title";
 import { getMonthName } from "./UTILS/getMonthName";
 import { extractNumFromString } from "./UTILS/parseNum";
 import request from "./axios";
+import { useNavigate } from "react-router-dom";
 
 const myContext = createContext();
 
@@ -16,19 +17,21 @@ const ContextAPI = ({ children }) => {
 
   const { email, password } = signIn;
   const [isPayrollProcessed, setIsPayrollProcessed] = useState(false);
+  const [isPayrollDisbursed, setIsPayrollDisbursed] = useState(false);
+  const navigate = useNavigate();
 
   // -------------------------------------[]--------------------------------------------
 
-  useEffect(() => {
-    const data = window.localStorage.getItem("payMe_signIn");
-    setSignIn(JSON.parse(data));
-  }, []);
+  // useEffect(() => {
+  //   const data = window.localStorage.getItem("payMe_signIn");
+  //   setSignIn(JSON.parse(data));
+  // }, []);
 
   // -------------------------------------[]--------------------------------------------
 
-  useEffect(() => {
-    window.localStorage.setItem("payMe_signIn", JSON.stringify(signIn));
-  }, [signIn]);
+  // useEffect(() => {
+  //   window.localStorage.setItem("payMe_signIn", JSON.stringify(signIn));
+  // }, [signIn]);
 
   // -------------------------------------[]--------------------------------------------
 
@@ -70,27 +73,35 @@ const ContextAPI = ({ children }) => {
 
     const getToken = async () => {
       try {
-        await request
-          .post(import.meta.env.VITE_API_ENDPOINT + "/auth/login", {
-            ...signIn,
-          })
-          .then((response) => {
-            setIsPending(false);
-            const token = response.data.accessToken;
-            const user = response.data.user.username;
-            toast.loading("Logging in...");
-            setHRToken(token);
-            setUserInfo(user);
-            window.localStorage.setItem("HR_access_token", token);
-            setTimeout(() => {
-              token && (window.location = "/dashboard");
-            }, 3000);
-          });
+        const response = await request.post(import.meta.env.VITE_API_ENDPOINT + "/auth/login", {
+          ...signIn,
+        });
+
+        if (response?.data) {
+          setIsPending(false);
+
+          toast.success("Login successful", { autoClose: 2000 });
+
+          const token = response.data.accessToken;
+          const user = JSON.stringify(response.data.user);
+
+          console.log(user);
+
+          setHRToken(token);
+          setUserInfo(user);
+
+          window.localStorage.setItem("HR_access_token", token);
+          window.localStorage.setItem("userInfo", user);
+
+          setTimeout(() => {
+            navigate("/dashboard");
+          }, 2000);
+        }
       } catch (error) {
         console.log(error);
         if (error.response && error.response.status > 400) {
           setTimeout(() => {
-            toast.error("Pls you are not authorized");
+            toast.error("Invalid email or password");
             setIsPending(false);
           }, 2000);
         }
@@ -126,11 +137,11 @@ const ContextAPI = ({ children }) => {
   };
 
   const handleLogout = () => {
-    toast.loading("Logging out...");
+    toast.info("Logout successful...", { autoClose: 2000 });
     setTimeout(() => {
       setHRToken(null);
       window.localStorage.removeItem("HR_access_token");
-      window.location = "/";
+      navigate("/");
     }, 2000);
   };
 
@@ -138,9 +149,7 @@ const ContextAPI = ({ children }) => {
     setIsLoading(false);
     setProcessPayroll([]);
 
-    const dataType = [
-      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-    ];
+    const dataType = ["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"];
     const file = e.target.files[0];
     setFileName(titleCase(file.name.split(".")[0]));
     if (file) {
@@ -217,10 +226,7 @@ const ContextAPI = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    window.localStorage.setItem(
-      "process_employee_data",
-      JSON.stringify(processData)
-    );
+    window.localStorage.setItem("process_employee_data", JSON.stringify(processData));
   }, [processData]);
   useEffect(() => {
     const data = window.localStorage.getItem("process_notification");
@@ -313,9 +319,7 @@ const ContextAPI = ({ children }) => {
       };
 
       const mergedArray = processData.map((item) => {
-        const matchingPayrollItem = calculate.find(
-          (payrollItem) => payrollItem.ID === item.ID
-        );
+        const matchingPayrollItem = calculate.find((payrollItem) => payrollItem.ID === item.ID);
         if (matchingPayrollItem) {
           const mergedItem = {
             ...item,
@@ -361,11 +365,12 @@ const ContextAPI = ({ children }) => {
 
       const response = await request.post("/disbursement", formData);
 
+      setIsPayrollDisbursed(true);
       toast.success(response.data.message);
       setLoadingProcessedPayroll(false);
     } catch (err) {
       console.error(err);
-      toast.error(err.response.data.error);
+      toast.error(err.response.data.error ?? err.message);
 
       return Promise.reject(err);
     }
@@ -444,6 +449,8 @@ const ContextAPI = ({ children }) => {
           isPayrollProcessed,
           setIsPayrollProcessed,
           disburseSalary,
+          isPayrollDisbursed,
+          setIsPayrollDisbursed,
         }}
       >
         {children}
