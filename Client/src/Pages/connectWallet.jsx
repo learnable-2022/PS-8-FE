@@ -12,28 +12,19 @@ const ConnectWallet = () => {
   const [currentAccount, setCurrentAccount] = useState("");
   const [checkAcct, setCheck] = useState("");
 
-  useEffect(() => {
-    checkConnectedWallet();
-  }, []);
-
-  const checkConnectedWallet = async () => {
-    if (eth && eth.selectedAddress) {
-      setCheck(1);
-      setCurrentAccount(eth.selectedAddress);
-    } else {
-      setCheck(0);
-      setCurrentAccount("");
-    }
+  const disConnect = function () {
+    setCheck(2);
   };
 
   const connectWallet = async () => {
     try {
-      if (eth) {
-        await eth.request({ method: "eth_requestAccounts" });
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner();
-        const accounts = await signer.getAddress();
+      if (typeof eth !== "undefined") {
+        //const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const accounts = await eth.request({ method: "eth_requestAccounts" });
+        // const signer = provider.getSigner();
+        // const accounts = await signer.getAddress();
         setCheck(1);
+
         setCurrentAccount(accounts[0]);
         alert("Hey " + accounts[0]);
       } else {
@@ -43,46 +34,53 @@ const ConnectWallet = () => {
       console.error(error);
       alert("Error connecting to Ethereum wallet");
     }
-  };
+    const disconnectWallet = () => {
+      setCurrentAccount("");
+    };
 
-  const disconnectWallet = () => {
-    if (eth) {
-      eth.removeAllListeners();
-    }
-    setCheck(0);
-    setCurrentAccount("");
-  };
-
-  return (
-    <div>
-      {checkAcct !== 1 && (
+    const toggleDropdown = () => {
+      setShowDropdown(!showDropdown);
+    };
+    return (
+      <div>
         <button
-          className="connect-btn cursor-pointer text-[#430359] font-bold py-1 px-4 rounded-xl hover:bg-[#F5E4FB] hover:border-none hover:transition-all hover:duration-500"
+          className="connect-btn hidden cursor-pointer text-[#430359] font-bold py-1 px-4 rounded-xl hover:bg-[#F5E4FB] hover:border-none hover:transition-all hover:duration-500"
           onClick={connectWallet}
-        >
-          Connect
-        </button>
-      )}
-
-      {checkAcct === 1 && (
-        <div>
+        />
+        Connect
+        <button />
+        <div className="dropdown">
           <button
-            className="cursor-pointer bg-[#660000] text-white font-bold py-2 px-4 rounded-xl"
-            onClick={disconnectWallet}
+            className=" cursor-pointer bg-[#660000] text-white font-bold py-2 px-4 rounded-xl"
+            onClick={toggleDropdown}
           >
             Disconnect
           </button>
-      {checkAcct === 1 && (
-          <div>
-            <p className="walletAddress">
-              {`${currentAccount.slice(0, 4)}...${currentAccount.slice(-4)}`}
-            </p>
-          </div>
-      )}
+          {showDropdown && (
+            <div>
+              {checkAcct == 1 && (
+                <button
+                  className="disconnect cursor-pointer text-black font-bold py-2 px-4 rounded-xl"
+                  onClick={disConnect}
+                >
+                  Disconnect Wallet
+                </button>
+              )}
+              <div>
+                {checkAcct == 1 && (
+                  <p className="walletAddress">
+                    {`${currentAccount.slice(0, 4)}...${currentAccount.slice(
+                      -4
+                    )}`}
+                  </p>
+                )}
+              </div>
+            </div>
+          )}
         </div>
-      )}
-    </div>
-  );
+      </div>
+    );
+  };
 };
 
 export default ConnectWallet;

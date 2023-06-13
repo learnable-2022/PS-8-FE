@@ -15,6 +15,7 @@ export const Payroll = () => {
     typeError,
     isLoading,
     loading,
+    nav,
   } = useContext(myContext);
   const [files, setFiles] = useState([]);
   console.log(
@@ -39,14 +40,16 @@ export const Payroll = () => {
               !moveIsSuccessful
                 ? "translate-x-[500px] transition-all duration-1000"
                 : "translate-x-0 transition-all duration-1000 mt-5"
-            } bg-white px-10 py-3 rounded-lg text-[green] `}
+            } bg-white px-10 py-3 rounded-lg text-[green]`}
           >
             {moveIsSuccessful}
           </p>
         </div>
         <div className="w-full justify-center flex">
-          <div className="w-[90%] items-center flex justify-between">
-            <h2 className="text-[34px] font-bold">Payroll</h2>
+          <div
+            className={`w-[90%] md:items-center md:flex md:flex-row flex flex-col justify-between`}
+          >
+            <h2 className="text-[34px] font-bold mb-5 md:mb-auto">Payroll</h2>
             <form>
               <input
                 className="hidden"
@@ -58,19 +61,25 @@ export const Payroll = () => {
               />
             </form>
             {isFile.length > 0 ? (
-              <div className="flex gap-5">
+              <div
+                className={` ${
+                  nav
+                    ? "sm:flex  flex flex-col-reverse sm:flex-row"
+                    : "sm:flex sm:flex-row flex flex-col-reverse"
+                } gap-2 md:gap-5 md:flex md:flex-row`}
+              >
                 <button
                   onClick={() => {
                     loading();
                     moveData();
                   }}
-                  className="bg-[#430359] transition duration-300 hover:bg-purple-900 text-white font-bold py-2 px-7 rounded-lg"
+                  className="bg-[#430359] text-start sm:text-center transition duration-300 hover:bg-purple-900 text-white font-bold  py-2 px-7 rounded-lg"
                 >
                   Move file to processor
                 </button>
                 <button
                   onClick={handleButtonClick}
-                  className="bg-[#430359] transition duration-300 hover:bg-purple-900 text-white font-bold py-2 px-7 rounded-lg"
+                  className="bg-[#430359] transition text-start sm:text-center duration-300 hover:bg-purple-900 text-white font-bold py-2 px-7 rounded-lg"
                 >
                   Import File
                 </button>
@@ -78,7 +87,7 @@ export const Payroll = () => {
             ) : (
               <button
                 onClick={handleButtonClick}
-                className="bg-[#430359] transition duration-300 hover:bg-purple-900 text-white font-bold py-2 px-7 rounded-lg cursor-pointer"
+                className="bg-[#430359] transition text-start sm:text-center duration-300 hover:bg-purple-900 text-white font-bold py-2 px-7 rounded-lg cursor-pointer"
               >
                 Import File{" "}
               </button>
@@ -94,7 +103,7 @@ export const Payroll = () => {
                   {fileName}
                 </button>
 
-                <p className="pr-10 mt-[2%]">
+                <p className="md:pr-10 mt-[2%]">
                   {isLoading ? <Loading_Animation /> : ""}
                 </p>
               </div>
@@ -105,7 +114,10 @@ export const Payroll = () => {
                   <thead className="text-left h-[70px] text-black/70 font-medium">
                     <tr className="border-b ">
                       {columnHeader.map((header, index) => (
-                        <th key={index} className="pl-[1.5%] pr-10 whitespace-nowrap">
+                        <th
+                          key={index}
+                          className="pl-[1.5%] pr-10 whitespace-nowrap"
+                        >
                           {header}
                         </th>
                       ))}
@@ -116,7 +128,10 @@ export const Payroll = () => {
                     {isFile.map((row, index) => (
                       <tr key={index} className="border-b">
                         {columnHeader.map((header, index) => (
-                          <td key={index} className="py-3 text-sm pl-[1.5%] pr-10 whitespace-nowrap">
+                          <td
+                            key={index}
+                            className="py-3 text-sm pl-[1.5%] pr-10 whitespace-nowrap"
+                          >
                             {row[header]}
                           </td>
                         ))}
