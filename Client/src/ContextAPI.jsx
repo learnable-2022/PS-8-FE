@@ -104,11 +104,7 @@ const ContextAPI = ({ children }) => {
       } catch (error) {
         if (error.response && error.response.status > 400) {
           setTimeout(() => {
-<<<<<<< HEAD
-            toast.error("Incorrect Email and Password");
-=======
-            toast.error("Invalid email or password");
->>>>>>> ebcf8095fc26c298dd7a5b9ee3132f78a4e9b811
+            toast.error("Incorrect email or password");
             setIsPending(false);
           }, 2000);
         } else if (error.message === "Network Error") {
@@ -264,7 +260,7 @@ const ContextAPI = ({ children }) => {
     setLoadingProcessedPayroll(true);
     setTimeout(() => {
       setLoadingProcessedPayroll(false);
-        setAlert("Payroll Processed Successfully");
+      setAlert("Payroll Processed Successfully");
       const calculate = processData.map((item) => {
         const appraisalScore = item["Appraisal score"];
         const workingHours = item["Total working hours"];
