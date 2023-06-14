@@ -6,8 +6,8 @@
 
 body,
 html {
-  height: 100vh;
   width: 100%;
+  height: auto;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -31,7 +31,7 @@ header {
 
 .active {
   background: #f5e4fb;
-  height: 10vh;
+  height: 8vh;
   width: 100%;
   display: flex;
   justify-items: center;

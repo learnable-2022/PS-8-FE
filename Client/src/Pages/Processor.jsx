@@ -24,14 +24,14 @@ export const Processor = () => {
         <p
           className={`${
             alert === ""
-              ? "translate-x-[500px] transition-all duration-1000 bg-white  px-10 py-3 rounded-lg text-[green]"
+              ? `translate-x-[500px] transition-all duration-1000 bg-white  px-10 py-3 rounded-lg text-[green]`
               : "translate-x-0 transition-all duration-1000 mt-5 bg-white   px-10 py-3 rounded-lg text-[green]"
           }    `}
         >
           {alert}
         </p>
       </div>
-      <div className="w-full flex justify-center pt-[3%]">
+      <div className="w-full flex justify-center">
         <div className="w-[90%] md:items-center flex flex-col md:flex md:flex-row justify-between">
           <h2 className="text-[34px] font-bold">Processor</h2>
           {!processPayroll?.length > 0 ? (
@@ -49,7 +49,12 @@ export const Processor = () => {
               Disburse Salary
             </button>
           ) : (
-            ""
+            <button
+              onClick={processUploadedData}
+              className="bg-[#430359] transition duration-300 hover:bg-purple-900 text-white font-bold py-2 md:px-7 mt-3 md:mt-auto rounded-lg md:w-auto"
+            >
+              Process Payroll
+            </button>
           )}
         </div>
       </div>

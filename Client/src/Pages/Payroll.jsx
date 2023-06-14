@@ -134,8 +134,11 @@ export const Payroll = () => {
                 </table>
               </div>
             </div>
-            <div className="full flex justify-center mb-20">
-              <button className="bg-white px-5 py-2 rounded-lg cursor-pointer" onClick={removeData}>
+            <div className="h-full flex justify-center mb-20">
+              <button
+                className="bg-white px-5 py-2 rounded-lg cursor-pointer"
+                onClick={removeData}
+              >
                 Remove Data
               </button>
             </div>

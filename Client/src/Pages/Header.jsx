@@ -8,9 +8,9 @@ import { myContext } from "../ContextAPI";
 import { titleCase } from "../UTILS/Title";
 import { RxHamburgerMenu } from "react-icons/rx";
 const Header = () => {
-  const { userInfo, showNavbar, nav } = useContext(myContext);
+  const { showNavbar, nav, refreshToken } = useContext(myContext);
   const [profileImage, setProfileImage] = useState(null);
-  const { username, avatar } = JSON.parse(userInfo);
+  const { username, avatar } = JSON.parse(window.localStorage.getItem("userInfo"));
 
   useEffect(() => {
     window.localStorage.setItem("payme_profile", avatar);
