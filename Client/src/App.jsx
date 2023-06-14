@@ -21,7 +21,7 @@ function App() {
   }, []);
   return (
     <div>
-      <ToastContainer />
+      <ToastContainer autoClose={4000} />
       <Routes>
         <Route element={<ProtectedPage />}>
           <Route element={<Payroll_Dashboard />}>

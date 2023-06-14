@@ -20,7 +20,7 @@ export const Payroll = () => {
   const [files, setFiles] = useState([]);
   console.log(
     isFile
-      .filter((item) => item["Monthly base pay ($)"] <= 3000)
+      ?.filter((item) => item["Monthly base pay ($)"] <= 3000)
       .map((item) => item["Monthly base pay ($)"])
   );
 
@@ -30,7 +30,7 @@ export const Payroll = () => {
     }
   }, [fileName]);
 
-  const columnHeader = isFile.length > 0 ? Object.keys(isFile[0]) : [];
+  const columnHeader = isFile?.length > 0 ? Object.keys(isFile[0]) : [];
   return (
     <div>
       <div className="md:w-full">
@@ -60,7 +60,7 @@ export const Payroll = () => {
                 onChange={uploadFile}
               />
             </form>
-            {isFile.length > 0 ? (
+            {isFile?.length > 0 ? (
               <div
                 className={` ${
                   nav
@@ -95,17 +95,13 @@ export const Payroll = () => {
           </div>
         </div>
 
-        {isFile.length > 0 ? (
+        {isFile?.length > 0 ? (
           <div>
             <div className="w-full justify-center flex">
               <div className="w-[90%] flex justify-between items-center">
-                <button className="bg-white px-5 py-2 mt-6 rounded-xl">
-                  {fileName}
-                </button>
+                <button className="bg-white px-5 py-2 mt-6 rounded-xl">{fileName}</button>
 
-                <p className="md:pr-10 mt-[2%]">
-                  {isLoading ? <Loading_Animation /> : ""}
-                </p>
+                <p className="md:pr-10 mt-[2%]">{isLoading ? <Loading_Animation /> : ""}</p>
               </div>
             </div>
             <div className="w-full flex justify-center mb-10">
@@ -114,10 +110,7 @@ export const Payroll = () => {
                   <thead className="text-left h-[70px] text-black/70 font-medium">
                     <tr className="border-b ">
                       {columnHeader.map((header, index) => (
-                        <th
-                          key={index}
-                          className="pl-[1.5%] pr-10 whitespace-nowrap"
-                        >
+                        <th key={index} className="pl-[1.5%] pr-10 whitespace-nowrap">
                           {header}
                         </th>
                       ))}
@@ -161,9 +154,7 @@ export const Payroll = () => {
             </div>
             {typeError !== "" ? (
               <div className="w-full flex justify-center mt-20">
-                <p className="bg-[#F5E4FB] px-20 py-2 text-[red] rounded-lg">
-                  {typeError}
-                </p>
+                <p className="bg-[#F5E4FB] px-20 py-2 text-[red] rounded-lg">{typeError}</p>
               </div>
             ) : (
               ""

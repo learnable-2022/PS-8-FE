@@ -3,21 +3,19 @@ import { myContext } from "../../ContextAPI";
 import { Processor_Processed_Payroll } from "./Processor_Processed_Payroll";
 
 export const Processor_Payroll = () => {
-  const { processData, removeProcessor, processPayroll } =
-    useContext(myContext);
+  const { processData, removeProcessor, processPayroll } = useContext(myContext);
   // console.log(processData);
-  const columnHeader =
-    processData.length > 0 ? Object.keys(processData[0]) : [];
+  const columnHeader = processData?.length > 0 ? Object.keys(processData[0]) : [];
 
   return (
     <div className="">
-      {processPayroll.length > 0 ? (
+      {processPayroll?.length > 0 ? (
         <div className="w-full flex justify-center mb-10">
           <Processor_Processed_Payroll />
         </div>
       ) : (
         <div>
-          {processData.length > 0 ? (
+          {processData?.length > 0 ? (
             <div>
               <div className="w-full flex justify-center mb-10 ">
                 <div
@@ -33,10 +31,7 @@ export const Processor_Payroll = () => {
                     <thead className="text-left h-[70px] text-black/70 font-medium ">
                       <tr className="border-b">
                         {columnHeader.map((header, index) => (
-                          <th
-                            key={index}
-                            className="pl-[1.5%] whitespace-nowrap pr-10"
-                          >
+                          <th key={index} className="pl-[1.5%] whitespace-nowrap pr-10">
                             {header}
                           </th>
                         ))}
@@ -61,10 +56,7 @@ export const Processor_Payroll = () => {
                 </div>
               </div>
               <div className="flex justify-center my-4">
-                <button
-                  onClick={removeProcessor}
-                  className="bg-white px-5 py-2 rounded-lg"
-                >
+                <button onClick={removeProcessor} className="bg-white px-5 py-2 rounded-lg">
                   Remove Data{" "}
                 </button>
               </div>

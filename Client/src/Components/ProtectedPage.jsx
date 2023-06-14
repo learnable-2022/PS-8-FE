@@ -1,26 +1,17 @@
 import React from "react";
-import {  Outlet } from "react-router-dom";
+import { Outlet, Navigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export const ProtectedPage = () => {
   const userAuth = () => {
-    const user = window.localStorage.getItem("payMe_signIn");
     const token = window.localStorage.getItem("HR_access_token");
 
-    return user && token;
+    return token;
   };
 
-  const navigate = () => {
-    toast.warning("Please Sign In");
-    setTimeout(() => {
-      window.location = "/";
-    }, 1000);
-  };
+  const location = useLocation();
 
   const isAuth = userAuth();
-  return (
-    isAuth ? <Outlet /> : navigate()
-  );
+
+  return isAuth ? <Outlet /> : <Navigate to="/" state={{ from: location }} replace />;
 };
-
-

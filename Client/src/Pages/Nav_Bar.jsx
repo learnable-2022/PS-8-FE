@@ -8,10 +8,9 @@ import { NavLink } from "react-router-dom";
 import { myContext } from "../ContextAPI";
 import { TbLogout } from "react-icons/tb";
 
-
 export const Nav_Bar = () => {
   const { processData, handleNotification, notification, handleLogout } = useContext(myContext);
-  
+
   return (
     <aside className="w-full">
       <nav className="md:flex overflow-hidden flex-col h-screen bg-[#ffffff] w-full py-6 ">
@@ -24,7 +23,7 @@ export const Nav_Bar = () => {
           </NavLink>
 
           <NavLink activeClassName="active" to="/processor">
-            {processData.length > 0 ? (
+            {processData?.length > 0 ? (
               <li
                 onClick={handleNotification}
                 className="flex items-center justify-start hover:py-5 pl-[5%] md:pl-[15%] h-[8vh] gap-2 hover:text-[#ffffff] transition duration-500 hover:bg-[#430359] text-md w-[100%]"
