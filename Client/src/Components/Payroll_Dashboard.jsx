@@ -40,7 +40,6 @@ export const Payroll_Dashboard = () => {
           <Nav_Bar />
         </div>
         {nav ? (
-<<<<<<< HEAD
           <div
             data-aos="fade-right"
             data-aos-duration="500"
@@ -50,24 +49,13 @@ export const Payroll_Dashboard = () => {
                 : "w-0 translate-x-[-80%] transition-all duration-500"
             } md:justify-center md:hidden`}
           >
-=======
-          <div className={`md:w-[17%] ${nav ? "w-[45%]" : "w-0"} md:justify-center md:hidden`}>
->>>>>>> ebcf8095fc26c298dd7a5b9ee3132f78a4e9b811
             <Nav_Bar />
           </div>
         ) : (
           ""
         )}
 
-<<<<<<< HEAD
-        <div
-          className={`md:w-[83%] ${
-            nav ? "w-full overflow-auto h-full" : "w-full h-screen"
-          }`}
-        >
-=======
-        <div className={`md:w-[83%] ${nav ? "w-[75%] overflow-auto" : "w-full"}`}>
->>>>>>> ebcf8095fc26c298dd7a5b9ee3132f78a4e9b811
+        <div className={`md:w-[83%] ${nav ? "w-full overflow-auto h-full" : "w-full h-screen"}`}>
           <Upload />
         </div>
       </main>
