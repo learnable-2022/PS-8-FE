@@ -248,11 +248,7 @@ const ContextAPI = ({ children }) => {
     setLoadingProcessedPayroll(true);
     setTimeout(() => {
       setLoadingProcessedPayroll(false);
-      if (processPayroll.length > 0) {
         setAlert("Payroll Processed Successfully");
-      } else {
-        setAlert("No data to process");
-      }
       const calculate = processData.map((item) => {
         const appraisalScore = item["Appraisal score"];
         const workingHours = item["Total working hours"];

@@ -22,9 +22,9 @@ export const Processor = () => {
       <div className="flex justify-end pr-10 w-full overflow-hidden ">
         <p
           className={`${
-            alert === "" || processPayroll.length > 0
+            alert === ""
               ? `translate-x-[500px] transition-all duration-1000 bg-white  px-10 py-3 rounded-lg text-[green]`
-              : "translate-x-0 transition-all duration-1000 mt-5 bg-white   px-10 py-3 rounded-lg text-[red]"
+              : "translate-x-0 transition-all duration-1000 mt-5 bg-white   px-10 py-3 rounded-lg text-[green]"
           }    `}
         >
           {alert}
