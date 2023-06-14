@@ -61,7 +61,6 @@ const ContextAPI = ({ children }) => {
   }, [userInfo]);
 
   const handleClick = () => {
-    console.log("clicked");
     setIsPending(true);
   };
 
@@ -90,7 +89,7 @@ const ContextAPI = ({ children }) => {
         console.log(error);
         if (error.response && error.response.status > 400) {
           setTimeout(() => {
-            toast.error("Pls you are not authorized");
+            toast.error("Incorrect Email and Password");
             setIsPending(false);
           }, 2000);
         }
@@ -249,7 +248,11 @@ const ContextAPI = ({ children }) => {
     setLoadingProcessedPayroll(true);
     setTimeout(() => {
       setLoadingProcessedPayroll(false);
-      setAlert("Payroll Processed Successfully");
+      if (processPayroll.length > 0) {
+        setAlert("Payroll Processed Successfully");
+      } else {
+        setAlert("No data to process");
+      }
       const calculate = processData.map((item) => {
         const appraisalScore = item["Appraisal score"];
         const workingHours = item["Total working hours"];

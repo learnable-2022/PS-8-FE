@@ -21,7 +21,7 @@ export const HR_SignIn = () => {
       <div className=" w-full mt-10 relative">
         <div className="w-full">
           <div className="flex justify-center ">
-            <figure className="w-[5%] ">
+            <figure className="w-[50px] md:w-[5%] ">
               <img
                 src="/Images/Logo.png"
                 alt="PayMe"
@@ -29,16 +29,16 @@ export const HR_SignIn = () => {
               />
             </figure>
           </div>
-          <h2 className="flex justify-center mt-5 text-4xl text-[#1A1A1A] font-semibold">
+          <h2 className="flex justify-center mt-5 md:text-4xl text-2xl text-[#1A1A1A] font-semibold">
             Welcome back
           </h2>
-          <div className="flex justify-center items-center lg:ml-[12%] w-full">
-            <div className="md:w-[40%] lg:w-[30%] border-[#C2C2C2] md:mt-5 rounded-lg border flex justify-center">
+          <div className="flex justify-center w-full ">
+            <div className="w-[80%] sm:w-[60%] md:w-[50%] lg:w-[35%] border-[#c4c2c2] md:mt-5 rounded-lg border flex justify-center">
               <form
                 onSubmit={handleSubmit}
-                className="flex flex-col w-[90%] mt-5"
+                className="flex flex-col w-[90%]  mt-5"
               >
-                <h2 className="font-bold text-[#1A1A1A] text-[28px] mb-5">
+                <h2 className="font-bold text-[#1A1A1A] text-[20px] md:text-[28px] mb-5">
                   Sign in
                 </h2>
 
@@ -93,15 +93,15 @@ export const HR_SignIn = () => {
                 </button>
               </form>
             </div>
-            <div className="w-[25%] h-full hidden lg:flex mt-40">
-              <figure className="w-4/5 flex ">
-                <img
-                  src="./Images/signImg.png"
-                  alt="Human Resource Management"
-                  className=" md:flex w-full h-full "
-                />
-              </figure>
-            </div>
+          </div>
+          <div className="w-full hidden lg:flex justify-end -mt-40 -ml-40">
+            <figure className="w-1/5 flex flex-col">
+              <img
+                src="./Images/signImg.png"
+                alt="Human Resource Management"
+                className=" md:flex w-full h-full "
+              />
+            </figure>
           </div>
         </div>
       </div>

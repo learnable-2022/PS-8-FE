@@ -7,8 +7,6 @@ import { BrowserRouter } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 
 
-
-
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <ContextAPI>

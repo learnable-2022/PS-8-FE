@@ -25,8 +25,12 @@ export const Payroll_Dashboard = () => {
         </div>
         {nav ? (
           <div
-            className={`md:w-[17%] ${
-              nav ? "w-[45%]" : "w-0"
+            data-aos="fade-right"
+            data-aos-duration="500"
+            className={`md:w-[17%]  ${
+              nav
+                ? "w-[65%] translate-x-0 fixed shadow-black/70 shadow-md transition-transform duration-500"
+                : "w-0 translate-x-[-80%] transition-all duration-500"
             } md:justify-center md:hidden`}
           >
             <Nav_Bar />
@@ -36,7 +40,9 @@ export const Payroll_Dashboard = () => {
         )}
 
         <div
-          className={`md:w-[83%] ${nav ? "w-[75%] overflow-auto" : "w-full"}`}
+          className={`md:w-[83%] ${
+            nav ? "w-full overflow-auto h-full" : "w-full h-screen"
+          }`}
         >
           <Upload />
         </div>

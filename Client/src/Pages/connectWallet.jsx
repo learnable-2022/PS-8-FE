@@ -11,11 +11,10 @@ const eth = getWallet();
 const ConnectWallet = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [currentAccount, setCurrentAccount] = useState("");
-  const [checkAcct, setCheckAcct] = useState(0); // Initialize with 0
+  let [checkAcct, setCheckAcct] = useState(0);
 
   const disConnect = function () {
-    setCurrentAccount("");
-    setCheckAcct(0); // Set checkAcct to 0 to hide the dropdown
+    setCheckAcct(2);
   };
 
   const connectWallet = async () => {
@@ -28,7 +27,7 @@ const ConnectWallet = () => {
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
         const accounts = await signer.getAddress();
-        setCheckAcct(1);
+        setCheck(1);
 
         setCurrentAccount(accounts[0]);
         alert("Hey " + accounts[0]);
@@ -41,32 +40,55 @@ const ConnectWallet = () => {
     }
   };
 
-  const toggleDropdown = () => {
-    setShowDropdown(!showDropdown);
-  };
+  // const disconnectWallet = () => {
+  //   setCurrentAccount("");
+  // };
 
+  const toggleDropdown = () => {
+    setShowDropdown(true);
+  };
   return (
     <div>
-      {currentAccount ? (
-        <div className="dropdown">
-          <button
-            onClick={toggleDropdown}
-            className="cursor-pointer bg-[#660000] text-white font-bold py-2 px-4 rounded-xl"
-          >
-            Disconnect
-          </button>
-          <p className="walletAddress">
-            {`${currentAccount.slice(0, 4)}...${currentAccount.slice(-4)}`}
-          </p>
-        </div>
+      {currentAccount !== "" ? (
+        <button
+          onClick={toggleDropdown}
+          className=" cursor-pointer bg-[#660000] text-white font-bold py-2 px-4 rounded-xl"
+        >
+          Disconnect
+        </button>
       ) : (
         <button
-          className="mr-10 border border-[#430359]== text-white font-bold px-5 py-1 rounded-full hover:bg-[#7f23a0] transition duration-500 md:flex hidden"
+          className="mr-10 border-[#430359] border
+       font-bold px-5 py-1 rounded-full hover:bg-[#7f23a0] hover:text-white transition duration-500 md:flex hidden text-[#430359]"
           onClick={connectWallet}
         >
-          {currentAccount ? "Connected" : "Connect"}
+          Connect
         </button>
       )}
+
+      <div className="dropdown">
+        {showDropdown && (
+          <div>
+            {checkAcct == 1 && (
+              <button
+                className="disconnect cursor-pointer text-black font-bold py-2 px-4 rounded-xl"
+                onClick={disConnect}
+              >
+                Disconnect Wallet
+              </button>
+            )}
+            <div>
+              {checkAcct == 1 && (
+                <p className="walletAddress">
+                  {`${currentAccount.slice(0, 4)}...${currentAccount.slice(
+                    -4
+                  )}`}
+                </p>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
