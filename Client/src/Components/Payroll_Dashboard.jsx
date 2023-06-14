@@ -2,17 +2,33 @@ import React, { useContext, useEffect } from "react";
 // import { TbLogout } from "react-icons/tb";
 // import { IoNotificationsOutline } from "react-icons/io5";
 import { Upload } from "../Pages/Upload";
+import request from "../axios";
 import Header from "../Pages/Header";
 import { Nav_Bar } from "../Pages/Nav_Bar";
 import { toast } from "react-toastify";
 import { myContext } from "../ContextAPI";
 
 export const Payroll_Dashboard = () => {
+  const { nav } = useContext(myContext);
+  const { _id: id } = JSON.parse(window.localStorage.getItem("userInfo"));
+
   useEffect(() => {
     toast("Welcome to PayMe");
+    validateToken();
   }, []);
 
-  const { nav } = useContext(myContext);
+  const validateToken = async () => {
+    try {
+      const response = await request.get(`/users/${id}`);
+
+      if (response?.data) {
+        const { user } = response.data;
+        window.localStorage.setItem("userInfo", JSON.stringify(user));
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>
