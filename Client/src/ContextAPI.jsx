@@ -56,12 +56,14 @@ const ContextAPI = ({ children }) => {
 
   useEffect(() => {
     const data = window.localStorage.getItem("userInfo");
-    setUserInfo(data);
+    if (data) {
+      setUserInfo(data);
+    }
   }, []);
 
-  useEffect(() => {
-    window.localStorage.setItem("userInfo", userInfo);
-  }, [userInfo]);
+  // useEffect(() => {
+  //   window.localStorage.setItem("userInfo", userInfo);
+  // }, [userInfo]);
 
   const handleClick = () => {
     console.log("clicked");
@@ -77,7 +79,7 @@ const ContextAPI = ({ children }) => {
           ...signIn,
         });
 
-        if (response?.data) {
+        if (response.data) {
           setIsPending(false);
 
           toast.success("Login successful", { autoClose: 2000 });
@@ -96,20 +98,23 @@ const ContextAPI = ({ children }) => {
           setTimeout(() => {
             navigate("/dashboard");
           }, 2000);
+        } else {
+          toast.error(response);
+          setIsPending(false);
         }
       } catch (error) {
-        console.log(error);
         if (error.response && error.response.status > 400) {
           setTimeout(() => {
             toast.error("Invalid email or password");
             setIsPending(false);
           }, 2000);
-        }
-        if (error.message === "Network Error") {
+        } else if (error.message === "Network Error") {
           setTimeout(() => {
             toast.error(error.message);
             setIsPending(false);
           }, 1000);
+        } else {
+          toast.error("an error occured logging in");
         }
       }
     };
@@ -141,6 +146,7 @@ const ContextAPI = ({ children }) => {
     setTimeout(() => {
       setHRToken(null);
       window.localStorage.removeItem("HR_access_token");
+      window.localStorage.removeItem("userInfo");
       navigate("/");
     }, 2000);
   };
@@ -312,6 +318,7 @@ const ContextAPI = ({ children }) => {
       });
       setProcessPayroll(calculate);
       setIsPayrollProcessed(true);
+      setIsPayrollDisbursed(false);
 
       const getCurrentDateTime = () => {
         const now = new Date();
@@ -364,12 +371,15 @@ const ContextAPI = ({ children }) => {
       const formData = await getFormData();
 
       const response = await request.post("/disbursement", formData);
-
-      setIsPayrollDisbursed(true);
-      toast.success(response.data.message);
-      setLoadingProcessedPayroll(false);
+      if (response.data) {
+        setIsPayrollDisbursed(true);
+        toast.success(response.data.message);
+        setLoadingProcessedPayroll(false);
+      } else {
+        setLoadingProcessedPayroll(false);
+      }
     } catch (err) {
-      console.error(err);
+      console.log(err);
       toast.error(err.response.data.error ?? err.message);
 
       return Promise.reject(err);

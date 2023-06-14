@@ -11,24 +11,9 @@ import { Processor_Payroll } from "./Pages/Processor_Mini_Pages/Processor_Payrol
 import { Processor_History } from "./Pages/Processor_Mini_Pages/Processor_History";
 import { Processor_Disbursement } from "./Pages/Processor_Mini_Pages/Processor_Disbursement";
 import NotFound from "./Pages/NotFound";
-import request from "./axios";
-import { useContext, useEffect } from "react";
-import { myContext } from "./ContextAPI";
 
 function App() {
   const token = window.localStorage.getItem("HR_access_token");
-  const { userInfo } = useContext(myContext);
-
-  useEffect(() => {
-    validateToken();
-  }, []);
-
-  const validateToken = async () => {
-    // try {
-    //   const response = await request.get("/disbursement");
-    // } catch (error) {}
-    console.log(userInfo);
-  };
 
   return (
     <div>
