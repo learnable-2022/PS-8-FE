@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { Outlet, Link } from "react-router-dom";
 import { myContext } from "../ContextAPI";
 import { Loading_Animation } from "../UTILS/Loading_Animation";
+import { BsDot } from "react-icons/bs";
 
 export const Processor = () => {
   const {
@@ -34,74 +35,62 @@ export const Processor = () => {
       <div className="w-full flex justify-center">
         <div className="w-[90%] md:items-center flex flex-col md:flex md:flex-row justify-between">
           <h2 className="text-[34px] font-bold">Processor</h2>
-          {!processPayroll?.length > 0 ? (
-            <button
-              onClick={processUploadedData}
-              className="bg-[#430359] transition duration-300 hover:bg-purple-900 text-white font-bold py-2 md:px-7 mt-3 md:mt-auto rounded-lg w-40 md:w-auto"
-            >
-              Process Payroll
-            </button>
-          ) : !isPayrollDisbursed ? (
-            <button
-              className="bg-[#430359] transition duration-300 hover:bg-purple-900 text-white font-bold py-2 px-7 rounded-lg"
-              onClick={disburseSalary}
-            >
-              Disburse Salary
-            </button>
-          ) : (
-            <button
-              onClick={processUploadedData}
-              className="bg-[#430359] transition duration-300 hover:bg-purple-900 text-white font-bold py-2 md:px-7 mt-3 md:mt-auto rounded-lg md:w-auto"
-            >
-              Process Payroll
-            </button>
-          )}
+
+          <>
+            {!processPayroll?.length > 0 ? (
+              <button
+                onClick={processUploadedData}
+                className="bg-[#430359] transition duration-300 hover:bg-purple-900 text-white font-bold py-2 md:px-7 mt-3 md:mt-auto rounded-lg w-40 md:w-auto"
+              >
+                Process Payroll
+              </button>
+            ) : (
+              <button
+                className={`bg-[#430359] transition duration-300 hover:bg-purple-900 text-white font-bold py-2 px-7 rounded-lg ${
+                  isPayrollDisbursed ? "hidden" : ""
+                }`}
+                onClick={disburseSalary}
+              >
+                Disburse Salary
+              </button>
+            )}
+          </>
         </div>
       </div>
-      {processData?.length > 0 || processPayroll?.length > 0 ? (
-        <div className="w-full justify-center flex">
-          <div className="w-[90%]  flex flex-col md:flex md:flex-row justify-between md:items-center ">
-            <div className="gap-2 flex ">
-              <Link to="/processor" activeClassName="active-route">
-                <button
-                  onClick={() => handleActive(0)}
-                  className={`${
-                    active === 0 ? "border-b-[#430161] border-2 md:border" : ""
-                  } bg-white px-5  font-bold py-2 mt-6 rounded-xl`}
-                >
-                  Payroll
-                </button>
-              </Link>
-              <Link to="/processor/history" activeClassName="active-route">
-                <button
-                  onClick={() => handleActive(1)}
-                  className={`${
-                    active === 1 ? "border-b-[#430161] border-2 md:border" : ""
-                  } bg-white px-5  font-bold py-2 mt-6 rounded-xl`}
-                >
-                  History
-                </button>
-              </Link>
-              <Link to="/processor/disbursement" activeClassName="active-route">
-                <button
-                  onClick={() => handleActive(2)}
-                  className={`${
-                    active === 2 ? "border-b-[#430161] border-2 md:border" : ""
-                  } bg-white px-5  font-bold py-2 mt-6 rounded-xl`}
-                  activeClassName="active"
-                >
-                  Disbursements
-                </button>
-              </Link>
-            </div>
-            <div className="flex items-start md:pr-10 mt-5 ">
-              {loadingProcessedPayroll ? <Loading_Animation /> : ""}
-            </div>
+
+      <div className="w-full justify-center flex">
+        <div className="w-[90%]  flex flex-col md:flex md:flex-row justify-between md:items-center ">
+          <div className="gap-2 flex ">
+            <Link to="/processor" activeClassName="active-route">
+              <button
+                onClick={() => handleActive(0)}
+                className={`${
+                  active === 0 ? "border-b-[#430161] border-2 md:border" : ""
+                } bg-white px-5  font-bold py-2 mt-6 rounded-xl`}
+              >
+                Payroll
+              </button>
+            </Link>
+            <Link to="/processor/history" activeClassName="active-route">
+              <button
+                onClick={() => handleActive(1)}
+                className={`${
+                  active === 1 ? "border-b-[#430161] border-2 md:border" : ""
+                } bg-white px-5  font-bold py-2 mt-6 rounded-xl`}
+              >
+                History
+                {isPayrollDisbursed && (
+                  <BsDot className="md:ml-[-15%]  md:flex mt-[-2%] -ml-9 text-[#DBBB23] text-3xl" />
+                )}
+              </button>
+            </Link>
+          </div>
+          <div className="flex items-start md:pr-10 mt-5 ">
+            {loadingProcessedPayroll ? <Loading_Animation /> : ""}
           </div>
         </div>
-      ) : (
-        ""
-      )}
+      </div>
+
       <Outlet />
     </div>
   );
