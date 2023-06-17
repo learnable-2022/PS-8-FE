@@ -120,17 +120,17 @@ export const Processor_History = () => {
 
   return (
     <div className="w-full">
-      <div className="w-full flex justify-center">
+      <div className="flex justify-center">
         {disbursements?.length > 0 ? (
-          <div className="w-[90%] rounded-2xl h-full bg-white mt-2 overflow-x-scroll">
+          <div className="w-[90%] rounded-2xl h-full bg-white mt-2">
             {/* history count */}
-            <div className="flex m-5 justify-between">
-              <span className="flex items-center gap-1">
+            <div className="sm:flex m-5 justify-between">
+              <span className="sm:flex items-center gap-1">
                 <span
                   className="font-semibold
                 "
                 >
-                  Go to Page :&nbsp;
+                  Go to Page:&nbsp;
                 </span>
                 <input
                   type="number"
@@ -142,7 +142,7 @@ export const Processor_History = () => {
                   className="border p-1 rounded w-16"
                 />
               </span>
-              <div className="flex justify-end space-x-8">
+              <div className="flex justify-end sm:space-x-6 space-x-1 p-2 py-3">
                 <div>
                   <DebouncedInput
                     value={globalFilter ?? ""}
@@ -168,36 +168,41 @@ export const Processor_History = () => {
             </div>
 
             {/* end history count */}
-            <table className="min-w-full ">
-              <thead className="text-left h-[70px] text-black/70 font-medium ">
-                {table.getHeaderGroups().map((headerGroup) => (
-                  <tr key={headerGroup.id} className="border-b">
-                    {headerGroup.headers.map((header) => (
-                      <th key={header.id} className="pl-[1.5%] pr-10 whitespace-nowrap">
-                        {header.isPlaceholder
-                          ? null
-                          : flexRender(header.column.columnDef.header, header.getContext())}
-                      </th>
-                    ))}
-                  </tr>
-                ))}
-              </thead>
-              <tbody>
-                {table.getRowModel().rows.map((row) => (
-                  <tr key={row.id} className="border-b">
-                    {row.getVisibleCells().map((cell) => (
-                      <td key={cell.id} className="py-3 text-sm pl-[1.5%] pr-10 whitespace-nowrap">
-                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <div className="overflow-x-auto">
+              <table className="min-w-full ">
+                <thead className="text-left h-[70px] text-black/70 font-medium ">
+                  {table.getHeaderGroups().map((headerGroup) => (
+                    <tr key={headerGroup.id} className="border-b">
+                      {headerGroup.headers.map((header) => (
+                        <th key={header.id} className="pl-[1.5%] pr-10 whitespace-nowrap">
+                          {header.isPlaceholder
+                            ? null
+                            : flexRender(header.column.columnDef.header, header.getContext())}
+                        </th>
+                      ))}
+                    </tr>
+                  ))}
+                </thead>
+                <tbody>
+                  {table.getRowModel().rows.map((row) => (
+                    <tr key={row.id} className="border-b">
+                      {row.getVisibleCells().map((cell) => (
+                        <td
+                          key={cell.id}
+                          className="py-3 text-sm pl-[1.5%] pr-10 whitespace-nowrap"
+                        >
+                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
 
             <div className="m-8 flex justify-between">
               <span className="flex items-center gap-1">
-                <div>Showing Page</div>
+                <div>Page</div>
                 <strong>
                   {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
                 </strong>
