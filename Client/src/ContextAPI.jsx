@@ -22,21 +22,6 @@ const ContextAPI = ({ children }) => {
 
   // -------------------------------------[]--------------------------------------------
 
-  // useEffect(() => {
-  //   const data = window.localStorage.getItem("payMe_signIn");
-  //   setSignIn(JSON.parse(data));
-  // }, []);
-
-  // -------------------------------------[]--------------------------------------------
-
-  // useEffect(() => {
-  //   window.localStorage.setItem("payMe_signIn", JSON.stringify(signIn));
-  // }, [signIn]);
-
-  // -------------------------------------[]--------------------------------------------
-
-  // -------------------------------------[]--------------------------------------------
-
   const handleSignIn = (e) => {
     const { name, value } = e.target;
     setSignIn((state) => ({
@@ -378,9 +363,16 @@ const ContextAPI = ({ children }) => {
 
       const response = await request.post("/disbursement", formData);
       if (response.data) {
-        setIsPayrollDisbursed(true);
-        toast.success(response.data.message);
-        setLoadingProcessedPayroll(false);
+        setTimeout(() => {
+          setLoadingProcessedPayroll(false);
+          setIsPayrollDisbursed(true);
+          toast.success(response.data.message);
+          window.localStorage.setItem("process_employee_data", null);
+          window.localStorage.setItem("employee_data_name", null);
+
+          setProcessData([]);
+          setProcessPayroll([]);
+        }, 2000);
       } else {
         setLoadingProcessedPayroll(false);
       }
@@ -417,6 +409,7 @@ const ContextAPI = ({ children }) => {
         yearsOfService: processData[index]["Years of service"],
         totalWorkingHours: processData[index]["Total working hours"],
         jobRole: processData[index]["Role"],
+        appraisal: processData[index]["Appraisal score"],
       };
     });
 
