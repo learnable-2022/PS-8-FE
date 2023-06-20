@@ -6,7 +6,7 @@ export const Processor_History = () => {
   console.log(showDataHistory);
 
   return (
-    <div className="w-full">
+    <div className={`w-full ${showDataHistory.length > 0 ? "h-full" : "h-screen"}`}>
       <div className="w-full flex justify-center">
         {showDataHistory?.length > 0 ? (
           <div className="w-[90%] rounded-2xl h-full bg-white mt-2 overflow-x-scroll">
@@ -14,7 +14,10 @@ export const Processor_History = () => {
               <thead className="text-left h-[70px] text-black/70 font-medium ">
                 <tr className="border-b">
                   {Object.keys(showDataHistory[0]).map((header) => (
-                    <th key={header} className="pl-[1.5%] pr-10 whitespace-nowrap">
+                    <th
+                      key={header}
+                      className="pl-[1.5%] pr-10 whitespace-nowrap"
+                    >
                       {header}
                     </th>
                   ))}
@@ -25,7 +28,9 @@ export const Processor_History = () => {
                   <tr key={index} className="border-b">
                     {Object.values(item).map((value, index) => (
                       <Fragment key={index}>
-                        <td className="py-3 text-sm pl-[1.5%] pr-10 whitespace-nowrap">{value}</td>
+                        <td className="py-3 text-sm pl-[1.5%] pr-10 whitespace-nowrap">
+                          {value}
+                        </td>
                       </Fragment>
                     ))}
                   </tr>

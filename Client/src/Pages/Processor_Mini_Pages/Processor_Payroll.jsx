@@ -8,9 +8,9 @@ export const Processor_Payroll = () => {
   const columnHeader = processData?.length > 0 ? Object.keys(processData[0]) : [];
 
   return (
-    <div className="">
+    <div className={processData.length > 0 ? "h-full" : "h-screen"}>
       {processPayroll?.length > 0 ? (
-        <div className="w-full flex justify-center mb-10">
+        <div className="w-full flex justify-center">
           <Processor_Processed_Payroll />
         </div>
       ) : (
@@ -19,7 +19,7 @@ export const Processor_Payroll = () => {
             <div>
               <div className="w-full flex justify-center mb-10 ">
                 <div
-                  className="w-[90%] rounded-2xl h-full bg-white mt-2 overflow-x-scroll"
+                  className="w-[90%] rounded-2xl bg-white mt-2 overflow-x-scroll"
                   style={{
                     scrollBehavior: "smooth",
                     overflow: "auto",
@@ -55,7 +55,7 @@ export const Processor_Payroll = () => {
                   </table>
                 </div>
               </div>
-              <div className="flex justify-center my-4">
+              <div className="flex justify-center">
                 <button onClick={removeProcessor} className="bg-white px-5 py-2 rounded-lg">
                   Remove Data{" "}
                 </button>

@@ -159,6 +159,13 @@ padding-right: 54px;
   animation: loading 1s infinite;
 }
 
+.card_child{
+  display: none;
+}
+.card_parent:hover  .card_child{
+  display: flex;
+}
+
 @keyframes loading {
   0% {
     transform: scale(1);

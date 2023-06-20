@@ -19,7 +19,7 @@ export const Processor = () => {
   };
 
   return (
-    <div>
+    <div className="">
       <div className="flex justify-end pr-10 w-full overflow-hidden ">
         <p
           className={`${
@@ -31,7 +31,7 @@ export const Processor = () => {
           {alert}
         </p>
       </div>
-      <div className="w-full flex justify-center">
+      <div className="w-full h-full flex justify-center">
         <div className="w-[90%] md:items-center flex flex-col md:flex md:flex-row justify-between">
           <h2 className="text-[34px] font-bold">Processor</h2>
           {!processPayroll?.length > 0 ? (

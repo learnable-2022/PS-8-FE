@@ -44,12 +44,11 @@ export const Nav_Bar = () => {
             )}
           </NavLink>
 
-          {/* <NavLink activeClassName="active"> */}
+          <NavLink activeClassName="active" to="/employees">
           <li className="flex gap-2 justify-start  h-[8vh] items-center pl-[5%] md:pl-[15%]  hover:text-[#ffffff] transition duration-500 hover:bg-[#430359] text-md w-[100%]">
-            <MdPolicy className="md:text-xl text-[1.6rem]  md:flex" /> Pay
-            Policy
+            <MdPolicy className="md:text-xl text-[1.6rem]  md:flex" /> Employees
           </li>
-          {/* </NavLink> */}
+          </NavLink>
 
           <div
             className="flex items-center text-start  text-black/80 justify-start pl-[5%] h-[7vh] md:pl-[15%] gap-2 mt-[18rem] cursor-pointer  hover:font-bold text-lg transition duration-300 w-full md:w-[90%] md:rounded-md text-md"

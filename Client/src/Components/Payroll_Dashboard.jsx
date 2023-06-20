@@ -1,6 +1,4 @@
 import React, { useContext, useEffect } from "react";
-// import { TbLogout } from "react-icons/tb";
-// import { IoNotificationsOutline } from "react-icons/io5";
 import { Upload } from "../Pages/Upload";
 import request from "../axios";
 import Header from "../Pages/Header";
@@ -9,7 +7,7 @@ import { toast } from "react-toastify";
 import { myContext } from "../ContextAPI";
 
 export const Payroll_Dashboard = () => {
-  const { nav } = useContext(myContext);
+  const { nav, isFile } = useContext(myContext);
   const { _id: id } = JSON.parse(window.localStorage.getItem("userInfo"));
 
   useEffect(() => {
@@ -31,11 +29,13 @@ export const Payroll_Dashboard = () => {
   };
 
   return (
-    <>
+    <div className="w-full">
       <header>
         <Header />
       </header>
-      <main className="flex flex-row ">
+      <main
+        className={`flex flex-row h-full`}
+      >
         <div className={`md:w-[17%] hidden md:flex justify-center`}>
           <Nav_Bar />
         </div>
@@ -55,10 +55,10 @@ export const Payroll_Dashboard = () => {
           ""
         )}
 
-        <div className={`md:w-[83%] ${nav ? "w-full overflow-auto h-full" : "w-full h-screen"}`}>
+        <div className={`md:w-[83%] ${nav ? "w-full" : "w-full"} h-full`}>
           <Upload />
         </div>
       </main>
-    </>
+    </div>
   );
 };

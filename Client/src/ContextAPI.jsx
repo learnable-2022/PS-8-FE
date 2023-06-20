@@ -74,7 +74,7 @@ const ContextAPI = ({ children }) => {
 
     const getToken = async () => {
       try {
-        const response = await request.post(import.meta.env.VITE_API_ENDPOINT + "/auth/login", {
+        const response = await request.post("/auth/login", {
           ...signIn,
         });
 
@@ -154,7 +154,9 @@ const ContextAPI = ({ children }) => {
     setIsLoading(false);
     setProcessPayroll([]);
 
-    const dataType = ["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"];
+    const dataType = [
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    ];
     const file = e.target.files[0];
     setFileName(titleCase(file.name.split(".")[0]));
     if (file) {
@@ -231,7 +233,10 @@ const ContextAPI = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    window.localStorage.setItem("process_employee_data", JSON.stringify(processData));
+    window.localStorage.setItem(
+      "process_employee_data",
+      JSON.stringify(processData)
+    );
   }, [processData]);
   useEffect(() => {
     const data = window.localStorage.getItem("process_notification");
@@ -325,7 +330,9 @@ const ContextAPI = ({ children }) => {
       };
 
       const mergedArray = processData.map((item) => {
-        const matchingPayrollItem = calculate.find((payrollItem) => payrollItem.ID === item.ID);
+        const matchingPayrollItem = calculate.find(
+          (payrollItem) => payrollItem.ID === item.ID
+        );
         if (matchingPayrollItem) {
           const mergedItem = {
             ...item,
@@ -416,7 +423,37 @@ const ContextAPI = ({ children }) => {
     return data;
   };
   // -------------------------------------[Process Disburse Salaries end]-----------------------------------//
+  const [employeeData, setEmployeeData] = useState([]);
+  const [employeeIsLoading, setEmployeeIsLoading] = useState("");
 
+  const employeesDatabase = async () => {
+    setEmployeeIsLoading("Loading");
+
+    try {
+      const employees = await request.get("/employees");
+      setEmployeeData(employees.data.employees);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setEmployeeIsLoading("");
+    }
+  };
+
+  useEffect(() => {
+    employeesDatabase();
+  }, []);
+
+  const employeeID = employeeData.map((item) => item._id);
+
+  const deleteEmployee = async (id) => {
+    // try {
+    //   await request.delete(`/employees/${employeeID}`);
+    //   setEmployeeData(employeeData.filter((item) => item._id !== id));
+    //   console.log("employee deleted");
+    // } catch (err) {
+    //   console.log(err.message);
+    // }
+  };
   return (
     <div>
       <myContext.Provider
@@ -460,6 +497,9 @@ const ContextAPI = ({ children }) => {
           disburseSalary,
           isPayrollDisbursed,
           setIsPayrollDisbursed,
+          employeeData,
+          employeeIsLoading,
+          deleteEmployee,
         }}
       >
         {children}

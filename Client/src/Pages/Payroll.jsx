@@ -33,7 +33,7 @@ export const Payroll = () => {
   const columnHeader = isFile?.length > 0 ? Object.keys(isFile[0]) : [];
   return (
     <div>
-      <div className="md:w-full">
+      <div className={`md:w-full ${isFile.length > 0 ? "h-full" : "h-screen"}`}>
         <div className="flex justify-end pr-10 w-full overflow-hidden ">
           <p
             className={`${
@@ -45,7 +45,7 @@ export const Payroll = () => {
             {moveIsSuccessful}
           </p>
         </div>
-        <div className="w-full justify-center flex">
+        <div className="w-full  justify-center flex">
           <div
             className={`w-[90%] md:items-center md:flex md:flex-row flex flex-col justify-between`}
           >
@@ -89,7 +89,7 @@ export const Payroll = () => {
                 onClick={handleButtonClick}
                 className="bg-[#430359] transition text-start sm:text-center duration-300 hover:bg-purple-900 text-white font-bold py-2 px-7 rounded-lg cursor-pointer"
               >
-                Import File{" "}
+                Import File
               </button>
             )}
           </div>
@@ -97,11 +97,15 @@ export const Payroll = () => {
 
         {isFile?.length > 0 ? (
           <div>
-            <div className="w-full justify-center flex">
+            <div className="w-full  justify-center flex">
               <div className="w-[90%] flex justify-between items-center">
-                <button className="bg-white px-5 py-2 mt-6 rounded-xl">{fileName}</button>
+                <button className="bg-white px-5 py-2 mt-6 rounded-xl">
+                  {fileName}
+                </button>
 
-                <p className="md:pr-10 mt-[2%]">{isLoading ? <Loading_Animation /> : ""}</p>
+                <p className="md:pr-10 mt-[2%]">
+                  {isLoading ? <Loading_Animation /> : ""}
+                </p>
               </div>
             </div>
             <div className="w-full flex justify-center mb-10">
@@ -110,7 +114,10 @@ export const Payroll = () => {
                   <thead className="text-left h-[70px] text-black/70 font-medium">
                     <tr className="border-b ">
                       {columnHeader.map((header, index) => (
-                        <th key={index} className="pl-[1.5%] pr-10 whitespace-nowrap">
+                        <th
+                          key={index}
+                          className="pl-[1.5%] pr-10 whitespace-nowrap"
+                        >
                           {header}
                         </th>
                       ))}
@@ -134,7 +141,7 @@ export const Payroll = () => {
                 </table>
               </div>
             </div>
-            <div className="h-full flex justify-center mb-20">
+            <div className="h-full flex justify-center pb-20">
               <button
                 className="bg-white px-5 py-2 rounded-lg cursor-pointer"
                 onClick={removeData}
@@ -154,7 +161,9 @@ export const Payroll = () => {
             </div>
             {typeError !== "" ? (
               <div className="w-full flex justify-center mt-20">
-                <p className="bg-[#F5E4FB] px-20 py-2 text-[red] rounded-lg">{typeError}</p>
+                <p className="bg-[#F5E4FB] px-20 py-2 text-[red] rounded-lg">
+                  {typeError}
+                </p>
               </div>
             ) : (
               ""
