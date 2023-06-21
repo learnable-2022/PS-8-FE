@@ -57,7 +57,7 @@ const getRefreshToken = async () => {
 const logOut = async () => {
   localStorage.removeItem("HR_access_token");
   localStorage.removeItem("userInfo");
-  // window.location.href = "/";
+  window.location.href = "/";
 };
 // const token = window.localStorage.getItem("HR_access_token");
 
