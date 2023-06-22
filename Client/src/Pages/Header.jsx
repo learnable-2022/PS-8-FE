@@ -6,7 +6,7 @@ import { GrClose } from "react-icons/gr";
 import "../index.css";
 import { myContext } from "../ContextAPI";
 import { titleCase } from "../UTILS/Title";
- import ConnectWallet from "./connectWallet";
+//  import ConnectWallet from "./connectWallet";
 
 
 
@@ -36,8 +36,8 @@ const Header = () => {
     <header className="bg-[#ffffff] border-b border-[#dbdada] overflow-hidden  fixed px-10 flex items-center w-full">
       <div className="flex justify-between w-full items-center">
         <div className="w-2/5 h-full">
-          <figure className="w-[16%] ">
-            <img src="/Images/Logo.png" alt="PayMe" className="w-full h-full" />
+          <figure className="w-[40%] md:w-[20%] p-0">
+            <img src="/Images/Logo-1.png" alt="PayMe" className="w-full h-full" />
           </figure>
         </div>
 

@@ -25,8 +25,7 @@ export const Processor = () => {
             alert === ""
               ? "translate-x-[500px] transition-all duration-1000 bg-white  px-10 py-3 rounded-lg text-[green]"
               : "translate-x-0 transition-all duration-1000 mt-5 bg-white   px-10 py-3 rounded-lg text-[green]"
-          }    `}
-        >
+          }    `}>
           {alert}
         </p>
       </div>
@@ -35,16 +34,14 @@ export const Processor = () => {
           <h2 className="text-[34px] font-bold">Processor</h2>
           {processPayroll.length > 0 ? (
             <button
-              className="bg-[#430359] transition duration-300 hover:bg-purple-900 text-white font-bold py-2 px-7 rounded-lg"
-              onClick={disburseSalary}
-            >
+              className="bg-[#2E3192] transition duration-300 hover:bg-[#595FFF] text-white font-bold py-2 px-7 rounded-lg"
+              onClick={disburseSalary}>
               Disburse Salary
             </button>
           ) : (
             <button
               onClick={processUploadedData}
-              className="bg-[#430359] transition duration-300 hover:bg-purple-900 text-white font-bold py-2 md:px-7 mt-3 md:mt-auto rounded-lg w-40 md:w-auto"
-            >
+              className="bg-[#2E3192] transition duration-300 hover:bg-[#595FFF] text-white font-bold py-2 md:px-7 mt-3 md:mt-auto rounded-lg w-40 md:w-auto">
               Process Payroll
             </button>
           )}
@@ -58,9 +55,8 @@ export const Processor = () => {
                 <button
                   onClick={() => handleActive(0)}
                   className={`${
-                    active === 0 ? "border-b-[#430161] border-2 md:border" : ""
-                  } bg-white px-5  font-bold py-2 mt-6 rounded-xl`}
-                >
+                    active === 0 ? "border-b-[#2E3192] border-2 md:border" : ""
+                  } bg-white px-5  font-bold py-2 mt-6 rounded-xl`}>
                   Payroll
                 </button>
               </Link>
@@ -68,9 +64,8 @@ export const Processor = () => {
                 <button
                   onClick={() => handleActive(1)}
                   className={`${
-                    active === 1 ? "border-b-[#430161] border-2 md:border" : ""
-                  } bg-white px-5  font-bold py-2 mt-6 rounded-xl`}
-                >
+                    active === 1 ? "border-b-[#2E3192] border-2 md:border" : ""
+                  } bg-white px-5  font-bold py-2 mt-6 rounded-xl`}>
                   History
                 </button>
               </Link>
@@ -78,10 +73,9 @@ export const Processor = () => {
                 <button
                   onClick={() => handleActive(2)}
                   className={`${
-                    active === 2 ? "border-b-[#430161] border-2 md:border" : ""
+                    active === 2 ? "border-b-[#2E3192] border-2 md:border" : ""
                   } bg-white px-5  font-bold py-2 mt-6 rounded-xl`}
-                  activeClassName="active"
-                >
+                  activeClassName="active">
                   Disbursements
                 </button>
               </Link>

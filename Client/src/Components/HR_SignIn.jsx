@@ -36,16 +36,14 @@ export const HR_SignIn = () => {
             <div className="md:w-[40%] lg:w-[30%] border-[#C2C2C2] md:mt-5 rounded-lg border flex justify-center">
               <form
                 onSubmit={handleSubmit}
-                className="flex flex-col w-[90%] mt-5"
-              >
+                className="flex flex-col w-[90%] mt-5">
                 <h2 className="font-bold text-[#1A1A1A] text-[28px] mb-5">
                   Sign in
                 </h2>
 
                 <label
                   htmlFor="email"
-                  className="mb-1 text-[#1A1A1A] font-medium"
-                >
+                  className="mb-1 text-[#1A1A1A] font-medium">
                   Email Address
                 </label>
                 <input
@@ -57,8 +55,7 @@ export const HR_SignIn = () => {
                 />
                 <label
                   htmlFor="password"
-                  className="mb-1 text-[#1A1A1A] font-medium"
-                >
+                  className="mb-1 text-[#1A1A1A] font-medium">
                   Password
                 </label>
                 <div className="flex mb-7">
@@ -83,12 +80,11 @@ export const HR_SignIn = () => {
                   )}
                 </div>
                 <button
-                  className={`bg-[#430359] hover:bg-[#6c148a] transition duration-300 py-2 rounded-lg mb-5 text-white font-bold disabled:opacity-40 ${
+                  className={`bg-[#2E3192] hover:bg-[#595FFF] transition duration-300 py-2 rounded-lg mb-5 text-white font-bold disabled:opacity-40 ${
                     isPending && "cursor-not-allowed"
                   }`}
                   disabled={!email || !password}
-                  onClick={handleClick}
-                >
+                  onClick={handleClick}>
                   {isPending ? "Loading..." : "Sign In"}
                 </button>
               </form>
