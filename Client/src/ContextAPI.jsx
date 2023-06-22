@@ -6,6 +6,8 @@ import { getMonthName } from "./UTILS/getMonthName";
 import { extractNumFromString } from "./UTILS/parseNum";
 import request from "./axios";
 import { useNavigate } from "react-router-dom";
+import _ from "lodash";
+import payPolicy from "../payPolicy";
 
 const myContext = createContext();
 
@@ -250,58 +252,62 @@ const ContextAPI = ({ children }) => {
     setTimeout(() => {
       setLoadingProcessedPayroll(false);
       setAlert("Payroll Processed Successfully");
-      const calculate = processData.map((item) => {
-        const appraisalScore = item["Appraisal score"];
-        const workingHours = item["Total working hours"];
-        const yearsOfService = item["Years of service"];
-        const taxPolicy = item["Tax policy (%)"];
-        const monthlyBasePay = item["Monthly base pay (₦)"];
 
-        let totalSalary = monthlyBasePay;
+      const payrollColumns = Object.keys(processData[0]);
 
-        let bonusPercentage = 0;
+      const calculate = processData.map((elem) => {
+        const baseSalary = elem["Monthly base pay (₦)"] ?? 0;
+        const taxPolicy = elem["Tax policy (%)"] ?? 0;
+        const taxDeduction = baseSalary * (taxPolicy / 100);
 
-        if (appraisalScore === 5) {
-          bonusPercentage += 20;
-        } else if (appraisalScore === 4) {
-          bonusPercentage += 10;
-        } else if (appraisalScore === 3) {
-          bonusPercentage += 5;
-        }
+        let totalEarnings = 0;
+        let bonusEarnings = 0;
+        let otherdeductions = 0;
+        let totalDeductions = taxDeduction;
+        let netChange = 0;
+        let netPay = 0;
+        let allowance = elem["Allowance"] ?? 0;
+        let loan = elem["Loan"] ?? 0;
 
-        if (workingHours > 180) {
-          bonusPercentage += 20;
-        } else if (workingHours >= 161 && workingHours <= 180) {
-          bonusPercentage += 10;
-        } else if (workingHours === 160) {
-          bonusPercentage += 2;
-        }
+        payPolicy.forEach((policy) => {
+          if (payrollColumns.includes(_.upperFirst(policy.performance))) {
+            //   console.log(elem[_.upperFirst(policy.performance)]);
+            const percentValue = policy.percentage;
 
-        if (yearsOfService >= 2 && yearsOfService <= 10) {
-          const serviceBonus = [0.05, 0.08, 0.1, 0.14, 0.17, 0.2, 0.24, 0.26];
-          bonusPercentage += serviceBonus[yearsOfService - 2] * 100;
-        } else if (yearsOfService >= 10) {
-          bonusPercentage += 35;
-        }
+            let operator = policy.condition;
 
-        const bonusAmount = monthlyBasePay * (bonusPercentage / 100);
-        totalSalary += bonusAmount;
+            const operation = operationToPerform(operator, elem, policy);
 
-        const taxDeductionPercentage = taxPolicy;
-        const taxDeductionAmount = totalSalary * (taxDeductionPercentage / 100);
-        totalSalary -= taxDeductionAmount;
+            if (operation) {
+              netChange += baseSalary * (percentValue / 100);
+
+              if (percentValue >= 0) {
+                bonusEarnings += baseSalary * (percentValue / 100);
+              } else {
+                otherdeductions += baseSalary * (percentValue / 100);
+              }
+            }
+          }
+        });
+
+        otherdeductions = Math.abs(otherdeductions);
+        totalDeductions += parseFloat(otherdeductions + loan + taxDeduction);
+        totalEarnings += parseFloat(baseSalary + allowance + bonusEarnings);
+        netPay = totalEarnings - totalDeductions;
+        netChange -= taxDeduction;
 
         return {
-          Name: item.Name,
-          ID: item.ID,
-          Loan: 0,
-          Tax: item["Tax policy (%)"],
-          "Email Address": item["Email address"],
-          "Net Change": `₦${(totalSalary - monthlyBasePay).toFixed(0)}`,
-          Bonus: `₦${bonusAmount.toFixed(0)}`,
-          Deduction: ` ₦-${taxDeductionAmount.toFixed(0)}`,
-          "Monthly base pay (₦)": `₦${monthlyBasePay}`,
-          "Total salary": `NGN${totalSalary.toLocaleString()}`,
+          Name: elem["Name"],
+          ID: elem.ID,
+          "Email Address": elem["Email address"],
+          Loan: loan,
+          Tax: taxDeduction,
+          "Net Change": `₦${netChange.toFixed(0)}`,
+          Bonus: `₦${bonusEarnings.toFixed(0)}`,
+          Deduction: ` ₦-${totalDeductions.toFixed(0)}`,
+          "Monthly base pay (₦)": `₦${baseSalary}`,
+          // "Total Earnings (₦)": `₦${totalEarnings}`,
+          "Net Salary": `NGN${netPay.toLocaleString()}`,
         };
       });
       setProcessPayroll(calculate);
@@ -341,6 +347,33 @@ const ContextAPI = ({ children }) => {
 
   const removeProcessedData = () => {
     setProcessPayroll([]);
+  };
+
+  const operationToPerform = (operator = "", payroll = {}, policy = {}) => {
+    let conditionNum = policy.perfvalue;
+    let condition;
+
+    switch (operator) {
+      case "=":
+        condition = payroll[_.upperFirst(policy.performance)] == conditionNum;
+        break;
+      case ">":
+        condition = payroll[_.upperFirst(policy.performance)] > conditionNum;
+        break;
+      case "<":
+        condition = payroll[_.upperFirst(policy.performance)] < conditionNum;
+        break;
+      case "<=":
+        condition = payroll[_.upperFirst(policy.performance)] <= conditionNum;
+        break;
+      case ">=":
+        condition = payroll[_.upperFirst(policy.performance)] <= conditionNum;
+        break;
+      default:
+        break;
+    }
+
+    return condition;
   };
   // -------------------------------------[Process Uploaded Data]-----------------------------------
 
