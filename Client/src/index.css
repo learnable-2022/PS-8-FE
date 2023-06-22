@@ -12,6 +12,7 @@ html {
   margin: 0;
   box-sizing: border-box;
   font-family: Font1;
+  font-weight: 100;
   color: rgb(63, 62, 62);
 }
 
@@ -35,7 +36,7 @@ header {
 }
 
 .active {
-  background: #f5e4fb;
+  background: #E5E6FF;
   height: 8vh;
   width: 100%;
   display: flex;

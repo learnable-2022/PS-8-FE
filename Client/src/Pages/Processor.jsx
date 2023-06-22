@@ -27,25 +27,26 @@ export const Processor = () => {
             alert === ""
               ? `translate-x-[500px] transition-all duration-1000 bg-white  px-10 py-3 rounded-lg text-[green]`
               : "translate-x-0 transition-all duration-1000 mt-5 bg-white   px-10 py-3 rounded-lg text-[green]"
-          }    `}>
+          }    `}
+        >
           {alert}
         </p>
       </div>
       <div className="w-full h-full flex justify-center">
         <div className="w-[90%] md:items-center flex flex-col md:flex md:flex-row justify-between">
-          <h2 className="text-[34px] font-bold">Processor</h2>
+          <h2 className="text-[34px] font-bold text-[#2E3192]">Processor</h2>
 
           <>
             {!processPayroll?.length > 0 ? (
               <button
                 onClick={processUploadedData}
-                className="bg-[#430359] transition duration-300 hover:bg-purple-900 text-white font-bold py-2 md:px-7 mt-3 md:mt-auto rounded-lg w-40 md:w-auto"
+                className="bg-[#2E3192] transition duration-300 hover:bg-[#4448c0] text-white font-bold py-2 md:px-7 mt-3 md:mt-auto rounded-lg w-40 md:w-auto"
               >
                 Process Payroll
               </button>
             ) : (
               <button
-                className={`bg-[#430359] transition duration-300 hover:bg-purple-900 text-white font-bold py-2 px-7 rounded-lg ${
+                className={`bg-[#2E3192] transition duration-300 hover:bg-[#4448c0] text-white font-bold py-2 px-7 rounded-lg ${
                   isPayrollDisbursed ? "hidden" : ""
                 }`}
                 onClick={disburseSalary}
@@ -64,7 +65,7 @@ export const Processor = () => {
               <button
                 onClick={() => handleActive(0)}
                 className={`${
-                  active === 0 ? "border-b-[#430161] border-2 md:border" : ""
+                  active === 0 ? "border-b-[#2E3192] border-2 md:border" : ""
                 } bg-white px-5  font-bold py-2 mt-6 rounded-xl`}
               >
                 Payroll
@@ -74,7 +75,7 @@ export const Processor = () => {
               <button
                 onClick={() => handleActive(1)}
                 className={`${
-                  active === 1 ? "border-b-[#430161] border-2 md:border" : ""
+                  active === 1 ? "border-b-[#2E3192] border-2 md:border" : ""
                 } bg-white px-5  font-bold py-2 mt-6 rounded-xl`}
               >
                 History

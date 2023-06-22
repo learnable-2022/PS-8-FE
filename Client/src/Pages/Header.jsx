@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { TbLogout } from "react-icons/tb";
 import ConnectWallet from "./connectWallet";
 import { HiUserCircle } from "react-icons/hi";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -11,7 +12,7 @@ import { titleCase } from "../UTILS/Title";
 
 
 const Header = () => {
-  const { showNavbar, nav } = useContext(myContext);
+  const { showNavbar, nav, refreshToken } = useContext(myContext);
   const [profileImage, setProfileImage] = useState(null);
   const { username, avatar } = JSON.parse(window.localStorage.getItem("userInfo"));
 
@@ -44,8 +45,8 @@ const Header = () => {
         </div>
 
         <div className="md:w-2/5 h-full">
-          <figure className="md:w-[16%] w-[60px]">
-            <img src="/Images/Logo.png" alt="PayMe" className="w-full h-full hidden md:flex" />
+          <figure className="md:w-[20%] w-[60px]">
+            <img src="/Images/Logo-1.png" alt="PayMe" className="w-full h-full hidden md:flex" />
           </figure>
           <figure className="md:w-[16%] w-[26px] ml-5">
             <img src="/Images/Logo symbol.png" alt="PayMe" className="w-full h-full  md:hidden" />
@@ -53,7 +54,7 @@ const Header = () => {
         </div>
 
         <div className="flex items-center md:justify-end md:w-3/5">
-          <ConnectWallet />
+          <ConnectWallet/>
 
           <div className="div border-l-[gray-200] border p-3 md:flex hidden"></div>
 
@@ -71,7 +72,7 @@ const Header = () => {
               <img
                 src={avatar}
                 alt="Profile"
-                title={username}
+                title={userInfo}
                 className="w-full h-full rounded-full"
               />
             </figure>

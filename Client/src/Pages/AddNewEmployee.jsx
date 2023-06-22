@@ -1,9 +1,8 @@
-import React, { useContext,  useState } from "react";
+import React, { useContext, useState } from "react";
 import request from "axios";
 import { myContext } from "../ContextAPI";
 import { IoIosAdd } from "react-icons/io";
 import { GrClose } from "react-icons/gr";
-
 
 export const AddNewEmployee = () => {
   const { createNewCard, closeForm } = useContext(myContext);
@@ -93,7 +92,7 @@ export const AddNewEmployee = () => {
               onChange={handleProfilePhoto}
             />
           </form>
-          <div className="flex md:flex-row flex-col justify-center gap-10 px-10 items-center  md:w-[75%] bg-white py-10 rounded-lg ">
+          <div className="flex md:flex-row flex-col justify-center gap-10 px-10 items-center  md:w-[75%] bg-white py-10 rounded-lg md:mt-0 mt-40">
             {newEmployee.image ? (
               <div className="w-3/4 md:w-1/5 ">
                 <GrClose
@@ -260,6 +259,12 @@ export const AddNewEmployee = () => {
                 </button>
               </form>
             </div>
+          </div>
+          <div className="mb-5 mt-[-40%] cursor-pointer  rounded-2xl px-3 py-2 bg-white justify-end md:flex  hidden">
+            <GrClose
+              onClick={closeForm}
+              className="text-xl"
+            />
           </div>
         </div>
       ) : (

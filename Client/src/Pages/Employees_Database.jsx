@@ -6,6 +6,7 @@ import { Link, useParams } from "react-router-dom";
 import { GrClose } from "react-icons/gr";
 import { AddNewEmployee } from "./AddNewEmployee";
 import { IoIosAdd } from "react-icons/io";
+import SyncLoader from "react-spinners/SyncLoader";
 
 export const Employees_Database = () => {
   const { employeeData, employeeIsLoading, deleteEmployee, createCard } =
@@ -260,7 +261,7 @@ export const Employees_Database = () => {
           <div className="w-full flex justify-center">
             <div className="bg-[#ffffff] w-[90%] py-[10%] mt-10 rounded-xl md:shadow-black/20 md:shadow-md">
               <p className="flex items-center justify-center text-gray-500 text-sm">
-                {employeeIsLoading}{" "}
+                {employeeIsLoading ? <SyncLoader color="#430359" /> : "Error loading employee data"}
               </p>
             </div>
           </div>
@@ -269,7 +270,7 @@ export const Employees_Database = () => {
         )}
 
         <div className="w-full h-full flex justify-center mt-10">
-          <div className="w-full h-full gap-10 grid grid-cols-1 md:grid-cols-2">
+          <div className="w-full h-full md:gap-y-5 lg:gap-10 gap-y-10 grid grid-cols-1 md:grid-cols-2">
             {employeeData
               .slice(0, firstHalf)
               .filter(
@@ -283,11 +284,11 @@ export const Employees_Database = () => {
                   <div key={item._id} className="flex justify-center w-full">
                     <Link
                       to={`${item.name}`}
-                      className="flex md:flex-row justify-between flex-col bg-white card_parent w-[85%] py-5 px-3 rounded-xl shadow-md shadow-black/40 hover:shadow-black/50 hover:shadow-xl  transition duration-500 hover:text-sm hover:font-semibold cursor-pointer"
+                      className="flex md:flex-row justify-between flex-col bg-white card_parent w-[80%] md:w-[95%]  lg:w-[85%] py-5 px-3 rounded-xl shadow-md shadow-black/40 hover:shadow-black/50 hover:shadow-xl  transition duration-500 hover:text-sm hover:font-semibold cursor-pointer"
                     >
                       <div className="flex md:flex-row flex-col  w-full md:w-[80%] items-start gap-5">
                         <div className="w-full h-full md:hidden flex justify-center">
-                          <figure className="w-[70%] h-full ">
+                          <figure className="w-[50%] h-full ">
                             <img
                               src={item.profileImage}
                               alt={item.name}
@@ -295,7 +296,7 @@ export const Employees_Database = () => {
                             />
                           </figure>
                         </div>
-                        <figure className="md:w-3/5 md:flex hidden md:h-4/5">
+                        <figure className="lg:w-3/5 md:flex hidden lg:h-4/5 md:w-2/5 md:h-2/5">
                           <img
                             src={item.profileImage}
                             alt={item.name}
@@ -331,7 +332,7 @@ export const Employees_Database = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="md: card_child flex items-start justify-center md:justify-end gap-5 md:gap-3">
+                      <div className="card_child flex items-start justify-center md:justify-end gap-5 md:gap-3">
                         <Link to="#" className="transition duration-1000">
                           <AiFillEdit className="md:text-[1.3rem] text-[2rem] hover:text-black/50 transition duration-300" />
                         </Link>

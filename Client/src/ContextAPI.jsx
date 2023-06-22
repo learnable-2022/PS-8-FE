@@ -349,6 +349,19 @@ const ContextAPI = ({ children }) => {
     setProcessPayroll([]);
   };
 
+  // const getNetSalary = processPayroll
+  //   .filter((item) => item["Net Salary"])
+  //   .map((item) => item["Net Salary"]);
+
+  // console.log(getNetSalary);
+
+  // const amounts = getNetSalary
+  //   .split("NGN")
+  //   .filter((value) => value !== "")
+  //   .map((value) => parseFloat(value.replace(/,/g, "")));
+
+  // console.log(amounts);
+
   const operationToPerform = (operator = "", payroll = {}, policy = {}) => {
     let conditionNum = policy.perfvalue;
     let condition;
@@ -449,10 +462,10 @@ const ContextAPI = ({ children }) => {
   };
   // -------------------------------------[Process Disburse Salaries end]-----------------------------------//
   const [employeeData, setEmployeeData] = useState([]);
-  const [employeeIsLoading, setEmployeeIsLoading] = useState("");
+  const [employeeIsLoading, setEmployeeIsLoading] = useState(false);
 
   const employeesDatabase = async () => {
-    setEmployeeIsLoading("Loading");
+    setEmployeeIsLoading(true);
 
     try {
       const employees = await request.get("/employees");
