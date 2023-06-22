@@ -72,9 +72,6 @@ const ContextAPI = ({ children }) => {
 
           const token = response.data.accessToken;
           const user = JSON.stringify(response.data.user);
-
-          console.log(user);
-
           setHRToken(token);
           setUserInfo(user);
 
@@ -106,6 +103,8 @@ const ContextAPI = ({ children }) => {
     };
     getToken();
   };
+
+  console.log(HRtoken);
 
   // -------------------------------------[FILE UPLOAD]--------------------------------------------
 
@@ -141,7 +140,9 @@ const ContextAPI = ({ children }) => {
     setIsLoading(false);
     setProcessPayroll([]);
 
-    const dataType = ["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"];
+    const dataType = [
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    ];
     const file = e.target.files[0];
     setFileName(titleCase(file.name.split(".")[0]));
     if (file) {
@@ -218,7 +219,10 @@ const ContextAPI = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    window.localStorage.setItem("process_employee_data", JSON.stringify(processData));
+    window.localStorage.setItem(
+      "process_employee_data",
+      JSON.stringify(processData)
+    );
   }, [processData]);
   useEffect(() => {
     const data = window.localStorage.getItem("process_notification");
@@ -316,7 +320,9 @@ const ContextAPI = ({ children }) => {
       };
 
       const mergedArray = processData.map((item) => {
-        const matchingPayrollItem = calculate.find((payrollItem) => payrollItem.ID === item.ID);
+        const matchingPayrollItem = calculate.find(
+          (payrollItem) => payrollItem.ID === item.ID
+        );
         if (matchingPayrollItem) {
           const mergedItem = {
             ...item,
@@ -342,6 +348,19 @@ const ContextAPI = ({ children }) => {
   const removeProcessedData = () => {
     setProcessPayroll([]);
   };
+
+  // const getNetSalary = processPayroll
+  //   .filter((item) => item["Net Salary"])
+  //   .map((item) => item["Net Salary"]);
+
+  // console.log(getNetSalary);
+
+  // const amounts = getNetSalary
+  //   .split("NGN")
+  //   .filter((value) => value !== "")
+  //   .map((value) => parseFloat(value.replace(/,/g, "")));
+
+  // console.log(amounts);
 
   const operationToPerform = (operator = "", payroll = {}, policy = {}) => {
     let conditionNum = policy.perfvalue;
@@ -442,7 +461,55 @@ const ContextAPI = ({ children }) => {
     return data;
   };
   // -------------------------------------[Process Disburse Salaries end]-----------------------------------//
+  const [employeeData, setEmployeeData] = useState([]);
+  const [employeeIsLoading, setEmployeeIsLoading] = useState(false);
 
+  const employeesDatabase = async () => {
+    setEmployeeIsLoading(true);
+
+    try {
+      const employees = await request.get("/employees");
+      setEmployeeData(employees.data.employees);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setEmployeeIsLoading("");
+    }
+  };
+
+  useEffect(() => {
+    employeesDatabase();
+  }, []);
+
+  const employeeID = employeeData.map((item) => item._id);
+  const token = window.localStorage.getItem("HR_access_token");
+
+  const deleteEmployee = async (id) => {
+    try {
+      await request.delete(`/employees/${employeeID}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-type": "application/json",
+        },
+      });
+      setEmployeeData(employeeData.filter((item) => item._id !== id));
+      console.log("employee deleted");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const [createNewCard, setCreateNewCard] = useState(false);
+
+  const createCard = () => {
+    setCreateNewCard(true);
+  };
+
+  const closeForm = () => {
+    setCreateNewCard(false);
+  };
+
+  console.log(employeeData);
   return (
     <div>
       <myContext.Provider
@@ -486,6 +553,12 @@ const ContextAPI = ({ children }) => {
           disburseSalary,
           isPayrollDisbursed,
           setIsPayrollDisbursed,
+          employeeData,
+          employeeIsLoading,
+          deleteEmployee,
+          createNewCard,
+          createCard,
+          closeForm,
         }}
       >
         {children}

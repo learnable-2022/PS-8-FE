@@ -119,6 +119,7 @@ export const Processor_History = () => {
     );
 
   return (
+    <div className={`w-full h-full`}>
     <div className="w-full">
       <div className="flex justify-center">
         {disbursements?.length > 0 ? (
@@ -139,7 +140,7 @@ export const Processor_History = () => {
                     const page = e.target.value ? Number(e.target.value) - 1 : 0;
                     table.setPageIndex(page);
                   }}
-                  className="border p-1 rounded w-16"
+                  className="border p-1 rounded w-16 outline-none"
                 />
               </span>
               <div className="flex justify-end sm:space-x-6 space-x-1 p-2 py-3">
@@ -147,7 +148,7 @@ export const Processor_History = () => {
                   <DebouncedInput
                     value={globalFilter ?? ""}
                     onChange={(value) => setGlobalFilter(String(value))}
-                    className="p-2 font-lg shadow border border-block rounded-lg"
+                    className="p-2 font-lg shadow border border-block rounded-lg outline-none"
                     placeholder="Search all columns..."
                   />
                 </div>
@@ -235,6 +236,7 @@ export const Processor_History = () => {
           </div>
         )}
       </div>
+    </div>
     </div>
   );
 };

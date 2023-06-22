@@ -1,13 +1,18 @@
 import React, { useContext, useState, useEffect } from "react";
+import { TbLogout } from "react-icons/tb";
 import ConnectWallet from "./connectWallet";
 import { HiUserCircle } from "react-icons/hi";
+import { RxHamburgerMenu } from "react-icons/rx";
 import { GrClose } from "react-icons/gr";
 import "../index.css";
 import { myContext } from "../ContextAPI";
 import { titleCase } from "../UTILS/Title";
-import { RxHamburgerMenu } from "react-icons/rx";
+//  import ConnectWallet from "./connectWallet";
+
+
+
 const Header = () => {
-  const { showNavbar, nav } = useContext(myContext);
+  const { showNavbar, nav, refreshToken } = useContext(myContext);
   const [profileImage, setProfileImage] = useState(null);
   const { username, avatar } = JSON.parse(window.localStorage.getItem("userInfo"));
 
@@ -29,7 +34,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-[#ffffff] border-b border-[#dbdada] overflow-hidden px-5  fixed md:px-10 flex items-center w-full">
+    <header className="bg-[#ffffff] border-b border-[#dbdada] overflow-hidden  fixed px-10 flex items-center w-full">
       <div className="flex justify-between w-full items-center">
         <div onClick={showNavbar}>
           {nav ? (
@@ -40,8 +45,8 @@ const Header = () => {
         </div>
 
         <div className="md:w-2/5 h-full">
-          <figure className="md:w-[16%] w-[60px]">
-            <img src="/Images/Logo.png" alt="PayMe" className="w-full h-full hidden md:flex" />
+          <figure className="md:w-[20%] w-[60px]">
+            <img src="/Images/Logo-1.png" alt="PayMe" className="w-full h-full hidden md:flex" />
           </figure>
           <figure className="md:w-[16%] w-[26px] ml-5">
             <img src="/Images/Logo symbol.png" alt="PayMe" className="w-full h-full  md:hidden" />
@@ -49,7 +54,7 @@ const Header = () => {
         </div>
 
         <div className="flex items-center md:justify-end md:w-3/5">
-          <ConnectWallet />
+          <ConnectWallet/>
 
           <div className="div border-l-[gray-200] border p-3 md:flex hidden"></div>
 
@@ -67,7 +72,7 @@ const Header = () => {
               <img
                 src={avatar}
                 alt="Profile"
-                title={username}
+                title={userInfo}
                 className="w-full h-full rounded-full"
               />
             </figure>
@@ -77,7 +82,6 @@ const Header = () => {
               onClick={uploadProfile}
             />
           )}
-          {/* <Connect /> */}
 
           <div className="md:flex flex-col px-3 hidden">
             <span className="text-sm">{titleCase(username)}</span>

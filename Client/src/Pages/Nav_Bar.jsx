@@ -13,10 +13,10 @@ export const Nav_Bar = () => {
 
   return (
     <aside className="w-full">
-      <nav className="md:flex overflow-hidden flex-col h-screen bg-[#ffffff] w-full py-6 ">
+      <nav className="md:flex overflow-hidden flex-col h-screen bg-[#ffffff] w-full py-6 text-[#2E3192]">
         <ul className="flex flex-col fixed gap-2 md:w-[17%] w-full">
           <NavLink activeClassName="active" to="/dashboard">
-            <li className="flex items-center h-[8vh] pl-[5%] md:pl-[15%] gap-2 hover:text-[#ffffff] transition duration-500 hover:bg-[#430359] w-[100%] text-md">
+            <li className="flex items-center h-[8vh] pl-[5%] md:pl-[15%] gap-2 hover:text-[#2E3192] transition duration-500 hover:bg-[#E5E6FF] w-[100%] text-md">
               <AiOutlineDollar className="md:text-xl text-[1.8rem]  md:flex" />
               Payroll
             </li>
@@ -26,7 +26,7 @@ export const Nav_Bar = () => {
             {processData?.length > 0 ? (
               <li
                 onClick={handleNotification}
-                className="flex items-center justify-start hover:py-5 pl-[5%] md:pl-[15%] h-[8vh] gap-2 hover:text-[#ffffff] transition duration-500 hover:bg-[#430359] text-md w-[100%]"
+                className="flex items-center justify-start hover:py-5 pl-[5%] md:pl-[15%] h-[8vh] gap-2 hover:text-[#2E3192] transition duration-500 hover:bg-[#E5E6FF] text-md w-[100%]"
               >
                 <VscServerProcess className="md:text-xl text-[1.8rem]  md:flex" />{" "}
                 Processor
@@ -37,25 +37,25 @@ export const Nav_Bar = () => {
                 )}
               </li>
             ) : (
-              <li className="flex items-center justify-start hover:py-5 pl-[5%] md:pl-[15%] h-[8vh] gap-2 hover:text-[#ffffff] transition duration-500 hover:bg-[#430359] text-md w-[100%]">
+              <li className="flex items-center justify-start hover:py-5 pl-[5%] md:pl-[15%] h-[8vh] gap-2 hover:text-[#2E3192] transition duration-500 hover:bg-[#E5E6FF] text-md w-[100%]">
                 <VscServerProcess className="md:text-xl text-[1.8rem]  md:flex" />{" "}
                 Processor
               </li>
             )}
           </NavLink>
 
-          {/* <NavLink activeClassName="active"> */}
-          <li className="flex gap-2 justify-start  h-[8vh] items-center pl-[5%] md:pl-[15%]  hover:text-[#ffffff] transition duration-500 hover:bg-[#430359] text-md w-[100%]">
-            <MdPolicy className="md:text-xl text-[1.6rem]  md:flex" /> Pay
-            Policy
-          </li>
-          {/* </NavLink> */}
+          <NavLink activeClassName="active" to="/employees">
+            <li className="flex gap-2 justify-start  h-[8vh] items-center pl-[5%] md:pl-[15%]  hover:text-[#2E3192] transition duration-500 hover:bg-[#E5E6FF] text-md w-[100%]">
+              <MdPolicy className="md:text-xl text-[1.6rem]  md:flex" />{" "}
+              Employees
+            </li>
+          </NavLink>
 
           <div
-            className="flex items-center text-start  text-black/80 justify-start pl-[5%] h-[7vh] md:pl-[15%] gap-2 mt-[18rem] cursor-pointer  hover:font-bold text-lg transition duration-300 w-full md:w-[90%] md:rounded-md text-md"
+            className="flex items-center text-start  text-[#2E3192] justify-start pl-[5%] h-[7vh] md:pl-[15%] gap-2 mt-[18rem] cursor-pointer  hover:font-bold text-lg transition duration-300 w-full md:w-[90%] md:rounded-md text-md"
             onClick={handleLogout}
           >
-            <TbLogout className="md:text-xl md:flex text-[1.8rem] text-black/80" />
+            <TbLogout className="md:text-xl md:flex text-[1.8rem] text-[#2E3192]" />
             Logout
           </div>
         </ul>

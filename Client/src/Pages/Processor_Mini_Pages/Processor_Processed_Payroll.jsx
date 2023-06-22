@@ -3,9 +3,8 @@ import { myContext } from "../../ContextAPI";
 
 export const Processor_Processed_Payroll = () => {
   const { processPayroll, removeProcessedData } = useContext(myContext);
-  // console.log(processPayroll);
   return (
-    <div className="w-full">
+    <div className="w-full ">
       <div className="w-full flex justify-center">
         <div className="w-[90%] rounded-2xl h-full bg-white mt-2 overflow-x-scroll">
           <table className="min-w-full">
@@ -36,7 +35,7 @@ export const Processor_Processed_Payroll = () => {
           </table>
         </div>
       </div>
-      <div className="flex justify-center my-4">
+      <div className="flex justify-center py-10">
         <button onClick={removeProcessedData} className="bg-white px-5 py-2 rounded-lg">
           Remove Data{" "}
         </button>

@@ -3,6 +3,7 @@ import { HR_SignIn } from "./Components/HR_SignIn";
 import { Payroll_Dashboard } from "./Components/Payroll_Dashboard";
 import { Payroll } from "./Pages/Payroll";
 import { Processor } from "./Pages/Processor";
+import { Employees_Database } from "./Pages/Employees_Database";
 import { ProtectedPage } from "./Components/ProtectedPage";
 import { ToastContainer } from "react-toastify";
 import { Processor_Payroll } from "./Pages/Processor_Mini_Pages/Processor_Payroll";
@@ -27,6 +28,12 @@ function App() {
         <Route element={<ProtectedPage />}>
           <Route element={<Payroll_Dashboard />}>
             <Route path="/dashboard" element={<Payroll />} />
+            <Route path="/employees" element={<Employees_Database />} />
+            <Route
+              path="/employees/:more_details"
+              element={<Employees_Database />}
+            />
+
             <Route path="/processor" element={<Processor />}>
               <Route path="/processor" element={<Processor_Payroll />} />
               <Route path="/processor/history" element={<Processor_History />} />

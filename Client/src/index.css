@@ -11,8 +11,14 @@ html {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: lato;
+  font-family: Font1;
+  font-weight: 100;
   color: rgb(63, 62, 62);
+}
+
+@font-face {
+  font-family: "Font1";
+  src: url("public/Fonts/Font1.ttf") format("truetype");
 }
 
 .div {
@@ -30,12 +36,12 @@ header {
 }
 
 .active {
-  background: #f5e4fb;
+  background: #E5E6FF;
   height: 8vh;
   width: 100%;
   display: flex;
   justify-items: center;
-  color: #430359;
+  color: #2e3192;
   font-weight: bold;
 }
 
@@ -61,7 +67,7 @@ header {
 }
 
 .payroll-bg {
-  background-color: #f5e4fb;
+  background-color: #e5e6ff;
   width: 100%;
   height: 100%;
 }
@@ -90,7 +96,7 @@ header {
 }
 
 .connect-btn {
-  border: 1px solid #4e0268;
+  border: 1px solid #2e3192;
 }
 
 .in1 {
@@ -127,7 +133,7 @@ header {
 }
 
 .cancel-button {
-  border: 1px solid #430359;
+  border: 1px solid #2e3192;
 }
 
 @media only screen and (max-width: 768px) {
@@ -156,6 +162,13 @@ header {
   background-color: #a8a8a8;
   margin: 0 4px;
   animation: loading 1s infinite;
+}
+
+.card_child{
+  display: none;
+}
+.card_parent:hover  .card_child{
+  display: flex;
 }
 
 @keyframes loading {
