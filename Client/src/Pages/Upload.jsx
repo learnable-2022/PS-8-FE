@@ -5,8 +5,8 @@ import { Outlet } from "react-router-dom";
 export const Upload = () => {
   // const { isFile, processData, processPayroll } = useContext(myContext);
   return (
-    <div className={`bg-[#F5E4FB] w-full`}>
-      <Outlet />
+    <div className=" bg-[#E5E6FF] h-full">
+      <Outlet/>
     </div>
   );
 };

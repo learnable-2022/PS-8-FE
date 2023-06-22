@@ -2,11 +2,15 @@ import React, { useContext, useState, useEffect } from "react";
 import { TbLogout } from "react-icons/tb";
 import ConnectWallet from "./connectWallet";
 import { HiUserCircle } from "react-icons/hi";
+import { RxHamburgerMenu } from "react-icons/rx";
 import { GrClose } from "react-icons/gr";
 import "../index.css";
 import { myContext } from "../ContextAPI";
 import { titleCase } from "../UTILS/Title";
-import { RxHamburgerMenu } from "react-icons/rx";
+//  import ConnectWallet from "./connectWallet";
+
+
+
 const Header = () => {
   const { showNavbar, nav, refreshToken } = useContext(myContext);
   const [profileImage, setProfileImage] = useState(null);
@@ -30,7 +34,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-[#ffffff] border-b border-[#dbdada] overflow-hidden px-5  fixed md:px-10 flex items-center w-full">
+    <header className="bg-[#ffffff] border-b border-[#dbdada] overflow-hidden  fixed px-10 flex items-center w-full">
       <div className="flex justify-between w-full items-center">
         <div onClick={showNavbar}>
           {nav ? (
@@ -78,7 +82,6 @@ const Header = () => {
               onClick={uploadProfile}
             />
           )}
-          {/* <Connect /> */}
 
           <div className="md:flex flex-col px-3 hidden">
             <span className="text-sm">{titleCase(username)}</span>

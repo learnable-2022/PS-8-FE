@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../index.css";
 import { ethers } from "ethers";
 import contractAbi from "./payme.json";
@@ -9,61 +9,66 @@ const getWallet = () => window.ethereum;
 const eth = getWallet();
 
 const ConnectWallet = () => {
-  const [showDropdown, setShowDropdown] = useState(false);
   const [currentAccount, setCurrentAccount] = useState("");
-  let [checkAcct, setCheckAcct] = useState(0);
+  const [checkAcct, setCheckAcct] = useState(0); 
 
   const disConnect = function () {
-    setCheckAcct(2);
+    setCurrentAccount("");
+    setCheckAcct(0); 
   };
 
   const connectWallet = async () => {
-    try {
-      if (typeof eth !== "undefined") {
-        await eth.request({
-          method: "eth_requestAccounts",
-        });
+    // try {
+    if (typeof eth !== "undefined") {
+      const accounts = await eth.request({
+        method: "eth_requestAccounts",
+      });
 
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner();
-        const accounts = await signer.getAddress();
-        setCheck(1);
+      // const provider = new ethers.providers.Web3Provider(window.ethereum);
+      // const signer = provider.getSigner();
+      // const accounts = await signer.getAddress();
+      // setCheckAcct(1);
 
-        setCurrentAccount(accounts[0]);
-        alert("Hey " + accounts[0]);
-      } else {
-        alert("MetaMask wallet not installed");
-      }
-    } catch (error) {
-      console.error(error);
-      alert("Error connecting to Ethereum wallet");
+      setCurrentAccount(accounts[0]);
+      alert("Hey " + accounts[0]);
+    } else {
+      alert("MetaMask wallet not installed");
     }
+    // } catch (error) {
+    //   console.error(error);
+    //   alert("Error connecting to Ethereum wallet");
+    // }
   };
 
-  // const disconnectWallet = () => {
-  //   setCurrentAccount("");
-  // };
 
   const toggleDropdown = () => {
     setShowDropdown(true);
   };
   return (
     <div>
-      {currentAccount !== "" ? (
+      {checkAcct !== 1 && (
         <button
-          onClick={toggleDropdown}
-          className=" cursor-pointer bg-[#660000] text-white font-bold py-2 px-4 rounded-xl"
-        >
-          Disconnect
-        </button>
-      ) : (
-        <button
-          className="mr-10 border-[#430359] border
-       font-bold px-5 py-1 rounded-full hover:bg-[#7f23a0] hover:text-white transition duration-500 md:flex hidden text-[#430359]"
-          onClick={connectWallet}
-        >
+          className="connect-btn cursor-pointer text-[#2E3192] font-bold py-1 px-4 rounded-xl hover:bg-[#F5F5F5] hover:border-none hover:transition-all hover:duration-500"
+          onClick={connectWallet}>
           Connect
         </button>
+      )}
+
+      {checkAcct === 1 && (
+        <div>
+          <button
+            className="cursor-pointer bg-[#660000] text-white font-bold py-2 px-4 rounded-xl"
+            onClick={disconnectWallet}>
+            Disconnect
+          </button>
+          {checkAcct === 1 && (
+            <div>
+              <p className="walletAddress">
+                {`${currentAccount.slice(0, 4)}...${currentAccount.slice(-4)}`}
+              </p>
+            </div>
+          )}
+        </div>
       )}
 
       <div className="dropdown">
@@ -94,3 +99,4 @@ const ConnectWallet = () => {
 };
 
 export default ConnectWallet;
+
