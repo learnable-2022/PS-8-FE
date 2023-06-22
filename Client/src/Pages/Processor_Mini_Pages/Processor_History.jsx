@@ -119,39 +119,7 @@ export const Processor_History = () => {
     );
 
   return (
-<<<<<<< HEAD
-    <div className={`w-full ${showDataHistory.length > 0 ? "h-full" : "h-screen"}`}>
-      <div className="w-full flex justify-center">
-        {showDataHistory?.length > 0 ? (
-          <div className="w-[90%] rounded-2xl h-full bg-white mt-2 overflow-x-scroll">
-            <table className="min-w-full">
-              <thead className="text-left h-[70px] text-black/70 font-medium ">
-                <tr className="border-b">
-                  {Object.keys(showDataHistory[0]).map((header) => (
-                    <th
-                      key={header}
-                      className="pl-[1.5%] pr-10 whitespace-nowrap"
-                    >
-                      {header}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {showDataHistory.map((item, index) => (
-                  <tr key={index} className="border-b">
-                    {Object.values(item).map((value, index) => (
-                      <Fragment key={index}>
-                        <td className="py-3 text-sm pl-[1.5%] pr-10 whitespace-nowrap">
-                          {value}
-                        </td>
-                      </Fragment>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-=======
+    <div className={`w-full h-full`}>
     <div className="w-full">
       <div className="flex justify-center">
         {disbursements?.length > 0 ? (
@@ -257,7 +225,6 @@ export const Processor_History = () => {
                 </button>
               </div>
             </div>
->>>>>>> 2994e283805943536b5eec450092ea89ae551aef
           </div>
         ) : (
           <div className="w-full flex justify-center">
@@ -269,6 +236,7 @@ export const Processor_History = () => {
           </div>
         )}
       </div>
+    </div>
     </div>
   );
 };

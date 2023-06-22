@@ -70,9 +70,6 @@ const ContextAPI = ({ children }) => {
 
           const token = response.data.accessToken;
           const user = JSON.stringify(response.data.user);
-
-          console.log(user);
-
           setHRToken(token);
           setUserInfo(user);
 
@@ -104,6 +101,8 @@ const ContextAPI = ({ children }) => {
     };
     getToken();
   };
+
+  console.log(HRtoken);
 
   // -------------------------------------[FILE UPLOAD]--------------------------------------------
 
@@ -437,16 +436,34 @@ const ContextAPI = ({ children }) => {
   }, []);
 
   const employeeID = employeeData.map((item) => item._id);
+  const token = window.localStorage.getItem("HR_access_token");
 
   const deleteEmployee = async (id) => {
-    // try {
-    //   await request.delete(`/employees/${employeeID}`);
-    //   setEmployeeData(employeeData.filter((item) => item._id !== id));
-    //   console.log("employee deleted");
-    // } catch (err) {
-    //   console.log(err.message);
-    // }
+    try {
+      await request.delete(`/employees/${employeeID}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-type": "application/json",
+        },
+      });
+      setEmployeeData(employeeData.filter((item) => item._id !== id));
+      console.log("employee deleted");
+    } catch (err) {
+      console.log(err);
+    }
   };
+
+  const [createNewCard, setCreateNewCard] = useState(false);
+
+  const createCard = () => {
+    setCreateNewCard(true);
+  };
+
+  const closeForm = () => {
+    setCreateNewCard(false);
+  };
+
+  console.log(employeeData);
   return (
     <div>
       <myContext.Provider
@@ -493,6 +510,9 @@ const ContextAPI = ({ children }) => {
           employeeData,
           employeeIsLoading,
           deleteEmployee,
+          createNewCard,
+          createCard,
+          closeForm,
         }}
       >
         {children}
