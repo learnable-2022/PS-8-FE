@@ -140,9 +140,7 @@ const ContextAPI = ({ children }) => {
     setIsLoading(false);
     setProcessPayroll([]);
 
-    const dataType = [
-      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-    ];
+    const dataType = ["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"];
     const file = e.target.files[0];
     setFileName(titleCase(file.name.split(".")[0]));
     if (file) {
@@ -219,10 +217,7 @@ const ContextAPI = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    window.localStorage.setItem(
-      "process_employee_data",
-      JSON.stringify(processData)
-    );
+    window.localStorage.setItem("process_employee_data", JSON.stringify(processData));
   }, [processData]);
   useEffect(() => {
     const data = window.localStorage.getItem("process_notification");
@@ -320,9 +315,7 @@ const ContextAPI = ({ children }) => {
       };
 
       const mergedArray = processData.map((item) => {
-        const matchingPayrollItem = calculate.find(
-          (payrollItem) => payrollItem.ID === item.ID
-        );
+        const matchingPayrollItem = calculate.find((payrollItem) => payrollItem.ID === item.ID);
         if (matchingPayrollItem) {
           const mergedItem = {
             ...item,
@@ -471,14 +464,14 @@ const ContextAPI = ({ children }) => {
   const employeesDatabase = async () => {
     setEmployeeIsLoading(true);
 
-    try {
-      const employees = await request.get("/employees");
-      setEmployeeData(employees.data.employees);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setEmployeeIsLoading("");
-    }
+    // try {
+    //   const employees = await request.get("/employees");
+    //   setEmployeeData(employees.data.employees);
+    // } catch (error) {
+    //   console.log(error);
+    // } finally {
+    //   setEmployeeIsLoading("");
+    // }
   };
 
   useEffect(() => {
