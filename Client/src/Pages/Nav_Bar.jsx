@@ -9,7 +9,8 @@ import { myContext } from "../ContextAPI";
 import { TbLogout } from "react-icons/tb";
 
 export const Nav_Bar = () => {
-  const { processData, handleNotification, notification, handleLogout } = useContext(myContext);
+  const { processData, handleNotification, notification, handleLogout } =
+    useContext(myContext);
 
   return (
     <aside className="w-full">

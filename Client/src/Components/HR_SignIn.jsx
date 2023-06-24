@@ -18,18 +18,18 @@ export const HR_SignIn = () => {
   return (
     <div className="w-full flex justify-center relative overflow-hidden">
       <ToastContainer />
-      <div className=" w-full mt-10 relative">
+      <div className="w-full mt-40 md:mt-10  relative">
         <div className="w-full">
-          <div className="flex justify-center ">
-            <figure className="w-[50px] md:w-[5%] ">
+          <div className="flex justify-center w-full">
+            <figure className="w-[30%] md:w-[14%] ">
               <img
-                src="/Images/Logo.png"
+                src="/Images/Logo-1.png"
                 alt="PayMe"
                 className="w-full h-full"
               />
             </figure>
           </div>
-          <h2 className="flex justify-center mt-5 md:text-4xl text-2xl text-[#1A1A1A] font-semibold">
+          <h2 className="flex justify-center mt-10 md:text-4xl text-3xl text-[#1A1A1A] font-semibold">
             Welcome back
           </h2>
           <div className="flex justify-center w-full ">
@@ -91,7 +91,7 @@ export const HR_SignIn = () => {
               </form>
             </div>
           </div>
-          <div className="w-full hidden lg:flex justify-end -mt-40 -ml-40">
+          <div className="w-full hidden lg:flex justify-end -mt-60 -ml-40">
             <figure className="w-1/5 flex flex-col">
               <img
                 src="./Images/signImg.png"

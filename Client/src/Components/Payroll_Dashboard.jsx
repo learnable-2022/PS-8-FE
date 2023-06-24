@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { myContext } from "../ContextAPI";
 
 export const Payroll_Dashboard = () => {
-  const { nav, isFile } = useContext(myContext);
+  const { nav, isFile, closeNav } = useContext(myContext);
   const { _id: id } = JSON.parse(window.localStorage.getItem("userInfo"));
 
   useEffect(() => {
@@ -33,23 +33,23 @@ export const Payroll_Dashboard = () => {
       <header>
         <Header />
       </header>
-      <main
-        className={`flex flex-row h-full`}
-      >
+      <main className={`flex flex-row h-full`}>
         <div className={`md:w-[17%] hidden md:flex justify-center`}>
           <Nav_Bar />
         </div>
         {nav ? (
-          <div
-            data-aos="fade-right"
-            data-aos-duration="500"
-            className={`md:w-[17%]  ${
-              nav
-                ? "w-[65%] translate-x-0 fixed shadow-black/70 shadow-md transition-transform duration-500"
-                : "w-0 translate-x-[-80%] transition-all duration-500"
-            } md:justify-center md:hidden`}
-          >
-            <Nav_Bar />
+          <div className="w-full h-full fixed bg-black/20 backdrop-blur-sm" onClick={closeNav}>
+            <div
+              data-aos="fade-right"
+              data-aos-duration="500"
+              className={`md:w-[17%]  ${
+                nav
+                  ? "w-[65%] translate-x-0 fixed shadow-black/70 shadow-md transition-transform duration-500"
+                  : "w-0 translate-x-[-80%] transition-all duration-500"
+              } md:justify-center md:hidden`}
+            >
+              <Nav_Bar />
+            </div>
           </div>
         ) : (
           ""

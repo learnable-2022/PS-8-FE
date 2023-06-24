@@ -12,11 +12,13 @@ import { Processor_Disbursement } from "./Pages/Processor_Mini_Pages/Processor_D
 import NotFound from "./Pages/NotFound";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import CalculatedPayroll from "./Components/CalculatedPayroll";
+import { myContext } from "./ContextAPI";
 
 function App() {
   const token = window.localStorage.getItem("HR_access_token");
+  const { nav } = useContext(myContext);
 
   useEffect(() => {
     AOS.init({});
@@ -36,13 +38,23 @@ function App() {
 
             <Route path="/processor" element={<Processor />}>
               <Route path="/processor" element={<Processor_Payroll />} />
-              <Route path="/processor/history" element={<Processor_History />} />
-              <Route path="/processor/disbursement" element={<Processor_Disbursement />} />{" "}
+              <Route
+                path="/processor/history"
+                element={<Processor_History />}
+              />
+              <Route
+                path="/processor/disbursement"
+                element={<Processor_Disbursement />}
+              />{" "}
             </Route>
           </Route>
         </Route>
 
-        <Route path="/" element={token ? <Navigate to="/dashboard" /> : <HR_SignIn />} exact />
+        <Route
+          path="/"
+          element={token ? <Navigate to="/dashboard" /> : <HR_SignIn />}
+          exact
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

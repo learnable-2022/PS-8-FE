@@ -399,6 +399,10 @@ const ContextAPI = ({ children }) => {
     setNav((prev) => !prev);
   };
 
+  const closeNav = () => {
+    setNav(false);
+  };
+
   // -------------------------------------[Process Disburse Salaries]-----------------------------------//
 
   const disburseSalary = async () => {
@@ -422,7 +426,7 @@ const ContextAPI = ({ children }) => {
         setLoadingProcessedPayroll(false);
       }
     } catch (err) {
-      console.log(err);
+      console.log(err.message);
       toast.error(err.response.data.error ?? err.message);
 
       return Promise.reject(err);
@@ -548,6 +552,7 @@ const ContextAPI = ({ children }) => {
           date,
           showNavbar,
           nav,
+          closeNav,
           isPayrollProcessed,
           setIsPayrollProcessed,
           disburseSalary,
