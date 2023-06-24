@@ -63,10 +63,7 @@ export const AddNewEmployee = () => {
   console.log(newEmployeeID);
   const addNewEmployee = async () => {
     try {
-      const response = await request.put(
-        `/employees/${newEmployeeID}`,
-        newEmployee
-      );
+      const response = await request.post(`/employees/${newEmployeeID}`, newEmployee);
       if (response.data) {
         console.log("New employee added successfully ");
       }
@@ -99,14 +96,8 @@ export const AddNewEmployee = () => {
                   onClick={closeForm}
                   className="mb-5  md:mt-0 flex w-full justify-end ml-[60%]  text-xl md:hidden"
                 />
-                <figure
-                  className="flex w-full rounded-full cursor-pointer"
-                  onClick={addPhoto}
-                >
-                  <img
-                    src={newEmployee.image}
-                    className="w-full h-full rounded-full"
-                  />
+                <figure className="flex w-full rounded-full cursor-pointer" onClick={addPhoto}>
+                  <img src={newEmployee.image} className="w-full h-full rounded-full" />
                 </figure>
                 <form onSubmit={submitCard}>
                   <input
@@ -131,10 +122,7 @@ export const AddNewEmployee = () => {
                   onClick={closeForm}
                   className="mb-5 flex w-full justify-end ml-[90%]  text-2xl md:hidden"
                 />
-                <div
-                  className="flex  w-full  rounded-full bg-black/20"
-                  onClick={addPhoto}
-                >
+                <div className="flex  w-full  rounded-full bg-black/20" onClick={addPhoto}>
                   <IoIosAdd className="justify-center flex w-full items-center h-full text-black/5 cursor-pointer" />
                 </div>
                 <form onSubmit={submitCard}>
@@ -261,10 +249,7 @@ export const AddNewEmployee = () => {
             </div>
           </div>
           <div className="mb-5 mt-[-40%] cursor-pointer  rounded-2xl px-3 py-2 bg-white justify-end md:flex  hidden">
-            <GrClose
-              onClick={closeForm}
-              className="text-xl"
-            />
+            <GrClose onClick={closeForm} className="text-xl" />
           </div>
         </div>
       ) : (

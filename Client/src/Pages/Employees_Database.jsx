@@ -7,11 +7,16 @@ import { GrClose } from "react-icons/gr";
 import { AddNewEmployee } from "./AddNewEmployee";
 import { IoIosAdd } from "react-icons/io";
 import SyncLoader from "react-spinners/SyncLoader";
+import fetcher from "../fetcher";
+import useSWR from "swr";
 
 export const Employees_Database = () => {
-  const { employeeData, employeeIsLoading, deleteEmployee, createCard } =
-    useContext(myContext);
-  const totalNumberOfEmployees = employeeData.reduce((sum) => sum + 1, 0);
+  const { data, error, isLoading: employeeIsLoading } = useSWR("/employees", fetcher);
+
+  const employeeData = data?.employees;
+
+  const { deleteEmployee, createCard } = useContext(myContext);
+  const totalNumberOfEmployees = employeeData?.reduce((sum) => sum + 1, 0);
   const [employee, setEmployee] = useState("");
 
   const handleEmployeeChange = (e) => {
@@ -27,11 +32,11 @@ export const Employees_Database = () => {
       setFirstHalf(employeeData.length);
     }
   };
-  console.log(employee);
 
   const { more_details } = useParams();
+
   const filteredUsers = employeeData
-    .filter((user) => user.name === more_details)
+    ?.filter((user) => user.name === more_details)
     .map((item) => {
       return (
         <Link
@@ -48,15 +53,9 @@ export const Employees_Database = () => {
                 <div className="flex md:flex-row flex-col md:w-[85%] w-full items-start pt-5 gap-5">
                   <div className="w-full md:hidden flex justify-center">
                     <figure className="h-4/5 w-4/5">
-                      <img
-                        src={item.profileImage}
-                        alt={item.name}
-                        className="w-full h-full"
-                      />
+                      <img src={item.profileImage} alt={item.name} className="w-full h-full" />
                       <figcaption className="flex gap-5 justify-center text-black/40 pt-2">
-                        <span className="text-black/70 text-2xl">
-                          {titleCase(item.name)}
-                        </span>
+                        <span className="text-black/70 text-2xl">{titleCase(item.name)}</span>
                       </figcaption>
                       <figcaption className="flex justify-center gap-5 text-justify text-black/40 ">
                         <span className="text-black/70 ">{item.jobRole}</span>
@@ -65,11 +64,7 @@ export const Employees_Database = () => {
                   </div>
 
                   <figure className="md:w-[45%] lg:w-2/5 md:flex flex-col hidden lg:h-[70%]">
-                    <img
-                      src={item.profileImage}
-                      alt={item.name}
-                      className="w-full h-full"
-                    />
+                    <img src={item.profileImage} alt={item.name} className="w-full h-full" />
                     <figcaption className="flex gap-5 justify-center text-black/40 pt-2">
                       <span className="text-black/70 md:text-lg lg:text-2xl">
                         {titleCase(item.name)}
@@ -82,118 +77,78 @@ export const Employees_Database = () => {
                   <div className="w-full h-full md:hidden flex justify-center pb-5 text-lg ">
                     <div className="flex flex-col gap-[0.2rem]">
                       <p className="flex gap-5 text-justify text-black/40 ">
-                        Employee ID:{" "}
-                        <span className="text-black/70">
-                          {item._id.substring(0, 8)}
-                        </span>
+                        Employee ID: <span className="text-black/70">{item.employeeId}</span>
                       </p>
                       <p className="flex gap-5 text-black/40 ">
-                        Gender:{" "}
-                        <span className="text-black/70">{item.gender}</span>
+                        Gender: <span className="text-black/70">{item.gender}</span>
                       </p>
                       <p className="flex gap-5 text-black/40 ">
-                        Age:{" "}
-                        <span className="text-black/70">{item.age} yrs</span>
+                        Age: <span className="text-black/70">{item.age} yrs</span>
                       </p>
                       <p className="flex gap-5 text-black/40 ">
-                        Department:{" "}
-                        <span className="text-black/70">{item.department}</span>
+                        Department: <span className="text-black/70">{item.department}</span>
                       </p>
                       <p className="flex gap-5 text-black/40 ">
-                        Email:{" "}
-                        <span className="text-black/70">{item.email}</span>
+                        Email: <span className="text-black/70">{item.email}</span>
                       </p>
                       <p className="flex gap-5 text-black/40 ">
-                        Phone Number:{" "}
-                        <span className="text-black/70">
-                          {item.phoneNumber}
-                        </span>
+                        Phone Number: <span className="text-black/70">{item.phoneNumber}</span>
                       </p>
                       <p className="flex gap-5 text-black/40 ">
                         Years of service:{" "}
-                        <span className="text-black/70">
-                          {item.yearsOfService} yrs
-                        </span>
+                        <span className="text-black/70">{item.yearsOfService} yrs</span>
                       </p>
                       <p className="flex gap-5 text-black/40 ">
                         Tax cut:
                         <span className="text-black/70">{item.taxPolicy}%</span>
                       </p>
                       <p className="flex gap-5 text-black/40 ">
-                        Base Salary:{" "}
-                        <span className="text-black/70">
-                          ₦{item.monthlyBasePay}
-                        </span>
+                        Base Salary: <span className="text-black/70">₦{item.monthlyBasePay}</span>
                       </p>
                       <p className="flex gap-5 text-black/40 ">
-                        Account Number:{" "}
-                        <span className="text-black/70">
-                          {item.accountNumber}
-                        </span>
+                        Account Number: <span className="text-black/70">{item.accountNumber}</span>
                       </p>
                       <p className="flex gap-5 text-black/40 ">
                         Bank Name:{" "}
-                        <span className="text-black/70">
-                          {titleCase(item.bank)} Bank
-                        </span>
+                        <span className="text-black/70">{titleCase(item.bank)} Bank</span>
                       </p>
                     </div>
                   </div>
                   <div className="h-full w-[55%]  md:flex hidden flex-col lg:gap-[0.2rem] pb-3">
                     <p className="flex gap-2 text-justify text-black/40 ">
-                      Employee ID:{" "}
-                      <span className="text-black/70">
-                        {item._id.substring(0, 8)}
-                      </span>
+                      Employee ID: <span className="text-black/70">{item.employeeId}</span>
                     </p>
                     <p className="flex gap-5 text-black/40 ">
-                      Gender:{" "}
-                      <span className="text-black/70">{item.gender}</span>
+                      Gender: <span className="text-black/70">{item.gender}</span>
                     </p>
                     <p className="flex gap-5 text-black/40 ">
                       Age: <span className="text-black/70">{item.age} yrs</span>
                     </p>
                     <p className="flex gap-5 text-black/40 ">
-                      Department:{" "}
-                      <span className="text-black/70">{item.department}</span>
+                      Department: <span className="text-black/70">{item.department}</span>
                     </p>
                     <p className="flex gap-5 text-black/40 ]">
-                      Email:{" "}
-                      <span className="text-black/70 md:w-1/5">
-                        {item.email}
-                      </span>
+                      Email: <span className="text-black/70 md:w-1/5">{item.email}</span>
                     </p>
                     <p className="flex gap-5 text-black/40 ">
-                      Phone Number:{" "}
-                      <span className="text-black/70">{item.phoneNumber}</span>
+                      Phone Number: <span className="text-black/70">{item.phoneNumber}</span>
                     </p>
                     <p className="flex gap-5 text-black/40 ">
                       Years of service:{" "}
-                      <span className="text-black/70">
-                        {item.yearsOfService} yrs
-                      </span>
+                      <span className="text-black/70">{item.yearsOfService} yrs</span>
                     </p>
                     <p className="flex gap-5 text-black/40 ">
                       Tax cut:
                       <span className="text-black/70">{item.taxPolicy}%</span>
                     </p>
                     <p className="flex gap-5 text-black/40 ">
-                      Base Salary:{" "}
-                      <span className="text-black/70">
-                        ₦{item.monthlyBasePay}
-                      </span>
+                      Base Salary: <span className="text-black/70">₦{item.monthlyBasePay}</span>
                     </p>
                     <p className="flex gap-5 text-black/40 ">
-                      Account Number:{" "}
-                      <span className="text-black/70">
-                        {item.accountNumber}
-                      </span>
+                      Account Number: <span className="text-black/70">{item.accountNumber}</span>
                     </p>
                     <p className="flex gap-5 text-black/40 ">
-                      Bank Name:{" "}
-                      <span className="text-black/70">
-                        {titleCase(item.bank)} Bank
-                      </span>
+                      Bank Name: <span className="text-black/70">{titleCase(item.bank)} Bank</span>
                     </p>
                   </div>
                 </div>
@@ -224,9 +179,7 @@ export const Employees_Database = () => {
     });
 
   return (
-    <div
-      className={`${employeeData.length > 1 ? "h-full" : "h-screen"} w-full `}
-    >
+    <div className={`${employeeData?.length > 1 ? "h-full" : "h-screen"} w-full `}>
       {filteredUsers}
 
       <AddNewEmployee />
@@ -257,7 +210,7 @@ export const Employees_Database = () => {
             </div>
           </div>
         </div>
-        {employeeData.length < 1 ? (
+        {employeeData?.length < 1 ? (
           <div className="w-full flex justify-center">
             <div className="bg-[#ffffff] w-[90%] py-[10%] mt-10 rounded-xl md:shadow-black/20 md:shadow-md">
               <p className="flex items-center justify-center text-gray-500 text-sm">
@@ -272,7 +225,7 @@ export const Employees_Database = () => {
         <div className="w-full h-full flex justify-center mt-10">
           <div className="w-full h-full md:gap-y-5 lg:gap-10 gap-y-10 grid grid-cols-1 md:grid-cols-2">
             {employeeData
-              .slice(0, firstHalf)
+              ?.slice(0, firstHalf)
               .filter(
                 (item) =>
                   item.name.toLowerCase().includes(employee.toLowerCase()) ||
@@ -297,37 +250,24 @@ export const Employees_Database = () => {
                           </figure>
                         </div>
                         <figure className="lg:w-3/5 md:flex hidden lg:h-4/5 md:w-2/5 md:h-2/5">
-                          <img
-                            src={item.profileImage}
-                            alt={item.name}
-                            className="w-full h-full"
-                          />
+                          <img src={item.profileImage} alt={item.name} className="w-full h-full" />
                         </figure>
                         <div className="w-full h-full flex justify-center">
                           <div className="flex flex-col gap-3 text-lg md:text-[16px]">
                             <p className="flex gap-5 text-black/40">
                               Name:
-                              <span className="text-black/70">
-                                {titleCase(item.name)}
-                              </span>
+                              <span className="text-black/70">{titleCase(item.name)}</span>
                             </p>
                             <p className="flex gap-5 text-justify text-black/40 ">
-                              Employee ID:{" "}
-                              <span className="text-black/70">
-                                {item._id.substring(0, 5)}
-                              </span>
+                              Employee ID: <span className="text-black/70">{item.employeeId}</span>
                             </p>
                             <p className="flex gap-5 text-black/40">
                               Gender:
-                              <span className="text-black/70">
-                                {item.gender}
-                              </span>
+                              <span className="text-black/70">{item.gender}</span>
                             </p>
                             <p className="flex gap-5 text-justify text-black/40 ">
                               Role:
-                              <span className="text-black/70 ">
-                                {item.jobRole}
-                              </span>
+                              <span className="text-black/70 ">{item.jobRole}</span>
                             </p>
                           </div>
                         </div>
@@ -346,12 +286,9 @@ export const Employees_Database = () => {
               })}
           </div>
         </div>
-        {employeeData.length > 6 && (
+        {employeeData?.length > 6 && (
           <div className="flex justify-center my-5">
-            <button
-              className="text-white bg-[#430359] py-2 px-6 rounded-lg"
-              onClick={showMore}
-            >
+            <button className="text-white bg-[#430359] py-2 px-6 rounded-lg" onClick={showMore}>
               {firstHalf === employeeData.length ? "Show Less" : "Show More"}
             </button>
           </div>

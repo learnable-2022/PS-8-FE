@@ -9,8 +9,6 @@ import { myContext } from "../ContextAPI";
 import { titleCase } from "../UTILS/Title";
 //  import ConnectWallet from "./connectWallet";
 
-
-
 const Header = () => {
   const { showNavbar, nav, refreshToken } = useContext(myContext);
   const [profileImage, setProfileImage] = useState(null);
@@ -54,7 +52,7 @@ const Header = () => {
         </div>
 
         <div className="flex items-center md:justify-end md:w-3/5">
-          <ConnectWallet/>
+          <ConnectWallet />
 
           <div className="div border-l-[gray-200] border p-3 md:flex hidden"></div>
 
@@ -72,7 +70,7 @@ const Header = () => {
               <img
                 src={avatar}
                 alt="Profile"
-                title={userInfo}
+                title="user avatar"
                 className="w-full h-full rounded-full"
               />
             </figure>
