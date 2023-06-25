@@ -1,4 +1,3 @@
-import { values } from "lodash";
 import * as yup from "yup";
 
 export const newEmployeeValidation = yup.object({

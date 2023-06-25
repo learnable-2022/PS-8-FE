@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import request from "../axios";
 import { myContext } from "../ContextAPI";
 import { IoIosAdd } from "react-icons/io";
@@ -81,6 +81,8 @@ export const AddNewEmployee = () => {
         console.log("Error adding New employee", error);
       }
     }
+
+    reset()
   };
 
   return (
