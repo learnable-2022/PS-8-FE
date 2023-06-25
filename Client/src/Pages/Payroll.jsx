@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { myContext } from "../ContextAPI";
 import { Loading_Animation } from "../UTILS/Loading_Animation";
@@ -89,7 +89,7 @@ export const Payroll = () => {
                 onClick={handleButtonClick}
                 className="bg-[#2E3192] transition text-start sm:text-center duration-300 hover:bg-[#595FFF] text-white font-bold py-2 px-7 rounded-lg cursor-pointer"
               >
-                Import File{" "}
+                Import file{" "}
               </button>
             )}
           </div>
@@ -143,7 +143,7 @@ export const Payroll = () => {
         ) : (
           <div>
             <div className="w-full flex justify-center">
-              <div className="bg-[#ffffff] w-[90%] py-[10%] mt-10 rounded-xl md:shadow-black/20 md:shadow-md">
+              <div className="bg-[#ffffff] w-[90%] py-[10%] mt-10 rounded-xl">
                 <p className="flex items-center justify-center text-gray-500 text-sm">
                   No data found
                 </p>

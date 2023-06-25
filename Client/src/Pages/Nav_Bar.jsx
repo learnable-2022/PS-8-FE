@@ -1,7 +1,7 @@
-import React, { useContext, useState } from "react";
-import { AiOutlineDollar, AiOutlineLogout } from "react-icons/ai";
+import { useContext } from "react";
+import { AiOutlineDollar } from "react-icons/ai";
 import { VscServerProcess } from "react-icons/vsc";
-import { MdPolicy } from "react-icons/md";
+import { HiOutlineUsers } from "react-icons/hi";
 import { BsDot } from "react-icons/bs";
 import "../index.css";
 import { NavLink } from "react-router-dom";
@@ -15,10 +15,10 @@ export const Nav_Bar = () => {
   return (
     <aside className="w-full">
       <nav className="md:flex overflow-hidden flex-col h-screen bg-[#ffffff] w-full py-6 text-[#2E3192]">
-        <ul className="flex flex-col fixed gap-2 md:w-[17%] w-full">
+        <ul className="flex flex-col fixed  md:w-[17%] w-full">
           <NavLink activeClassName="active" to="/dashboard">
-            <li className="flex items-center h-[8vh] pl-[5%] md:pl-[15%] gap-2 hover:text-[#2E3192] transition duration-500 hover:bg-[#E5E6FF] w-[100%] text-md">
-              <AiOutlineDollar className="md:text-xl text-[1.8rem]  md:flex" />
+            <li className="flex items-center h-[8vh] pl-[5%] md:pl-[15%] gap-2 hover:text-[#2E3192] transition duration-500 hover:bg-[#f2f2fc] w-[100%] text-md">
+              <AiOutlineDollar className="md:text-xl text-xl md:flex" />
               Payroll
             </li>
           </NavLink>
@@ -27,7 +27,7 @@ export const Nav_Bar = () => {
             {processData?.length > 0 ? (
               <li
                 onClick={handleNotification}
-                className="flex items-center justify-start hover:py-5 pl-[5%] md:pl-[15%] h-[8vh] gap-2 hover:text-[#2E3192] transition duration-500 hover:bg-[#E5E6FF] text-md w-[100%]"
+                className="flex items-center justify-start hover:py-5 pl-[5%] md:pl-[15%] h-[8vh] gap-2 hover:text-[#2E3192] transition duration-500 hover:bg-[#f2f2fc] text-md w-[100%]"
               >
                 <VscServerProcess className="md:text-xl text-[1.8rem]  md:flex" />{" "}
                 Processor
@@ -38,7 +38,7 @@ export const Nav_Bar = () => {
                 )}
               </li>
             ) : (
-              <li className="flex items-center justify-start hover:py-5 pl-[5%] md:pl-[15%] h-[8vh] gap-2 hover:text-[#2E3192] transition duration-500 hover:bg-[#E5E6FF] text-md w-[100%]">
+              <li className="flex items-center justify-start hover:py-5 pl-[5%] md:pl-[15%] h-[8vh] gap-2 hover:text-[#2E3192] transition duration-500 hover:bg-[#f2f2fc] text-md w-[100%]">
                 <VscServerProcess className="md:text-xl text-[1.8rem]  md:flex" />{" "}
                 Processor
               </li>
@@ -46,8 +46,8 @@ export const Nav_Bar = () => {
           </NavLink>
 
           <NavLink activeClassName="active" to="/employees">
-            <li className="flex gap-2 justify-start  h-[8vh] items-center pl-[5%] md:pl-[15%]  hover:text-[#2E3192] transition duration-500 hover:bg-[#E5E6FF] text-md w-[100%]">
-              <MdPolicy className="md:text-xl text-[1.6rem]  md:flex" />{" "}
+            <li className="flex gap-2 justify-start  h-[8vh] items-center pl-[5%] md:pl-[15%]  hover:text-[#2E3192] transition duration-500 hover:bg-[#f2f2fc] text-md w-[100%]">
+              <HiOutlineUsers className="md:text-xl text-[1.6rem]  md:flex" />{" "}
               Employees
             </li>
           </NavLink>

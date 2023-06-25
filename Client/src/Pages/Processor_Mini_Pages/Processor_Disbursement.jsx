@@ -1,8 +1,8 @@
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { myContext } from "../../ContextAPI";
 
 export const Processor_Disbursement = () => {
-  const { isPayrollProcessed, setIsPayrollProcessed } = useContext(myContext);
+  const { isPayrollProcessed } = useContext(myContext);
 
   useEffect(() => {
     console.log(isPayrollProcessed);

@@ -1,8 +1,26 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "Athletics-bold";
+  src: url("/Fonts/Athletics-bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Athletics-Medium";
+  src: url("/Fonts/Athletics-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Athletics-Regular";
+  src: url("/Fonts/Athletics-Regular.ttf") format("truetype");
+}
+
+.medium_font {
+  font-family: Athletics-Medium;
+}
+.bold_font {
+  font-family: Athletics-bold;
+}
 
 body,
 html {
@@ -11,14 +29,9 @@ html {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: Font1;
+  font-family: Athletics-Regular;
   font-weight: 100;
   color: rgb(63, 62, 62);
-}
-
-@font-face {
-  font-family: "Font1";
-  src: url("/Fonts/Font1.ttf") format("truetype");
 }
 
 .div {
