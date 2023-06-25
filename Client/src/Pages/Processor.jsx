@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { Outlet, Link } from "react-router-dom";
 import { myContext } from "../ContextAPI";
 import { Loading_Animation } from "../UTILS/Loading_Animation";
@@ -40,7 +40,9 @@ export const Processor = () => {
             {!processPayroll?.length > 0 ? (
               <button
                 onClick={processUploadedData}
-                className="bg-[#2E3192] transition duration-300 hover:bg-[#4448c0] text-white font-bold py-2 md:px-7 mt-3 md:mt-auto rounded-lg w-40 md:w-auto"
+                className={`bg-[#2E3192] transition duration-300 hover:bg-[#4448c0] text-white font-bold py-2 md:px-7 mt-3 md:mt-auto rounded-lg w-40 md:w-auto ${
+                  processData?.length === 0 ? "hidden" : "flex"
+                }`}
               >
                 Process Payroll
               </button>
@@ -85,7 +87,7 @@ export const Processor = () => {
               </button>
             </Link>
           </div>
-          <div className="flex items-start md:pr-10 mt-5 ">
+          <div className="flex items-start md:pr-10 mt-5">
             {loadingProcessedPayroll ? <Loading_Animation /> : ""}
           </div>
         </div>

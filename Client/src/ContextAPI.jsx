@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useRef, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import * as XLSX from "xlsx";
 import { titleCase } from "./UTILS/Title";
@@ -67,9 +67,6 @@ const ContextAPI = ({ children }) => {
 
         if (response.data) {
           setIsPending(false);
-
-          toast.success("Login successful", { autoClose: 2000 });
-
           const token = response.data.accessToken;
           const user = JSON.stringify(response.data.user);
           setHRToken(token);
@@ -91,13 +88,13 @@ const ContextAPI = ({ children }) => {
             toast.error("Incorrect email or password");
             setIsPending(false);
           }, 2000);
-        } else if (error.message === "Network Error") {
+        } else if (error.message === "Network error") {
           setTimeout(() => {
             toast.error(error.message);
             setIsPending(false);
           }, 1000);
         } else {
-          toast.error("an error occured logging in");
+          toast.error("An error occurred while logging in");
         }
       }
     };
@@ -140,7 +137,9 @@ const ContextAPI = ({ children }) => {
     setIsLoading(false);
     setProcessPayroll([]);
 
-    const dataType = ["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"];
+    const dataType = [
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    ];
     const file = e.target.files[0];
     setFileName(titleCase(file.name.split(".")[0]));
     if (file) {
@@ -217,7 +216,10 @@ const ContextAPI = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    window.localStorage.setItem("process_employee_data", JSON.stringify(processData));
+    window.localStorage.setItem(
+      "process_employee_data",
+      JSON.stringify(processData)
+    );
   }, [processData]);
   useEffect(() => {
     const data = window.localStorage.getItem("process_notification");
@@ -315,7 +317,9 @@ const ContextAPI = ({ children }) => {
       };
 
       const mergedArray = processData.map((item) => {
-        const matchingPayrollItem = calculate.find((payrollItem) => payrollItem.ID === item.ID);
+        const matchingPayrollItem = calculate.find(
+          (payrollItem) => payrollItem.ID === item.ID
+        );
         if (matchingPayrollItem) {
           const mergedItem = {
             ...item,
@@ -343,7 +347,7 @@ const ContextAPI = ({ children }) => {
   };
 
   // const getNetSalary = processPayroll
-  //   .filter((item) => item["Net Salary"])
+  //   .filter((item) => item["Net Salary"])gte
   //   .map((item) => item["Net Salary"]);
 
   // console.log(getNetSalary);
@@ -392,6 +396,10 @@ const ContextAPI = ({ children }) => {
     setNav((prev) => !prev);
   };
 
+  const closeNav = () => {
+    setNav(false);
+  };
+
   // -------------------------------------[Process Disburse Salaries]-----------------------------------//
 
   const disburseSalary = async () => {
@@ -415,7 +423,7 @@ const ContextAPI = ({ children }) => {
         setLoadingProcessedPayroll(false);
       }
     } catch (err) {
-      console.log(err);
+      console.log(err.message);
       toast.error(err.response.data.error ?? err.message);
 
       return Promise.reject(err);
@@ -454,39 +462,23 @@ const ContextAPI = ({ children }) => {
     return data;
   };
   // -------------------------------------[Process Disburse Salaries end]-----------------------------------//
-  const [employeeData, setEmployeeData] = useState([]);
   const [employeeIsLoading, setEmployeeIsLoading] = useState(false);
 
   const employeesDatabase = async () => {
     setEmployeeIsLoading(true);
-
-    // try {
-    //   const employees = await request.get("/employees");
-    //   setEmployeeData(employees.data.employees);
-    // } catch (error) {
-    //   console.log(error);
-    // } finally {
-    //   setEmployeeIsLoading("");
-    // }
   };
 
   useEffect(() => {
     employeesDatabase();
   }, []);
 
-  const employeeID = employeeData.map((item) => item._id);
-  const token = window.localStorage.getItem("HR_access_token");
-
   const deleteEmployee = async (id) => {
     try {
-      await request.delete(`/employees/${employeeID}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-type": "application/json",
-        },
-      });
-      setEmployeeData(employeeData.filter((item) => item._id !== id));
-      console.log("employee deleted");
+      const response = await request.delete(`/employees/${id}`);
+      if (response) {
+        toast.success(response.data.message);
+      }
+      console.log(response);
     } catch (err) {
       console.log(err);
     }
@@ -502,7 +494,6 @@ const ContextAPI = ({ children }) => {
     setCreateNewCard(false);
   };
 
-  console.log(employeeData);
   return (
     <div>
       <myContext.Provider
@@ -541,12 +532,12 @@ const ContextAPI = ({ children }) => {
           date,
           showNavbar,
           nav,
+          closeNav,
           isPayrollProcessed,
           setIsPayrollProcessed,
           disburseSalary,
           isPayrollDisbursed,
           setIsPayrollDisbursed,
-          employeeData,
           employeeIsLoading,
           deleteEmployee,
           createNewCard,

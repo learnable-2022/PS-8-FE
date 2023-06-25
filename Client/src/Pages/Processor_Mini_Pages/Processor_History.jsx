@@ -97,18 +97,18 @@ export const Processor_History = () => {
 
   if (error)
     return (
-      <div className="w-full flex justify-center mt-8 p-8">
-        <div className="w-[90%] rounded-lg bg-white p-10 text-xl text-center">
-          An Error Occured while fetching disbursement history
+      <div className="w-full h-screen flex justify-center mt-8 ">
+        <div className="w-[90%] rounded-lg h-2/5  bg-white pt-[9%] text-lg text-center">
+          An error occurred while fetching disbursement history
         </div>
       </div>
     );
 
   if (isLoading)
     return (
-      <div className="w-full flex justify-center mt-8 p-8">
-        <div className="w-[90%] rounded-lg bg-white p-10 text-xl mx-auto flex justify-center">
-          <SyncLoader color="#430359" />
+      <div className="w-full h-screen flex justify-center mt-8 p-8">
+        <div className="w-[90%] rounded-lg bg-white h-2/5  text-xl mx-auto flex justify-center">
+          <SyncLoader color="#430359" className="pt-[10%]"/>
         </div>
       </div>
     );
@@ -119,7 +119,6 @@ export const Processor_History = () => {
         <div className="flex justify-center">
           {disbursements?.length > 0 ? (
             <div className="w-[90%] rounded-2xl h-full bg-white mt-2">
-              {/* history count */}
               <div className="sm:flex m-5 justify-between">
                 <span className="sm:flex items-center gap-1">
                   <span
@@ -222,9 +221,9 @@ export const Processor_History = () => {
               </div>
             </div>
           ) : (
-            <div className="w-full flex justify-center">
-              <div className="bg-[#ffffff] w-[90%] py-[10%] mt-10 rounded-xl md:shadow-black/20 md:shadow-md">
-                <p className="flex items-center justify-center text-gray-500 text-sm">
+            <div className="w-full h-screen flex justify-center">
+              <div className="bg-[#ffffff] w-[90%] h-[37%] mt-2 rounded-xl">
+                <p className="flex items-center justify-center pt-[11%] text-gray-500 text-sm">
                   No data found
                 </p>
               </div>

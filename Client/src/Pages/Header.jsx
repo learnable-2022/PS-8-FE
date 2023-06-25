@@ -1,5 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
-import { TbLogout } from "react-icons/tb";
+import { useContext, useState, useEffect } from "react";
 import ConnectWallet from "./connectWallet";
 import { HiUserCircle } from "react-icons/hi";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -7,10 +6,9 @@ import { GrClose } from "react-icons/gr";
 import "../index.css";
 import { myContext } from "../ContextAPI";
 import { titleCase } from "../UTILS/Title";
-//  import ConnectWallet from "./connectWallet";
 
 const Header = () => {
-  const { showNavbar, nav, refreshToken } = useContext(myContext);
+  const { showNavbar, nav } = useContext(myContext);
   const [profileImage, setProfileImage] = useState(null);
   const { username, avatar } = JSON.parse(window.localStorage.getItem("userInfo"));
 

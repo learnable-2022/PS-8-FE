@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import  { useContext } from "react";
 import { myContext } from "../../ContextAPI";
 
 export const Processor_Processed_Payroll = () => {
