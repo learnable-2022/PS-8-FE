@@ -16,7 +16,6 @@ export const AddNewEmployee = () => {
     register,
     watch,
     setValue,
-    reset,
   } = useForm({
     resolver: yupResolver(newEmployeeValidation),
   });
@@ -72,7 +71,7 @@ export const AddNewEmployee = () => {
         },
       });
       if (response.data) {
-        toast.success(response.data);
+        toast.success(response.data.message);
       } else {
         console.log(response);
         toast.error(response);
