@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { myContext } from "../ContextAPI";
-import { AiFillDelete, AiFillEdit } from "react-icons/ai";
+import { AiFillDelete } from "react-icons/ai";
 import { titleCase } from "../UTILS/Title";
 import { Link, useParams } from "react-router-dom";
 import { GrClose } from "react-icons/gr";
@@ -282,7 +282,7 @@ export const Employees_Database = () => {
           </div>
         )}
 
-        <div className="w-full flex justify-center mt-10">
+        <div className="w-full flex justify-center mt-10 mb-10">
           <div className="w-[90%] lg:gap-x-10 gap-y-10 grid grid-cols-1 md:grid-cols-2">
             {employeeData
               ?.slice(0, firstHalf)
