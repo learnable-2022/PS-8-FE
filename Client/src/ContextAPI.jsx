@@ -101,7 +101,6 @@ const ContextAPI = ({ children }) => {
     getToken();
   };
 
-  console.log(HRtoken);
 
   // -------------------------------------[FILE UPLOAD]--------------------------------------------
 

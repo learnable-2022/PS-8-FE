@@ -98,7 +98,7 @@ export const Processor_History = () => {
   if (error)
     return (
       <div className="w-full h-screen flex justify-center mt-8 ">
-        <div className="w-[90%] rounded-lg h-2/5  bg-white pt-[9%] text-lg text-center">
+        <div className="w-[90%] rounded-lg h-[15%] md:h-2/5  bg-white pt-[9%] text-lg text-center">
           An error occurred while fetching disbursement history
         </div>
       </div>
@@ -222,7 +222,7 @@ export const Processor_History = () => {
             </div>
           ) : (
             <div className="w-full h-screen flex justify-center">
-              <div className="bg-[#ffffff] w-[90%] h-[37%] mt-2 rounded-xl">
+              <div className="bg-[#ffffff] w-[90%] h-[15%] md:h-[37%] mt-2 rounded-xl">
                 <p className="flex items-center justify-center pt-[11%] text-gray-500 text-sm">
                   No data found
                 </p>

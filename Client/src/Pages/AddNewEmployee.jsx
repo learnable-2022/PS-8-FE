@@ -64,25 +64,24 @@ export const AddNewEmployee = () => {
     }
   };
 
-  const submitCard = async (data, errors) => {
-    if (errors) {
-      console.log("fill Out form")
-      return;
-    } else {
-      try {
-        const response = await request.post("/employees", data);
-        if (response.data) {
-          console.log(response.data);
-        } else {
-          console.log(response);
-          toast.error(response);
-        }
-      } catch (error) {
-        console.log("Error adding New employee", error);
+  const submitCard = async (data) => {
+    try {
+      const response = await request.post("/employees", data);
+      if (response) {
+        toast(response.data.message)
+        console.log(response.data);
+        setTimeout(() => {
+          closeForm();
+        }, 2000);
+      } else {
+        console.log(response);
+        toast.error(response);
       }
+    } catch (error) {
+      console.log("Error adding New employee", error);
     }
 
-    reset()
+    reset();
   };
 
   return (
