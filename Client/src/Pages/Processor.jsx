@@ -40,7 +40,7 @@ export const Processor = () => {
             {!processPayroll?.length > 0 ? (
               <button
                 onClick={processUploadedData}
-                className={`bg-[#2E3192] transition duration-300 hover:bg-[#4448c0] text-white font-bold py-2 md:px-7 mt-3 md:mt-auto rounded-lg w-40 md:w-auto ${
+                className={`bg-[#2E3192] transition duration-300 hover:bg-[#4448c0] text-white font-bold py-2 px-5 md:px-7 mt-3 md:mt-auto rounded-lg md:w-auto ${
                   processData?.length === 0 ? "hidden" : "flex"
                 }`}
               >

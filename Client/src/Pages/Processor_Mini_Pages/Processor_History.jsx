@@ -78,7 +78,7 @@ export const Processor_History = () => {
   const { data, error, isLoading } = useSWR("/disbursement/fetch", fetcher);
   const [globalFilter, setGlobalFilter] = React.useState("");
 
-  const disbursements = data?.data;
+  const disbursements = data?.disbursements;
 
   const table = useReactTable({
     data: disbursements,
