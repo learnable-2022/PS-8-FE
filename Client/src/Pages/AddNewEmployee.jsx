@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import request from "../axios";
 import { myContext } from "../ContextAPI";
 import { IoIosAdd } from "react-icons/io";
@@ -64,23 +64,23 @@ export const AddNewEmployee = () => {
     }
   };
 
-  const submitCard = async (data, errors) => {
-    if (errors) {
-      console.log("fill Out form")
-      return;
-    } else {
-      try {
-        const response = await request.post("/employees", data);
-        if (response.data) {
-          console.log(response.data);
-        } else {
-          console.log(response);
-          toast.error(response);
-        }
-      } catch (error) {
-        console.log("Error adding New employee", error);
+  const submitCard = async (data) => {
+    try {
+      const response = await request.post("/employees", data, {
+        Headers: {
+          "content-type": "multipart/form-data",
+        },
+      });
+      if (response.data) {
+        toast.success(response.data);
+      } else {
+        console.log(response);
+        toast.error(response);
       }
+    } catch (error) {
+      console.log("Error adding New employee", error);
     }
+
   };
 
   return (
@@ -92,7 +92,7 @@ export const AddNewEmployee = () => {
               type="file"
               accept="image/*"
               id="profile2"
-              {...register("profileImage")}
+              // {...register("profileImage")}
               onChange={handleImageUpload}
               className="hidden"
             />

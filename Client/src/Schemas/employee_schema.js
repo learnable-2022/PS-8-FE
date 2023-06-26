@@ -1,4 +1,3 @@
-import { values } from "lodash";
 import * as yup from "yup";
 
 export const newEmployeeValidation = yup.object({
@@ -15,7 +14,7 @@ export const newEmployeeValidation = yup.object({
   jobRole: yup.string().required(),
   accountNumber: yup.string().required(),
   monthlyBasePay: yup.number().required(),
-  profileImage: yup.mixed().test("require", "please select a file", (value) => {
-    return value && value.length;
-  }),
+  // profileImage: yup.mixed().test("require", "please select a file", (value) => {
+  //   return value && value.length;
+  // }),
 });
