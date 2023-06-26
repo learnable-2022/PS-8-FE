@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { myContext } from "../ContextAPI";
-import { AiFillDelete, AiFillEdit } from "react-icons/ai";
+import { AiFillDelete } from "react-icons/ai";
 import { titleCase } from "../UTILS/Title";
 import { Link, useParams } from "react-router-dom";
 import { GrClose } from "react-icons/gr";
@@ -200,10 +200,10 @@ export const Employees_Database = () => {
                   </div>
                 </div>
                 <div className="w-full lg:w-[20%] md:items-start justify-center pb-5 flex lg:justify-center">
-                  <div className="card_child flex lg:w-full md:border-b lg:border-none justify-between md:w-full w-4/5 pt-5 md:justify-between lg:gap-5">
-                    <button className="transition duration-1000">
+                  <div className="card_child flex lg:w-full md:border-b lg:border-none justify-between lg:justify-center md:w-full w-4/5 pt-5 md:justify-between lg:gap-10">
+                    {/* <button className="transition duration-1000">
                       <AiFillEdit className="text-2xl hover:text-black/50 transition duration-300" />
-                    </button>
+                    </button> */}
                     <button>
                       <AiFillDelete
                         onClick={() => deleteEmployee(item._id)}
@@ -282,7 +282,7 @@ export const Employees_Database = () => {
           </div>
         )}
 
-        <div className="w-full flex justify-center mt-10">
+        <div className="w-full flex justify-center mt-10 mb-10">
           <div className="w-[90%] lg:gap-x-10 gap-y-10 grid grid-cols-1 md:grid-cols-2">
             {employeeData
               ?.slice(0, firstHalf)
@@ -346,9 +346,9 @@ export const Employees_Database = () => {
                         </div>
                       </div>
                       <div className="card_child flex items-start justify-center md:justify-end gap-5 md:gap-3">
-                        <Link to="#" className="transition duration-1000">
+                        {/* <Link to="#" className="transition duration-1000">
                           <AiFillEdit className="md:text-[1.3rem] text-[2rem] hover:text-black/50 transition duration-300" />
-                        </Link>
+                        </Link> */}
                         <Link to="#">
                           <button onClick={() => deleteEmployee(item._id)}>
                             <AiFillDelete className="md:text-[1.3rem] text-[1.8rem] hover:text-[red] transition duration-300" />

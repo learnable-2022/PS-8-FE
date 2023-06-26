@@ -101,7 +101,10 @@ const ContextAPI = ({ children }) => {
     getToken();
   };
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> a5927d97f289be599805016c0c8b25e54d51e2e7
   // -------------------------------------[FILE UPLOAD]--------------------------------------------
 
   const [isFile, setIsFile] = useState([]);
@@ -298,12 +301,12 @@ const ContextAPI = ({ children }) => {
           "Email Address": elem["Email address"],
           Loan: loan,
           Tax: taxDeduction,
-          "Net Change": `₦${netChange.toFixed(0)}`,
+          "Net Change": `${netChange.toFixed(0)}`,
           Bonus: `₦${bonusEarnings.toFixed(0)}`,
-          Deduction: ` ₦-${totalDeductions.toFixed(0)}`,
-          "Monthly base pay (₦)": `₦${baseSalary}`,
+          Deduction: ` -${totalDeductions.toFixed(0)}`,
+          "Monthly base pay (₦)": `${baseSalary}`,
           // "Total Earnings (₦)": `₦${totalEarnings}`,
-          "Net Salary": `NGN${netPay.toLocaleString()}`,
+          "Net Salary": `${netPay.toLocaleString()}`,
         };
       });
       setProcessPayroll(calculate);
@@ -431,9 +434,10 @@ const ContextAPI = ({ children }) => {
 
   const getFormData = async () => {
     const date = new Date();
-
+    console.log(processPayroll);
     const data = await processPayroll.map((elem, index) => {
       const allowance = elem["Allowance"] ?? 0;
+      console.log(elem["Net Salary"]);
       return {
         name: elem["Name"],
         employeeId: elem["ID"],
@@ -446,7 +450,7 @@ const ContextAPI = ({ children }) => {
           extractNumFromString(elem["Monthly base pay (₦)"]) +
           extractNumFromString(elem["Bonus"]) +
           allowance,
-        netSalary: extractNumFromString(elem["Total salary"]),
+        netSalary: extractNumFromString(elem["Net Salary"]),
         email: elem["Email Address"],
         allowance,
         year: date.getFullYear(),

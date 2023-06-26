@@ -16,7 +16,6 @@ export const AddNewEmployee = () => {
     register,
     watch,
     setValue,
-    reset,
   } = useForm({
     resolver: yupResolver(newEmployeeValidation),
   });
@@ -66,6 +65,7 @@ export const AddNewEmployee = () => {
 
   const submitCard = async (data) => {
     try {
+<<<<<<< HEAD
       const response = await request.post("/employees", data);
       if (response) {
         toast(response.data.message)
@@ -73,6 +73,15 @@ export const AddNewEmployee = () => {
         setTimeout(() => {
           closeForm();
         }, 2000);
+=======
+      const response = await request.post("/employees", data, {
+        Headers: {
+          "content-type": "multipart/form-data",
+        },
+      });
+      if (response.data) {
+        toast.success(response.data.message);
+>>>>>>> a5927d97f289be599805016c0c8b25e54d51e2e7
       } else {
         console.log(response);
         toast.error(response);
@@ -81,7 +90,10 @@ export const AddNewEmployee = () => {
       console.log("Error adding New employee", error);
     }
 
+<<<<<<< HEAD
     reset();
+=======
+>>>>>>> a5927d97f289be599805016c0c8b25e54d51e2e7
   };
 
   return (
@@ -93,7 +105,7 @@ export const AddNewEmployee = () => {
               type="file"
               accept="image/*"
               id="profile2"
-              {...register("profileImage")}
+              // {...register("profileImage")}
               onChange={handleImageUpload}
               className="hidden"
             />
